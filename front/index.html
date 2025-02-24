@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="data_handler.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Class Scheduler</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding-top: 10px;
+            font-size: 0.90rem;
+        }
+        
+        #printButton {
+            background-color: #005432;
+            border-color: #005432;
+        }
+        .form-select, .btn {
+            height: 45px; /* Same height for dropdown and button */
+            font-size: 1rem; /* Same font size for consistency */
+        }
+
+        .row.align-items-center {
+            gap: 10px; /* Optional: Add spacing between elements in smaller screens */
+        }
+        .top-bar {
+            background-color: #004b23;
+            color: white;
+            padding: 10px 20px;
+            top: 0;
+            left: 0;
+            width: 100%; /* Ensure navbar is full width */
+            position: fixed;
+            z-index: 1030; /* Ensure it stays on top of other elements */
+            align-items: center; /* Vertically center items */
+            justify-content: space-between; /* Space between brand and links */
+            font-size: 0.9rem;
+        }
+    
+        .navbar-brand {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none; /* Remove underline */
+        }
+    
+        .nav-links {
+            display: flex;
+            gap: 15px; /* Space between links */
+        }
+    
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.90rem;
+            font-weight: 500;
+        }
+    
+        .nav-link:hover {
+            text-decoration: underline; /* Add underline on hover for clarity */
+        }
+        .btn-custom {
+            background-color: rgb(0, 103, 71); /* Custom background color */
+            color: white; /* Text color */
+            font-size: 1rem; /* Button font size, similar to btn-lg */
+            padding: 8px 15px; /* Button padding for larger size */
+            width: 25%; /* Full width */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            text-align: center; /* Center the text */
+            display: block; /* Make sure it's a block element */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+        }
+        table, th, td {
+            font-size: 0.80rem; /* Adjust the value to decrease the font size */
+}
+        .main-content {
+            padding: 30px;
+            background-image: url('./GatewayHomeImage.jpg'); /* Path to your image */
+            background-size: cover; /* Make the image cover the entire content area */
+            background-position: center; /* Center the background image */
+            position: relative;
+            font-size: 0.90rem;
+            justify-content: center; /* Center horizontally */
+        }
+
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5); /* Optional overlay for better text visibility */
+            z-index: -1; /* Ensure overlay is behind content */
+}
+    
+        .description-box, .form-box {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            align-self: center;
+            align-content: center;
+        }
+
+        
+    
+        .results-section {
+            margin-top: 20px;
+        }
+    
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .form-check-input:checked {
+            background-color: #005432; /* Change the background color of the tick */
+            border-color: #005432;    /* Change the border color */
+        }
+
+        .form-check-label {
+            color: #004b23; /* Set a custom label color */
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #004b23 !important; /* Custom background color when expanded */
+            color: white !important; /* Custom text color when expanded */
+        }
+
+        /* Custom style for collapsed accordion header */
+        .accordion-button.collapsed {
+            background-color: #e8f5e9 !important; /* Custom background color when collapsed */
+            color: #004b23 !important; /* Custom text color when collapsed */
+        }
+        /* General accordion header styles */
+        .accordion-button {
+            border: none; /* Optional: Remove border */
+            outline: none; /* Optional: Remove outline on focus */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mx-auto p-3 py-md-5">
+        <!-- <header class="d-flex align-items-center pb-3 mb-5 border-bottom"> -->
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img">
+                <title>CSE Course Scheduler at USF</title> -->
+                <!-- <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+                    fill="currentColor"></path>
+            </svg> -->
+            <!-- <span class="fs-4">CSE Course Scheduler at USF</span> -->
+            <!-- <h1 style="color: rgb(0, 103, 71);">CSE Course Scheduler at USF</h1>
+            </a>
+        </header> -->
+        <!-- Top Sidebar (Header) -->
+        
+        
+        <main>
+            
+            <nav class="top-bar">
+                <div class="nav-links">
+                    <a class="nav-link text-white" href="https://www.usf.edu">University of South Florida</a>
+                    <a class="nav-link text-white" href="https://www.usf.edu/engineering/cse/index.aspx">CSE Department</a>
+                    <a class="nav-link text-white" href="https://usf.app.box.com/s/g030daao5cqk5kny1q8szc1he9qxpp7o">CSE Flowcharts</a>
+                    <a class="nav-link text-white" href="https://usf.app.box.com/s/epc9rvberld5r58stxb08n6b1y5dug9c">CSE 8-year Plan</a>
+                    <a class="nav-link text-white" href="https://usf.app.box.com/s/fkumee81tklestgeawrsu2fxd61j8111">Elective List</a>
+                </div>
+            </nav>
+
+            <!-- <div class="toast" style="position: absolute; top: 0; right: 0;"  data-delay="3000">
+                <div class="toast-header">
+                    <strong class="mr-auto" style="color:red;">Error</strong>
+                </div>
+                <div class="toast-body">
+                  Semester is required
+                </div>
+            </div> -->
+            
+            <!-- The toast for the empty next semester! -->
+            <div class="toast align-items-center text-bg-danger border-0" id="errorToast" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 80px; right: 20px; z-index: 1055;">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Semester is required.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            
+            <!-- New toast for invalid courses -->
+            <div class="toast" id="toast-invalid-courses" style="position: absolute; top: 0; right: 0;" data-delay="3000">
+                <div class="toast-header">
+                    <strong class="mr-auto" style="color:red;">Error</strong>
+                </div>
+                <div class="toast-body">
+                    Selected courses are not valid. Ensure prerequisites are selected.
+                </div>
+            </div>
+            
+            <div class="row g-5">
+                <!-- <div class="col-md-5 col-lg-4 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        
+                        <span class="text-primary" id="response"></span>
+                    </h4>
+                </div> -->
+                
+            <!-- Main Content -->
+            <div class="mt-4" >
+                <div class="row main-content">
+                    <h2 style="text-align: center; font-family: 'Roboto', sans-serif; font-weight: bold; color: #ffffff;">
+                        CSE Student Graduation Planner
+                    </h2>
+                    <!-- Left Description Box -->
+                    <!-- <div class="col-md-6">
+                        <div class="description-box">
+                            <h4 style="font-family: 'Roboto', sans-serif; font-weight: 700; color: #004b23;">CSE Department Course Scheduler</h4>
+                            <p>
+                                The CSE Course Scheduler helps you plan your semester by selecting taken courses and generating a personalized schedule.
+                            </p>
+                        </div>
+                    </div>     -->
+                        
+                    <!-- right box -->
+                    <div class="col-md-6 mx-auto">
+                        <div class="form-box" style="align-items: center">
+                            <div class="row align-items-center mb-3">
+                            <!-- Semester Dropdown -->
+                            <div class="col-md-6" style="margin-bottom: -35px;">
+                                <label for="semester" class="form-label">Please select your next semester.</label>
+                                <select class="form-select" id="semester" required>
+                                    <option value="">Choose...</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>summer 1</option>
+                                </select>
+                        <div class="invalid-feedback">
+                            Please select your next semester.
+                        </div>
+                    </div>
+
+                    <!-- pop up page -->
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Popup with Categorized Checkboxes</title>
+                        <!-- Include Bootstrap CSS -->
+                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+                        <style>
+                            .checkbox-list {
+                                max-height: 300px; /* Set scrollable height */
+                                overflow-y: auto; /* Enable vertical scrolling */
+                            }
+                        </style>
+                    </head>
+                    <body>
+                    <div class="mt-5">
+                        <!-- Button to Open Modal -->
+                        <label for="semester" class="form-label">Please select your taken courses.</label>
+                        <button type="button" class="btn-custom" data-bs-toggle="modal" data-bs-target="#takenCoursesModal">
+                            Taken Courses
+                        </button>
+                    </div>
+                            </div>
+                    
+                    <!-- Modal Structure -->
+                    <div class="modal fade" id="takenCoursesModal" tabindex="-1" aria-labelledby="takenCoursesModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="takenCoursesModalLabel">Please Select Taken Courses!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Hidden input to hold the selected courses -->
+                                    <input type="hidden" id="taken_courses_input" name="taken_courses[value]" value="{}">
+                
+                                    <!-- Categorized Checkboxes by Semester -->
+                                    <div class="accordion" id="accordionExample">
+                                        <!-- Semester 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Semester 1
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="taken_courses" id="MAC2281" value="MAC2281">
+                                                        <label class="form-check-label" for="MAC2281">Engineering Calculus I</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="taken_courses" id="ENC1101" value="ENC1101">
+                                                        <label class="form-check-label" for="ENC1101">Composition I</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="taken_courses" id="EGN3000/3000L" value="EGN3000/3000L">
+                                                        <label class="form-check-label" for="EGN3000/3000L">Foundations of Engineering/ Lab</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="taken_courses" id="NatSciElec1" value="NatSciElec1">
+                                                        <label class="form-check-label" for="NatSciElec1">Natural Science Elective</label>
+                                                    </div>
+
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        <!-- Semester 2 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Semester 2
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="MAC2282" value="MAC2282">
+                                                        <label class="form-check-label" for="MAC2282">Engineering Calculus II</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="PHY2048/2048L" value="PHY2048/2048L">
+                                                        <label class="form-check-label" for="PHY2048/2048L">General Physics I/ Lab</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="ENC1102" value="ENC1102">
+                                                        <label class="form-check-label" for="ENC1102">Composition II</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="COP2510" value="COP2510">
+                                                        <label class="form-check-label" for="COP2510">Programming Concepts</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        <!-- Semester 3 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                    Semester 3
+                                                </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="COT3100" value="COT3100">
+                                                        <label class="form-check-label" for="COT3100">Introduction to Discrete Structures</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="PHY2049/2049L" value="PHY2049/2049L">
+                                                        <label class="form-check-label" for="PHY2049/2049L">General Physics II/ LabL</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="COP3514" value="COP3514">
+                                                        <label class="form-check-label" for="COP3514">Program Design</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CDA3103" value="CDA3103">
+                                                        <label class="form-check-label" for="CDA3103">Computer Organization</label>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semester 4 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFour">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                    Semester 4
+                                                </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="COP4530" value="COP4530">
+                                                        <label class="form-check-label" for="COP4530">Data Structures</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CDA3201/3201L" value="CDA3201/3201L">
+                                                        <label class="form-check-label" for="CDA3201/3201L">Computer Logic and Design/ Lab</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GenEdHumanities" value="GenEdHumanities">
+                                                        <label class="form-check-label" for="GenEdHumanities">Gen Ed Humanities</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GeneralElec1" value="GeneralElec1">
+                                                        <label class="form-check-label" for="GeneralElec1">General Elective</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semester Summer 1 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingSummer1">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSummer1" aria-expanded="false" aria-controls="collapseSummer1">
+                                                    Summer 1
+                                                </button>
+                                            </h2>
+                                            <div id="collapseSummer1" class="accordion-collapse collapse" aria-labelledby="headingSummer1" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GenEdSocialScience" value="GenEdSocialScience">
+                                                        <label class="form-check-label" for="GenEdSocialScience">Gen Ed Core Social Science</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="NatSciElec2" value="NatSciElec2">
+                                                        <label class="form-check-label" for="NatSciElec2">Natural Science Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="EGN3443" value="EGN3443">
+                                                        <label class="form-check-label" for="EGN3443">Probability and Statistics for Engineers</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semester 5 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFive">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                    Semester 5
+                                                </button>
+                                            </h2>
+                                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CDA4205/4205L" value="CDA4205/4205L">
+                                                        <label class="form-check-label" for="CDA4205/4205L">Computer Architecture/ Lab</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="EGN4450" value="EGN4450">
+                                                        <label class="form-check-label" for="EGN4450">Introduction to Linear Systems</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GenEdHumanAndCulturalDiv" value="GenEdHumanAndCulturalDiv">
+                                                        <label class="form-check-label" for="GenEdHumanAndCulturalDiv">Gen Ed Human and Cultural Diversity</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CSESoftwareElelc1" value="CSESoftwareElelc1">
+                                                        <label class="form-check-label" for="CSESoftwareElelc1">CSE Software Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GeneralElec2" value="GeneralElec2">
+                                                        <label class="form-check-label" for="GeneralElec2">General Elective</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semester 6 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingSix">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                    Semester 6
+                                                </button>
+                                            </h2>
+                                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="COT4400" value="COT4400">
+                                                        <label class="form-check-label" for="COT4400">Analysis of Algorithms</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="ENC3246" value="ENC3246">
+                                                        <label class="form-check-label" for="ENC3246">Communication for Engineers</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CSESoftwareElelc2" value="CSESoftwareElelc2">
+                                                        <label class="form-check-label" for="CSESoftwareElelc2">CSE Software Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CSEelec1" value="CSEelec1">
+                                                        <label class="form-check-label" for="CSEelec1">CSE Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GeneralElec3" value="GeneralElec3">
+                                                        <label class="form-check-label" for="GeneralElec3">General Elective</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semester 7 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingSeven">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                    Semester 7
+                                                </button>
+                                            </h2>
+                                            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CNT4419" value="CNT4419">
+                                                        <label class="form-check-label" for="CNT4419">Secure Coding</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="COP4600" value="COP4600">
+                                                        <label class="form-check-label" for="COP4600">Operating Systems</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CSETheoryElelc" value="CSETheoryElelc">
+                                                        <label class="form-check-label" for="CSETheoryElelc">CSE Theory Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CSEelec2" value="CSEelec2">
+                                                        <label class="form-check-label" for="CSEelec2">CSE Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GeneralElec4" value="GeneralElec4">
+                                                        <label class="form-check-label" for="GeneralElec4">General Elective</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semester 8 -->
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingEight">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                    Semester 8
+                                                </button>
+                                            </h2>
+                                            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CIS4250" value="CIS4250">
+                                                        <label class="form-check-label" for="CIS4250">Ethical Issues and Prof Conduct</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CEN4020" value="CEN4020">
+                                                        <label class="form-check-label" for="CEN4020">Software Engineering</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="CSEelec3" value="CSEelec3">
+                                                        <label class="form-check-label" for="CSEelec3">CSE Elective</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="GeneralElec5" value="GeneralElec5">
+                                                        <label class="form-check-label" for="GeneralElec5">General Elective</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn-custom" onclick="updateTakenCourses()" data-bs-dismiss="modal">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+                    </body>
+                </body>
+
+                    <hr class="my-4">
+                    <button onclick="send_data()" class="w-100 btn btn-primary btn-lg" type="submit" style="background-color: rgb(0, 103, 71);color: white; font-size: 1.5em;">Schedule</button>
+                </div>
+                </div>
+            </div>
+            <!-- Include Bootstrap JS --> 
+                    
+        <div class="results-section">
+            <!-- <h4 class="text-center mt-4">Schedule Results</h4> -->
+            <div class="table-wrapper" id="table-wrapper">
+                        <!-- <h2 class="text-center">Schedule Results</h2> -->
+                <div>
+                    <table class="table table-bordered text-center">
+                        <thead  style="background-color: #005432; color: white;">
+                            <tr id="semester-headers"></tr>
+                        </thead>
+                        <tbody id="course-body" style="background-color: #EDEBD1;"></tbody>
+                    </table>
+                    <button id="printButton" class="btn btn-primary mt-3">Print</button>
+                </div>
+            <!-- Message section -->
+            <div id="results-message" class="mt-3 text-center" style="font-size: 1rem; color: #004b23;"></div>
+        </div>
+
+            <p class="text-primary" id="response"></p>
+
+        
+
+        </main>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2({ width: 'resolve' });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+</html>

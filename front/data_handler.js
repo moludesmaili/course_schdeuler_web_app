@@ -1,55 +1,142 @@
 var takenCoursesInput;
 
 function updateTakenCourses() {
-  const checkboxes = document.querySelectorAll('.form-check-input:checked');
-  takenCoursesInput = Array.from(checkboxes).map(checkbox => checkbox.value);
+  const checkboxes = document.querySelectorAll(".form-check-input:checked");
+  takenCoursesInput = Array.from(checkboxes).map((checkbox) => checkbox.value);
   // console.log("Selected Courses:", selectedCourses); // Debugging
   // takenCoursesInput = document.getElementById('taken_courses_input');
   // takenCoursesInput.value = JSON.stringify({ value: selectedCourses });
 }
 function updateResultsMessage(message) {
-  const messageElement = document.getElementById('results-message');
+  const messageElement = document.getElementById("results-message");
   messageElement.textContent = message; // Update the text content of the message
 }
 
 // the function for printing the table
-function printTable() {
-  const tableSection = document.getElementById('table-wrapper');
+function printTablePdf() {
+  const tableSection = document.getElementById("table-wrapper");
   if (!tableSection) {
-      console.error("Table section not found!");
-      return;
+    console.error("Table section not found!");
+    return;
   }
 
-  const printWindow = window.open('', '', 'width=800,height=600,location=no,menubar=no,toolbar=no,status=no');
-  printWindow.document.write('<html><head><title>Print Schedule</title>');
-  printWindow.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">');
-  printWindow.document.write('</head><body>');
-  printWindow.document.write('<h3>Generated Schedule</h3>');
+  const printWindow = window.open(
+    "",
+    "",
+    "width=800,height=600,location=no,menubar=no,toolbar=no,status=no"
+  );
+  printWindow.document.write("<html><head><title>Print Schedule</title>");
+  printWindow.document.write(
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">'
+  );
+  printWindow.document.write("</head><body>");
+  printWindow.document.write("<h3>Generated Schedule</h3>");
   printWindow.document.write(tableSection.innerHTML);
-  printWindow.document.write('</body></html>');
+  printWindow.document.write("</body></html>");
   printWindow.document.close();
   printWindow.print();
 }
 
+function printTable(mode, element) {
+  var html, link, blob, url, css;
+
+  css = `
+  <style>
+    @page WordSection1 {
+      size: 340mm 200mm;
+      mso-page-orientation: landscape;
+      margin: 5mm;
+    }
+    div.WordSection1 {
+      page: WordSection1;
+    }
+    body {
+      font-size: 8pt; 
+      font-family: Arial, sans-serif; 
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 100px; /* Set the fixed width for each cell */
+    }
+  </style>
+`;
+
+  html = `
+  <html>
+    <head>
+      ${css}
+    </head>
+    <body>
+      <div class="WordSection1">
+        ${element.innerHTML}
+      </div>
+    </body>
+  </html>
+`;
+  if (mode == "pdf") {
+    const opt = {
+      margin: 5,
+      filename: "usf_scheduler.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: [500, 200], orientation: "landscape" },
+      fontSize: 8,
+    };
+
+    html2pdf().from(html).set(opt).save();
+  } else if (mode == "word") {
+    blob = new Blob(["\ufeff", html], {
+      type: "application/msword",
+    });
+    url = URL.createObjectURL(blob);
+    link = document.createElement("A");
+    link.href = url;
+    link.download = "usf_scheduler"; 
+    document.body.appendChild(link);
+    if (navigator.msSaveOrOpenBlob)
+      navigator.msSaveOrOpenBlob(blob, "usf_scheduler.doc"); // IE10-11
+    else link.click(); 
+    document.body.removeChild(link);
+  }
+}
+
 $(document).ready(function () {
   // Print the table when the print button is clicked
-  $('#printButton').on('click', function () {
-      printTable();
+  $("#printPdf").on("click", function () {
+    const tableSection = document.getElementById("table-word-content");
+    printTable(mode="pdf",element=tableSection);
   });
 });
 
+$(document).ready(function () {
+  // Print the table when the print button is clicked
+  $("#printWord").on("click", function () {
+    const tableSection = document.getElementById("table-word-content");
+    printTable(mode="word",element=tableSection);
+  });
+});
 
 $(document).ready(function () {
   // Check if semester is selected on form submission
-  $('#formSubmitButton').on('click', function () {
-      const semester = $('#semester').val();
-      if (!semester) {
-          const toastElement = new bootstrap.Toast(document.getElementById('errorToast'));
-          toastElement.show();
-      }
+  $("#formSubmitButton").on("click", function () {
+    const semester = $("#semester").val();
+    if (!semester) {
+      const toastElement = new bootstrap.Toast(
+        document.getElementById("errorToast")
+      );
+      toastElement.show();
+    }
   });
 });
-
 
 // function send_data() {
 //   console.log(takenCoursesInput)
@@ -77,8 +164,7 @@ $(document).ready(function () {
 
 // }
 
-
-//new scripts for the response table 
+//new scripts for the response table
 // Function to send data and handle the response
 // function send_data() {
 //   console.log("Sending Data:", takenCoursesInput);
@@ -110,7 +196,7 @@ $(document).ready(function () {
 
 function send_data() {
   console.log("Sending Data:", takenCoursesInput);
-  const semester = $('#semester').val(); // Get the selected semester
+  const semester = $("#semester").val(); // Get the selected semester
 
   if (semester !== "") {
     fetch("http://127.0.0.1:8000/api/recommend/create", {
@@ -134,17 +220,22 @@ function send_data() {
       .then((json) => {
         console.log("Response Data:", json); // Debugging the response
         parseAndRenderTable(json); // Call to render the table with response data
-        updateResultsMessage("This plan must be reviewed and approved by a CSE advisor!");
-      })
+        updateResultsMessage(
+          "This plan must be reviewed and approved by a CSE advisor!"
+        );
+        let printDropdown = document.getElementById('printDropdown');
+        if (printDropdown) {
+            printDropdown.style.display = 'inline-block'; // Make it visible
+        }      })
       .catch((error) => {
         console.error("Error:", error);
         // Show error in toast
-        $('.toast-body').text(error.message); // Set the error message
-        $('.toast').toast('show'); // Show the toast
+        $(".toast-body").text(error.message); // Set the error message
+        $(".toast").toast("show"); // Show the toast
       });
   } else {
-    $('.toast-body').text("Semester is required!"); // Set the message for missing semester
-    $('.toast').toast('show'); // Show the toast
+    $(".toast-body").text("Semester is required!"); // Set the message for missing semester
+    $(".toast").toast("show"); // Show the toast
   }
 }
 
@@ -153,16 +244,18 @@ function parseAndRenderTable(responseText) {
   // Parse the response into structured data
   const parsedData = responseText
     .trim()
-    .split('<br/>')
-    .filter(line => line.trim() !== "")
-    .map(line => {
+    .split("<br/>")
+    .filter((line) => line.trim() !== "")
+    .map((line) => {
       const semesterMatch = line.match(/Semester: (\w+)/);
       const coursesMatch = line.match(/Courses: (\[.*?\])/);
       const creditsMatch = line.match(/Credits: (\d+)/);
 
       return {
         semester: semesterMatch ? semesterMatch[1] : "",
-        courses: coursesMatch ? JSON.parse(coursesMatch[1].replace(/'/g, '"')) : [],
+        courses: coursesMatch
+          ? JSON.parse(coursesMatch[1].replace(/'/g, '"'))
+          : [],
         credits: creditsMatch ? parseInt(creditsMatch[1], 10) : 0,
       };
     });
@@ -174,21 +267,21 @@ function parseAndRenderTable(responseText) {
   courseBody.innerHTML = "";
 
   // Add semester headers
-  parsedData.forEach(semester => {
+  parsedData.forEach((semester) => {
     const headerCell = document.createElement("th");
     headerCell.className = "semester-column";
-    headerCell.style.color="white"
+    headerCell.style.color = "white";
     headerCell.innerText = `Semester ${semester.semester}`;
     semesterHeaders.appendChild(headerCell);
   });
 
   // Maximum number of courses for any semester
-  const maxCourses = Math.max(...parsedData.map(s => s.courses.length));
+  const maxCourses = Math.max(...parsedData.map((s) => s.courses.length));
 
   // Add rows for courses
   for (let i = 0; i < maxCourses; i++) {
     const row = document.createElement("tr");
-    parsedData.forEach(semester => {
+    parsedData.forEach((semester) => {
       const cell = document.createElement("td");
       cell.innerText = semester.courses[i] || ""; // Leave blank if no course
       row.appendChild(cell);
@@ -198,7 +291,7 @@ function parseAndRenderTable(responseText) {
 
   // Add row for credits
   const creditsRow = document.createElement("tr");
-  parsedData.forEach(semester => {
+  parsedData.forEach((semester) => {
     const cell = document.createElement("td");
     cell.innerHTML = `<strong>Credits: ${semester.credits}</strong>`;
     creditsRow.appendChild(cell);

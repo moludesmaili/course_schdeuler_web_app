@@ -1,7 +1,7 @@
 # USF Course Scheduler
 ## Install Backend Service
 ```
-pip install requirement.txt
+pip install requirements.txt
 ```
 ## Run Service
 ```

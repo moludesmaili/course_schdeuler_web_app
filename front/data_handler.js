@@ -1,5 +1,5 @@
 var takenCoursesInput;
-var url = "http://100.29.16.102"
+var url = "http://localhost:8000"
 
 function updateTakenCourses() {
   const checkboxes = document.querySelectorAll(".form-check-input:checked");

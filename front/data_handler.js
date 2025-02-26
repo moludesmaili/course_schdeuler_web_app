@@ -1,4 +1,5 @@
 var takenCoursesInput;
+var url = "http://100.29.16.102"
 
 function updateTakenCourses() {
   const checkboxes = document.querySelectorAll(".form-check-input:checked");
@@ -109,21 +110,33 @@ function printTable(mode, element) {
   }
 }
 
+// $(document).ready(function () {
+//   // Print the table when the print button is clicked
+//   $("#printPdf").on("click", function () {
+//     const tableSection = document.getElementById("table-word-content");
+//     // printTable(mode="pdf",element=tableSection);
+
+//   });
+// });
 $(document).ready(function () {
-  // Print the table when the print button is clicked
+  // Print the table in PDF format
   $("#printPdf").on("click", function () {
-    const tableSection = document.getElementById("table-word-content");
-    printTable(mode="pdf",element=tableSection);
+    printTable2("pdf");
+  });
+
+  // Print the table in Word format
+  $("#printWord").on("click", function () {
+    printTable2("word");
   });
 });
 
-$(document).ready(function () {
-  // Print the table when the print button is clicked
-  $("#printWord").on("click", function () {
-    const tableSection = document.getElementById("table-word-content");
-    printTable(mode="word",element=tableSection);
-  });
-});
+// $(document).ready(function () {
+//   // Print the table when the print button is clicked
+//   $("#printWord").on("click", function () {
+//     const tableSection = document.getElementById("table-word-content");
+//     printTable(mode="word",element=tableSection);
+//   });
+// });
 
 $(document).ready(function () {
   // Check if semester is selected on form submission
@@ -199,7 +212,7 @@ function send_data() {
   const semester = $("#semester").val(); // Get the selected semester
 
   if (semester !== "") {
-    fetch("http://127.0.0.1:8000/api/recommend/create", {
+    fetch(url+"/api/recommend/create", {
       method: "POST",
       body: JSON.stringify({
         semester: semester,
@@ -251,11 +264,19 @@ function parseAndRenderTable(responseText) {
       const coursesMatch = line.match(/Courses: (\[.*?\])/);
       const creditsMatch = line.match(/Credits: (\d+)/);
 
+      // Parse the courses and include the credit for each course
+      const courses = coursesMatch
+        ? JSON.parse(coursesMatch[1].replace(/'/g, '"')).map((course) => {
+            return {
+              label: course.label,
+              credit: course.credit
+            };
+          })
+        : [];
+
       return {
         semester: semesterMatch ? semesterMatch[1] : "",
-        courses: coursesMatch
-          ? JSON.parse(coursesMatch[1].replace(/'/g, '"'))
-          : [],
+        courses: courses,
         credits: creditsMatch ? parseInt(creditsMatch[1], 10) : 0,
       };
     });
@@ -283,7 +304,7 @@ function parseAndRenderTable(responseText) {
     const row = document.createElement("tr");
     parsedData.forEach((semester) => {
       const cell = document.createElement("td");
-      cell.innerText = semester.courses[i] || ""; // Leave blank if no course
+      cell.innerText = semester.courses[i] ? semester.courses[i].label : ""; // Only label is shown
       row.appendChild(cell);
     });
     courseBody.appendChild(row);
@@ -297,4 +318,253 @@ function parseAndRenderTable(responseText) {
     creditsRow.appendChild(cell);
   });
   courseBody.appendChild(creditsRow);
+
+  // Make the parsedData available for other functions
+  window.courseData = parsedData;
 }
+
+
+
+
+
+// -------
+// function printTable2(mode) {
+//   // Get the parsed data directly from the already generated table
+//   const parsedData = [];
+//   const semesters = document.querySelectorAll("#semester-headers th");
+//   const rows = document.querySelectorAll("#course-body tr");
+
+//   semesters.forEach((semester, index) => {
+//     const semesterData = {
+//       semester: semester.innerText,
+//       courses: [],
+//       credits: 0,
+//     };
+
+//     rows.forEach((row) => {
+//       const cells = row.querySelectorAll("td");
+//       if (cells[index]) {
+//         const course = cells[index].innerText;
+//         if (course && !course.startsWith("Credits:")) {
+//           semesterData.courses.push(course);
+//         } else if (course.startsWith("Credits:")) {
+//           const creditMatch = course.match(/Credits: (\d+)/);
+//           semesterData.credits = creditMatch
+//             ? parseInt(creditMatch[1], 10)
+//             : 0;
+//         }
+//       }
+//     });
+
+//     parsedData.push(semesterData);
+//   });
+
+//   // Generate the new vertical layout
+//   let customTable = `
+//     <table style="width: 100%; border-collapse: collapse; background-color: white;">
+//       <tbody>`;
+//   parsedData.forEach((semester) => {
+//     customTable += `
+//       <tr>
+//         <td style="border: 1px solid black; padding: 8px; font-weight: bold; background-color: #f4f4f9;">
+//           ${semester.semester}
+//         </td>
+//       </tr>`;
+
+//     semester.courses.forEach((course) => {
+//       customTable += `
+//         <tr>
+//           <td style="border: 1px solid black; padding: 8px; text-align: left;">
+//             ${course}
+//           </td>
+//         </tr>`;
+//     });
+
+//     customTable += `
+//       <tr>
+//         <td style="border: 1px solid black; padding: 8px; text-align: left; font-weight: bold;">
+//           Total Credits: ${semester.credits}
+//         </td>
+//       </tr>
+//       <tr><td style="height: 20px;"></td></tr>`;
+//   });
+//   customTable += `
+//       </tbody>
+//     </table>`;
+
+//   // Add CSS for the Word or PDF layout
+//   const css = `
+//     <style>
+//       @page WordSection1 {
+//         size: 340mm 200mm;
+//         mso-page-orientation: landscape;
+//         margin: 5mm;
+//       }
+//       div.WordSection1 {
+//         page: WordSection1;
+//       }
+//       body {
+//         font-size: 10pt;
+//         font-family: Arial, sans-serif;
+//         background-color: white;
+//       }
+//       table {
+//         width: 100%;
+//         border-collapse: collapse;
+//       }
+//       td {
+//         border: 1px solid black;
+//         padding: 8px;
+//         text-align: center;
+//         vertical-align: middle;
+//         word-wrap: break-word;
+//         white-space: normal;
+//       }
+//     </style>`;
+
+//   const html = `
+//     <html>
+//       <head>
+//         ${css}
+//       </head>
+//       <body>
+//         <div class="WordSection1">
+//           <h3 style="text-align: center;">Generated Schedule</h3>
+//           ${customTable}
+//         </div>
+//       </body>
+//     </html>`;
+
+//   if (mode === "pdf") {
+//     const opt = {
+//       margin: 5,
+//       filename: "usf_scheduler.pdf",
+//       image: { type: "jpeg", quality: 0.98 },
+//       html2canvas: { scale: 2 },
+//       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+//     };
+
+//     html2pdf().from(html).set(opt).save();
+//   } else if (mode === "word") {
+//     const blob = new Blob(["\ufeff", html], {
+//       type: "application/msword",
+//     });
+//     const url = URL.createObjectURL(blob);
+//     const link = document.createElement("A");
+//     link.href = url;
+//     link.download = "usf_scheduler.doc";
+//     document.body.appendChild(link);
+//     link.click();
+//     document.body.removeChild(link);
+//   }
+// }
+
+function printTable2(mode) {
+  // Get the parsed data directly from the global variable
+  const parsedData = window.courseData;
+
+  // Generate the new vertical layout with an additional column for credits
+  let customTable = `
+    <table style="width: 100%; border-collapse: collapse; background-color: white;">
+      <tbody>`;
+  
+  parsedData.forEach((semester) => {
+    customTable += `
+      <tr>
+        <td colspan="2" style="border: 1px solid black; padding: 8px; font-weight: bold; background-color: #f4f4f9;">
+          ${semester.semester}
+        </td>
+      </tr>`;
+
+    semester.courses.forEach((course) => {
+      customTable += `
+        <tr>
+          <td style="border: 1px solid black; padding: 8px; text-align: left;">
+            ${course.label}
+          </td>
+          <td style="border: 1px solid black; padding: 8px; text-align: center;">
+            ${course.credit}
+          </td>
+        </tr>`;
+    });
+
+    customTable += `
+      <tr>
+        <td colspan="2" style="border: 1px solid black; padding: 8px; text-align: left; font-weight: bold;">
+          Total Credits: ${semester.credits}
+        </td>
+      </tr>
+      <tr><td colspan="2" style="height: 20px;"></td></tr>`;
+  });
+
+  customTable += `
+      </tbody>
+    </table>`;
+
+  // Add CSS for the Word or PDF layout
+  const css = `
+    <style>
+      @page WordSection1 {
+        size: 340mm 200mm;
+        mso-page-orientation: landscape;
+        margin: 5mm;
+      }
+      div.WordSection1 {
+        page: WordSection1;
+      }
+      body {
+        font-size: 10pt;
+        font-family: Arial, sans-serif;
+        background-color: white;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+        word-wrap: break-word;
+        white-space: normal;
+      }
+    </style>`;
+
+  const html = `
+    <html>
+      <head>
+        ${css}
+      </head>
+      <body>
+        <div class="WordSection1">
+          <h3 style="text-align: center;">Generated Schedule</h3>
+          ${customTable}
+        </div>
+      </body>
+    </html>`;
+
+  if (mode === "pdf") {
+    const opt = {
+      margin: 5,
+      filename: "usf_scheduler.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+
+    html2pdf().from(html).set(opt).save();
+  } else if (mode === "word") {
+    const blob = new Blob(["\ufeff", html], {
+      type: "application/msword",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("A");
+    link.href = url;
+    link.download = "usf_scheduler.doc";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+}
+

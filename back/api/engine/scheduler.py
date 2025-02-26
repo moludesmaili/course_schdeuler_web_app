@@ -402,17 +402,30 @@ def calculate(next_semester,taken_courses,dependencies,goal_schedule):
     
     new_schedule, total_credits, similarity_score = adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retake, dependencies)
     res = ""
+    # for semester in new_schedule["semesters"]:
+    #     if semester["id"] >= next_semester:  # Print semesters starting from the next semester
+    #         course_labels = [dependencies[course]["label"] if course in dependencies else course for course in semester["courses"]]
+    #         course_credit = [dependencies[course]["credits"] for course in semester["courses"]]
+    #         res += (f'Semester: {semester["name"]}, Courses: {course_labels}, Credits: {semester["credits"]}<br/>')
     for semester in new_schedule["semesters"]:
         if semester["id"] >= next_semester:  # Print semesters starting from the next semester
-            course_labels = [dependencies[course]["label"] if course in dependencies else course for course in semester["courses"]]
-            res += (f'Semester: {semester["name"]}, Courses: {course_labels}, Credits: {semester["credits"]}<br/>')
+            # Include label and credit as separate elements for each course
+            course_details = [
+                {
+                    "label": dependencies[course]["label"],
+                    "credit": dependencies[course]["credits"]
+                } if course in dependencies else {"label": course, "credit": 0} 
+                for course in semester["courses"]
+            ]
+            res += (f'Semester: {semester["name"]}, Courses: {course_details}, Credits: {semester["credits"]}<br/>')
+    
     return res
 
 # dependencies = load_json('api/engine/course_dep.json')
 # goal_schedule = load_json('api/engine/goal.json')
 # calculate("2",["ENC1101","EGN3000/3000L","NatSciElec1"],["MAC2281"],dependencies,goal_schedule)
 # # Main function
-# def main():
+# def main():                                                                                                                                                                                       
 #     # Load input JSON files
 #     dependencies = load_json('dependencies.json')
 #     goal_schedule = load_json('goal.json')

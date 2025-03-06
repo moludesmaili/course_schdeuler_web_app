@@ -1,7 +1,7 @@
 {
   "semesters": [
     {
-      "name": "1",
+      "name": "1, Fall",
       "id": "1",
       "term": "Fall",
       "courses": [
@@ -13,7 +13,7 @@
       "credits": 13
     },
     {
-      "name": "2",
+      "name": "2, Spring",
       "id": "2",
       "term": "Spring",
       "courses": [

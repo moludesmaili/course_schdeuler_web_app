@@ -332,9 +332,9 @@ function printTable2(mode) {
         backgroundColor: null, y: 0 , useCORS: true},
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     };
-    const printWindow = window.open("", "_blank", "width=800,height=600");
-    printWindow.document.write(opt);
-    printWindow.document.close();  // Close the document stream to render the content
+    // const printWindow = window.open("", "_blank", "width=800,height=600"); // to show the opt to debug
+    // printWindow.document.write(opt);
+    // printWindow.document.close();  // Close the document stream to render the content
     
     html2pdf().from(html).set(opt).save();
   } else if (mode === "word") {

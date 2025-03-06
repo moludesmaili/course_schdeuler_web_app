@@ -12,6 +12,27 @@ function updateResultsMessage(message) {
   const messageElement = document.getElementById("results-message");
   messageElement.textContent = message; // Update the text content of the message
 }
+function showContent() {
+  document.getElementById("protected-content").style.display = "block";
+}        
+function checkPassword() {
+  const correctPassword = "usf_course_scheduler"; // Change this to your desired password
+  const savedPassword = localStorage.getItem("auth");
+
+  if (savedPassword === correctPassword) {
+      showContent();
+      return;
+  }
+
+  const userInput = prompt("Enter the password:");
+  if (userInput === correctPassword) {
+      localStorage.setItem("auth", correctPassword); // Save password in localStorage
+      showContent();
+  } else {
+      alert("Incorrect password. Access denied.");
+      checkPassword(); // Keep prompting until the correct password is entered
+  }
+}
 
 // the function for printing the table
 function printTablePdf() {

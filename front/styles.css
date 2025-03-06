@@ -9,6 +9,9 @@ body {
 #printDropdown {
   display: none; /* Ensure it's hidden at first */
 }
+#protected-content {
+  display: none; /* Hide content initially */
+}
 
 #printButton {
   background-color: #005432;

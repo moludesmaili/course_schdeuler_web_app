@@ -1,17 +1,6 @@
 var takenCoursesInput;
-var url = "http://localhost:8000"
+var url = "http://100.29.16.102"
 
-function updateTakenCourses() {
-  const checkboxes = document.querySelectorAll(".form-check-input:checked");
-  takenCoursesInput = Array.from(checkboxes).map((checkbox) => checkbox.value);
-  // console.log("Selected Courses:", selectedCourses); // Debugging
-  // takenCoursesInput = document.getElementById('taken_courses_input');
-  // takenCoursesInput.value = JSON.stringify({ value: selectedCourses });
-}
-function updateResultsMessage(message) {
-  const messageElement = document.getElementById("results-message");
-  messageElement.textContent = message; // Update the text content of the message
-}
 function showContent() {
   document.getElementById("protected-content").style.display = "block";
 }        
@@ -32,6 +21,17 @@ function checkPassword() {
       alert("Incorrect password. Access denied.");
       checkPassword(); // Keep prompting until the correct password is entered
   }
+}
+function updateTakenCourses() {
+  const checkboxes = document.querySelectorAll(".form-check-input:checked");
+  takenCoursesInput = Array.from(checkboxes).map((checkbox) => checkbox.value);
+  // console.log("Selected Courses:", selectedCourses); // Debugging
+  // takenCoursesInput = document.getElementById('taken_courses_input');
+  // takenCoursesInput.value = JSON.stringify({ value: selectedCourses });
+}
+function updateResultsMessage(message) {
+  const messageElement = document.getElementById("results-message");
+  messageElement.textContent = message; // Update the text content of the message
 }
 
 // the function for printing the table
@@ -59,86 +59,7 @@ function printTablePdf() {
   printWindow.print();
 }
 
-function printTable(mode, element) {
-  var html, link, blob, url, css;
 
-  css = `
-  <style>
-    @page WordSection1 {
-      size: 340mm 200mm;
-      mso-page-orientation: landscape;
-      margin: 5mm;
-    }
-    div.WordSection1 {
-      page: WordSection1;
-    }
-    body {
-      font-size: 8pt; 
-      font-family: Arial, sans-serif; 
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-    vertical-align: middle;
-    word-wrap: break-word;
-    white-space: normal;
-    max-width: 100px; /* Set the fixed width for each cell */
-    }
-  </style>
-`;
-
-  html = `
-  <html>
-    <head>
-      ${css}
-    </head>
-    <body>
-      <div class="WordSection1">
-        ${element.innerHTML}
-      </div>
-    </body>
-  </html>
-`;
-  if (mode == "pdf") {
-    const opt = {
-      margin: 5,
-      filename: "usf_scheduler.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "mm", format: [500, 200], orientation: "landscape" },
-      fontSize: 8,
-    };
-
-    html2pdf().from(html).set(opt).save();
-  } else if (mode == "word") {
-    blob = new Blob(["\ufeff", html], {
-      type: "application/msword",
-    });
-    url = URL.createObjectURL(blob);
-    link = document.createElement("A");
-    link.href = url;
-    link.download = "usf_scheduler"; 
-    document.body.appendChild(link);
-    if (navigator.msSaveOrOpenBlob)
-      navigator.msSaveOrOpenBlob(blob, "usf_scheduler.doc"); // IE10-11
-    else link.click(); 
-    document.body.removeChild(link);
-  }
-}
-
-// $(document).ready(function () {
-//   // Print the table when the print button is clicked
-//   $("#printPdf").on("click", function () {
-//     const tableSection = document.getElementById("table-word-content");
-//     // printTable(mode="pdf",element=tableSection);
-
-//   });
-// });
 $(document).ready(function () {
   // Print the table in PDF format
   $("#printPdf").on("click", function () {
@@ -151,13 +72,6 @@ $(document).ready(function () {
   });
 });
 
-// $(document).ready(function () {
-//   // Print the table when the print button is clicked
-//   $("#printWord").on("click", function () {
-//     const tableSection = document.getElementById("table-word-content");
-//     printTable(mode="word",element=tableSection);
-//   });
-// });
 
 $(document).ready(function () {
   // Check if semester is selected on form submission
@@ -172,61 +86,6 @@ $(document).ready(function () {
   });
 });
 
-// function send_data() {
-//   console.log(takenCoursesInput)
-//   const semester = $('#semester').val();; // Replace "mySelect" with the ID of your select element
-
-//   if(semester != ""){
-
-//     fetch("http://127.0.0.1:8000/api/recommend/create", {
-//         method: "POST",
-//         body: JSON.stringify({
-//           semester: semester,
-//           taken_courses: takenCoursesInput,
-//         }),
-//         headers: {
-//           "Content-type": "application/json; charset=UTF-8"
-//         }
-//       })
-//         .then((response) => response.json())
-//         .then((json) => {
-//             document.getElementById("response").innerHTML = json;
-//         });
-//   }else{
-//     $('.toast').toast('show');
-//   }
-
-// }
-
-//new scripts for the response table
-// Function to send data and handle the response
-// function send_data() {
-//   console.log("Sending Data:", takenCoursesInput);
-//   const semester = $('#semester').val(); // Get the selected semester
-
-//   if (semester !== "") {
-//     fetch("http://127.0.0.1:8000/api/recommend/create", {
-//       method: "POST",
-//       body: JSON.stringify({
-//         semester: semester,
-//         taken_courses: takenCoursesInput,
-//       }),
-//       headers: {
-//         "Content-type": "application/json; charset=UTF-8",
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((json) => {
-//         console.log("Response Data:", json); // Debugging the response
-//         parseAndRenderTable(json); // Call to render the table with response data
-//         // Example usage after populating the table
-//         updateResultsMessage("This plan must be reviewed and approved by a CSE advisor!");
-//       })
-//       .catch((error) => console.error("Error:", error));
-//   } else {
-//     $('.toast').toast('show');
-//   }
-// }
 
 function send_data() {
   console.log("Sending Data:", takenCoursesInput);
@@ -345,177 +204,62 @@ function parseAndRenderTable(responseText) {
 }
 
 
-
-
-
-// -------
-// function printTable2(mode) {
-//   // Get the parsed data directly from the already generated table
-//   const parsedData = [];
-//   const semesters = document.querySelectorAll("#semester-headers th");
-//   const rows = document.querySelectorAll("#course-body tr");
-
-//   semesters.forEach((semester, index) => {
-//     const semesterData = {
-//       semester: semester.innerText,
-//       courses: [],
-//       credits: 0,
-//     };
-
-//     rows.forEach((row) => {
-//       const cells = row.querySelectorAll("td");
-//       if (cells[index]) {
-//         const course = cells[index].innerText;
-//         if (course && !course.startsWith("Credits:")) {
-//           semesterData.courses.push(course);
-//         } else if (course.startsWith("Credits:")) {
-//           const creditMatch = course.match(/Credits: (\d+)/);
-//           semesterData.credits = creditMatch
-//             ? parseInt(creditMatch[1], 10)
-//             : 0;
-//         }
-//       }
-//     });
-
-//     parsedData.push(semesterData);
-//   });
-
-//   // Generate the new vertical layout
-//   let customTable = `
-//     <table style="width: 100%; border-collapse: collapse; background-color: white;">
-//       <tbody>`;
-//   parsedData.forEach((semester) => {
-//     customTable += `
-//       <tr>
-//         <td style="border: 1px solid black; padding: 8px; font-weight: bold; background-color: #f4f4f9;">
-//           ${semester.semester}
-//         </td>
-//       </tr>`;
-
-//     semester.courses.forEach((course) => {
-//       customTable += `
-//         <tr>
-//           <td style="border: 1px solid black; padding: 8px; text-align: left;">
-//             ${course}
-//           </td>
-//         </tr>`;
-//     });
-
-//     customTable += `
-//       <tr>
-//         <td style="border: 1px solid black; padding: 8px; text-align: left; font-weight: bold;">
-//           Total Credits: ${semester.credits}
-//         </td>
-//       </tr>
-//       <tr><td style="height: 20px;"></td></tr>`;
-//   });
-//   customTable += `
-//       </tbody>
-//     </table>`;
-
-//   // Add CSS for the Word or PDF layout
-//   const css = `
-//     <style>
-//       @page WordSection1 {
-//         size: 340mm 200mm;
-//         mso-page-orientation: landscape;
-//         margin: 5mm;
-//       }
-//       div.WordSection1 {
-//         page: WordSection1;
-//       }
-//       body {
-//         font-size: 10pt;
-//         font-family: Arial, sans-serif;
-//         background-color: white;
-//       }
-//       table {
-//         width: 100%;
-//         border-collapse: collapse;
-//       }
-//       td {
-//         border: 1px solid black;
-//         padding: 8px;
-//         text-align: center;
-//         vertical-align: middle;
-//         word-wrap: break-word;
-//         white-space: normal;
-//       }
-//     </style>`;
-
-//   const html = `
-//     <html>
-//       <head>
-//         ${css}
-//       </head>
-//       <body>
-//         <div class="WordSection1">
-//           <h3 style="text-align: center;">Generated Schedule</h3>
-//           ${customTable}
-//         </div>
-//       </body>
-//     </html>`;
-
-//   if (mode === "pdf") {
-//     const opt = {
-//       margin: 5,
-//       filename: "usf_scheduler.pdf",
-//       image: { type: "jpeg", quality: 0.98 },
-//       html2canvas: { scale: 2 },
-//       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-//     };
-
-//     html2pdf().from(html).set(opt).save();
-//   } else if (mode === "word") {
-//     const blob = new Blob(["\ufeff", html], {
-//       type: "application/msword",
-//     });
-//     const url = URL.createObjectURL(blob);
-//     const link = document.createElement("A");
-//     link.href = url;
-//     link.download = "usf_scheduler.doc";
-//     document.body.appendChild(link);
-//     link.click();
-//     document.body.removeChild(link);
-//   }
-// }
-
 function printTable2(mode) {
   // Get the parsed data directly from the global variable
   const parsedData = window.courseData;
 
   // Generate the new vertical layout with an additional column for credits
   let customTable = `
-    <table style="width: 100%; border-collapse: collapse; background-color: white;">
+    <table style="width: 98%; border-collapse: collapse; background-color: white;">
       <tbody>`;
   
   parsedData.forEach((semester) => {
     customTable += `
       <tr>
-        <td colspan="2" style="border: 1px solid black; padding: 8px; font-weight: bold; background-color: #f4f4f9;">
-          ${semester.semester}
+        <td colspan="3" style="width: 100%; border: 1px solid black; padding: 4px; font-weight: bold; background-color: #f4f4f9;">
+          Semester ${semester.semester}
+        </td>
+      </tr>`;
+
+    customTable += `
+      <tr>
+        <td colspan="1" style="width: 40%; border: 1px solid black; padding: 4px; font-weight: bold; background-color: #f4f4f9;">
+          Course
+        </td>
+        <td colspan="1" style="width: 10%; border: 1px solid black; padding: 4px; font-weight: bold; background-color: #f4f4f9;">
+          credit
+        </td>
+        <td colspan="1" style="width: 50%; border: 1px solid black; padding: 4px; font-weight: bold; background-color: #f4f4f9;">
+          Notes
         </td>
       </tr>`;
 
     semester.courses.forEach((course) => {
       customTable += `
         <tr>
-          <td style="border: 1px solid black; padding: 8px; text-align: left;">
+          <td style="width: 40%; border: 1px solid black; padding: 4px; text-align: left;">
             ${course.label}
           </td>
-          <td style="border: 1px solid black; padding: 8px; text-align: center;">
+          <td style="width: 10%; border: 1px solid black; padding: 4px; text-align: center;">
             ${course.credit}
           </td>
+          <td style="width: 50%; border: 1px solid black; padding: 4px; text-align: center;">
+          &nbsp;</td>
         </tr>`;
     });
 
     customTable += `
       <tr>
-        <td colspan="2" style="border: 1px solid black; padding: 8px; text-align: left; font-weight: bold;">
-          Total Credits: ${semester.credits}
+        <td colspan="1" style="width: 40%; border: 1px solid black; padding: 4px; text-align: left; font-weight: bold;">
+          Total Credits:
         </td>
+        <td colspan="1" style="width: 10%; border: 1px solid black; padding: 4px; text-align: center; font-weight: bold;">
+          ${semester.credits}
+        </td>
+        <td colspan="1" style="width: 50%; border: 1px solid black; padding: 4px; text-align: left; font-weight: bold;">
+        &nbsp;</td>
       </tr>
-      <tr><td colspan="2" style="height: 20px;"></td></tr>`;
+      <tr><td colspan="3" style="height: 20px;"></td></tr>`;
   });
 
   customTable += `
@@ -526,9 +270,9 @@ function printTable2(mode) {
   const css = `
     <style>
       @page WordSection1 {
-        size: 340mm 200mm;
+        size: a4;
         mso-page-orientation: landscape;
-        margin: 5mm;
+        margin: 4mm;
       }
       div.WordSection1 {
         page: WordSection1;
@@ -537,7 +281,16 @@ function printTable2(mode) {
         font-size: 10pt;
         font-family: Arial, sans-serif;
         background-color: white;
+        margin-bottom: 10px;
+        margin-bottom: 10px;
       }
+      h3 {
+        margin-top: 0;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 0px; /* Adjust as needed */
+      }
+      
       table {
         width: 100%;
         border-collapse: collapse;
@@ -549,6 +302,10 @@ function printTable2(mode) {
         vertical-align: middle;
         word-wrap: break-word;
         white-space: normal;
+      }
+      table, td {
+        border-collapse: collapse;
+        border: 1px solid black;
       }
     </style>`;
 
@@ -564,16 +321,21 @@ function printTable2(mode) {
         </div>
       </body>
     </html>`;
+  
 
   if (mode === "pdf") {
     const opt = {
-      margin: 5,
+      margin: [5, 5, 5, 5],
       filename: "usf_scheduler.pdf",
       image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
+      html2canvas: { scale: 2 , 
+        backgroundColor: null, y: 0 , useCORS: true},
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     };
-
+    const printWindow = window.open("", "_blank", "width=800,height=600");
+    printWindow.document.write(opt);
+    printWindow.document.close();  // Close the document stream to render the content
+    
     html2pdf().from(html).set(opt).save();
   } else if (mode === "word") {
     const blob = new Blob(["\ufeff", html], {

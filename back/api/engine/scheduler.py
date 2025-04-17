@@ -1,4 +1,5 @@
 import json
+import copy
 
 # Load the dependencies and goal JSON files
 def load_json(filename):
@@ -15,12 +16,12 @@ def create_high_priority_courses(dependencies):
 
     return high_priority_courses
 
-def create_failed_courses(goal_schedule, next_semester, taken_courses, high_priority_courses):
+def create_failed_courses(goal_schedule, taken_courses, high_priority_courses):
     failed_to_retake = []
     # Iterate through all semesters before the next semester
     for semester in goal_schedule["semesters"]:
-        if semester["name"] == next_semester:
-            break  # Stop at the next semester
+    #     if semester["name"] == next_semester:
+    #         break  # Stop at the next semester
 
         # Check each course in the semester
         for course in semester["courses"]:
@@ -50,9 +51,9 @@ def is_prereq(course, dependencies):
 
 
 #Function to find the neareset available course to replace
-def find_nearest_available_course(taken_courses, failed_to_retake, dependencies, new_courses, updated_schedule, current_semester_index, term, skipped_courses):
+def find_nearest_available_course(taken_courses, failed_to_retake, dependencies, new_courses, updated_schedule, term, skipped_courses, sem_index):
     # Iterate over the future semesters (starting from the current semester)
-    for i in range(current_semester_index + 1, len(updated_schedule["semesters"])):
+    for i in range(sem_index + 1, len(updated_schedule["semesters"])):
         semester = updated_schedule["semesters"][i]
         for course in semester["courses"]:
             # Skip any course that is in the skipped_courses list (for the replacement while and not adding the two credit course to the summer)
@@ -63,7 +64,7 @@ def find_nearest_available_course(taken_courses, failed_to_retake, dependencies,
                 continue  # Don't return yet, keep looking for another course
             if course not in taken_courses and course not in failed_to_retake:
                 if can_take_course(course, taken_courses, dependencies, new_courses, term):
-                    return course, semester  # Return the first valid non-CIS4250 course
+                    return course, semester  # Return the first valid non-CIS4250 and non lis44 course
 
     return None, None
 
@@ -102,7 +103,12 @@ def find_nearest_available_course(taken_courses, failed_to_retake, dependencies,
 def handle_single_course_last_semester(updated_schedule, dependencies):
     # Identify the last and second-to-last semesters
     last_semester = updated_schedule["semesters"][-1]
-    second_to_last_semester = updated_schedule["semesters"][-2]
+    if (updated_schedule["semesters"][-2]["name"]== 'Summer1'):
+        second_to_last_semester = updated_schedule["semesters"][-3]
+    else:
+        second_to_last_semester = updated_schedule["semesters"][-2]
+    
+    # second_to_last_semester = updated_schedule["semesters"][-2]
 
     # Check if the last semester has only one course
     if len(last_semester["courses"]) == 1:
@@ -136,34 +142,99 @@ def handle_single_course_last_semester(updated_schedule, dependencies):
 #                 last_semester["courses"].remove(course)
 #                 last_semester["credits"] -= dependencies[course]["credits"]
 
+def remove_trailing_empty_semesters(schedule):
+    """
+    Remove semesters at the end of the schedule that have no credits.
+    Assumes schedule is a dictionary with a 'semesters' key containing a list of semester dictionaries.
+    Each semester dictionary has a 'credits' key.
+    """
+    # Get the list of semesters, or an empty list if not found.
+    semesters = schedule.get('semesters', [])
+    
+    # Remove trailing semesters with zero credits.
+    while semesters and semesters[-1].get('credits', 0) == 0:
+        semesters.pop()
+    
+    # Update the schedule and return it.
+    schedule['semesters'] = semesters
+    return schedule
 
 
-def ensure_ethical_course_in_last_semester(updated_schedule, dependencies):
-    ETHICAL_COURSE = "CIS4250"
+def ensure_senior_course_in_last_semester(updated_schedule, dependencies):
+    # ETHICAL_COURSE = "CIS4250"
+    # Identify all senior courses present in the program
+    senior_courses = ["CIS4250"]
+    present_senior_courses = [course for course in senior_courses if course in dependencies]
+    
+    if not present_senior_courses:
+        return  # No ethical courses found for this program
 
-    # Step 1: Remove CIS4250 from any semester where it might have been placed
-    for semester in updated_schedule["semesters"]:
-        if ETHICAL_COURSE in semester["courses"]:
-            semester["courses"].remove(ETHICAL_COURSE)
-            semester["credits"] -= dependencies[ETHICAL_COURSE]["credits"]
-            break  # Remove from the first occurrence and stop
+# Step 1: Remove the senior courses from any semester where they might have been placed
+    for senior_course in present_senior_courses:
+        for semester in updated_schedule["semesters"]:
+            if senior_course in semester["courses"]:
+                semester["courses"].remove(senior_course)
+                semester["credits"] -= dependencies[senior_course]["credits"]
+                break  # Remove from the first occurrence and stop
 
-    # Step 2: Identify the actual last semester (could be different from Semester 8)
-    #last_semester = updated_schedule["semesters"][-1]
     # Step 2: Find the last non-empty semester (i.e., the last semester that has courses)
     last_semester = None
     for semester in reversed(updated_schedule["semesters"]):
         if semester["courses"]:  # Check if the semester has courses
             last_semester = semester
             break
-    
 
-    # Step 3: Add CIS4250 to the last semester if it is not already taken
-    if ETHICAL_COURSE not in last_semester["courses"]:
-        last_semester["courses"].append(ETHICAL_COURSE)
-        last_semester["credits"] += dependencies[ETHICAL_COURSE]["credits"]
+    # Step 3: Add all ethical courses to the last semester, if not already there
+    if last_semester:
+        for senior_course in present_senior_courses:
+            if senior_course not in last_semester["courses"]:
+                last_semester["courses"].append(senior_course)
+                last_semester["credits"] += dependencies[senior_course]["credits"]
+
+    # # Step 1: Remove CIS4250 from any semester where it might have been placed
+    # for semester in updated_schedule["semesters"]:
+    #     if ETHICAL_COURSE in semester["courses"]:
+    #         semester["courses"].remove(ETHICAL_COURSE)
+    #         semester["credits"] -= dependencies[ETHICAL_COURSE]["credits"]
+    #         break  # Remove from the first occurrence and stop
+    # # Step 2: Identify the actual last semester (could be different from Semester 8)
+    # #last_semester = updated_schedule["semesters"][-1]
+    # # Step 2: Find the last non-empty semester (i.e., the last semester that has courses)
+    # last_semester = None
+    # for semester in reversed(updated_schedule["semesters"]):
+    #     if semester["courses"]:  # Check if the semester has courses
+    #         last_semester = semester
+    #         break
+    # # Step 3: Add CIS4250 to the last semester if it is not already taken
+    # if ETHICAL_COURSE not in last_semester["courses"]:
+    #     last_semester["courses"].append(ETHICAL_COURSE)
+    #     last_semester["credits"] += dependencies[ETHICAL_COURSE]["credits"]
 
 
+def restore_summer_courses_to_goal(semester, taken_courses, goal_schedule, goal_schedule_pure, dependencies):
+    """
+    Remove all courses from the given Summer1 semester and restore them
+    to their original semester in the current goal schedule, based on the structure of goal_schedule_pure.
+    Assumes caller has already verified that the semester needs correction.
+    """
+    removed_courses = semester["courses"][:]
+    semester["courses"] = []
+    semester["credits"] = 0
+
+    for course in removed_courses:
+        if course in taken_courses:
+            taken_courses.remove(course)
+
+        # Use goal_schedule_pure to find the original semester name
+        for i, goal_sem_pure in enumerate(goal_schedule_pure["semesters"]):
+            if course in goal_sem_pure["courses"]:
+                # Now append the course back to the same index in the actual (mutable) goal_schedule
+                goal_schedule["semesters"][i]["courses"].append(course)
+                goal_schedule["semesters"][i]["credits"] += dependencies[course]["credits"]
+                break  # once restored, stop searching
+
+
+# -------------------------
 def manage_credit_limit(updated_schedule, goal_schedule, dependencies):
     # Identify the last semester in the updated schedule
     last_semester_name = updated_schedule["semesters"][-1]["name"]
@@ -228,7 +299,7 @@ def manage_credit_limit(updated_schedule, goal_schedule, dependencies):
     
     # Call helper function to handle single-course last semesters
     handle_single_course_last_semester(updated_schedule, dependencies)
-    ensure_ethical_course_in_last_semester(updated_schedule, dependencies)
+    ensure_senior_course_in_last_semester(updated_schedule, dependencies)
 
 
 # Helper function to find a semester by name
@@ -239,14 +310,13 @@ def find_semester_by_name(schedule, semester_name):
     return -1
 
 # Function to calculate the similarity score between updated_schedule and goal_schedule
-def calculate_similarity_score(goal_schedule, updated_schedule):
+def calculate_similarity_score(goal_schedule_pure, updated_schedule):
     total_courses = 0
     matching_courses = 0
     total_similarity= 0
-    goal_schedule = load_json('api/engine/goal.json')
 
     # Loop through each semester in the goal schedule
-    for goal_semester in goal_schedule["semesters"]:
+    for goal_semester in goal_schedule_pure["semesters"]:
         goal_semester_name = goal_semester["name"]
         goal_courses = set(goal_semester["courses"])  # Convert to set for easier comparison
 
@@ -266,12 +336,18 @@ def calculate_similarity_score(goal_schedule, updated_schedule):
 
 
 # Function to adjust the course schedule based on taken and failed courses
-def adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retake, dependencies):
+def adjust_schedule(goal_schedule, taken_courses, dependencies):
+    # Generate high-priority courses
+    high_priority_courses = create_high_priority_courses(dependencies)
+    # remain a snapshot of the original state and never be mutated.
+    goal_schedule_pure = copy.deepcopy(goal_schedule)
+    # Generate failed courses
+    failed_to_retake = create_failed_courses(goal_schedule, taken_courses, high_priority_courses)
     updated_schedule = goal_schedule.copy()
     # The courses assigned to previous semesters but were not taken intentionally (not failed)
     intentionally_not_taken = []  
     prereq_courses = [course for course in dependencies if is_prereq(course, dependencies)]
-    current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]) if s["name"] == next_semester)
+    # current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]) if s["name"] == next_semester)
     total_credits = 0
     # Add credits of taken courses
     total_credits += sum(dependencies[course]["credits"] for course in taken_courses if course in dependencies)
@@ -282,7 +358,7 @@ def adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retak
     # for semester in updated_schedule["semesters"]:
     #     if semester["name"] == next_semester:
     
-    for semester_idx in range(current_semester_index, len(updated_schedule["semesters"])):
+    for semester_idx in range(0, len(updated_schedule["semesters"])):
         semester = updated_schedule["semesters"][semester_idx]
         new_courses = []
         current_credits = 0  # Initialize current credits for the semester
@@ -301,22 +377,19 @@ def adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retak
                     current_credits += dependencies[course]["credits"]  
                 else:
                     failed_to_retake.append(course)
-        print(new_courses, semester["name"])
         # Add failed courses
         to_remove = []
-        for failed in failed_to_retake[:]:
+        for course in failed_to_retake[:]:
             # Ensure we can add the course and credit limits allow it
-            if can_take_course(failed, taken_courses, dependencies, new_courses, term):
-                print(current_credits, failed)
+            if can_take_course(course, taken_courses, dependencies, new_courses, term) and course not in taken_courses:
                 if (
-                    (semester["name"] != "Summer1" and (current_credits + dependencies[failed]["credits"]) <= 15) 
-                    or (semester["name"] != "Summer1" and (current_credits + dependencies[failed]["credits"]) <= 9)
+                    (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 15) 
+                    or (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 9)
                 ):
-                    new_courses.append(failed)
-                    taken_courses.append(failed)
-                    to_remove.append(failed)  # Mark for removal
-                    current_credits += dependencies[failed]["credits"]
-        
+                    new_courses.append(course)
+                    taken_courses.append(course)
+                    to_remove.append(course)  # Mark for removal
+                    current_credits += dependencies[course]["credits"]
         # Remove processed courses after the loop
         for course in to_remove:
             failed_to_retake.remove(course)
@@ -326,7 +399,7 @@ def adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retak
         #     continue
         # Collect the intentionally not taken courses
         
-        for prev_semester_idx in range(current_semester_index):
+        for prev_semester_idx in range(int(float(semester["id"]))):
             earlier_semester = updated_schedule["semesters"][prev_semester_idx]
             for course in earlier_semester["courses"]:
                 if course not in taken_courses and course not in failed_to_retake and course not in intentionally_not_taken:  # Not taken or failed
@@ -334,47 +407,47 @@ def adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retak
         #Add intentionally not taken courses
         for course in intentionally_not_taken[:]:
             if can_take_course(course, taken_courses, dependencies, new_courses, term):
-                new_courses.append(course)
-                taken_courses.append(course)
-                current_credits += dependencies[course]["credits"]
-                intentionally_not_taken.remove(course)
-        
+                if (
+                    (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 15) 
+                    or (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 9)
+                ):
+                    new_courses.append(course)
+                    taken_courses.append(course)
+                    current_credits += dependencies[course]["credits"]
+                    intentionally_not_taken.remove(course)
         #Update the update_schedule and its credits before goinf to check empty places 
         semester["courses"] = new_courses
         semester["credits"] = sum(dependencies[course]["credits"] for course in semester["courses"])
 
         #check if there is place for adding more courses
-        print(new_courses, semester["name"])
         #if semester["courses"]:
         while (semester["name"] != "Summer1" and semester["credits"] <= 12) or (semester["name"] == "Summer1" and semester["credits"] <= 6):
-            replacement, original_semester = find_nearest_available_course(taken_courses, failed_to_retake, dependencies, new_courses, updated_schedule, current_semester_index, term, skipped_courses)
+            replacement, original_semester = find_nearest_available_course(taken_courses, failed_to_retake, dependencies, new_courses, updated_schedule, term, skipped_courses, semester_idx)
             if semester["name"] == "Summer1" and replacement == "EGN4450":
                 skipped_courses.append(replacement)  # Add EGN4450 to skipped_courses
                 continue  # Go back to the start of the loop to get the next replacement
-            if (replacement):
-                if (semester["name"] != "Summer1" and (semester["credits"] + dependencies[replacement]["credits"]) <= 15):
+            if replacement:
+                if replacement not in taken_courses:
                     semester["courses"].append(replacement)
                     taken_courses.append(replacement)
                     semester["credits"] += dependencies[replacement]["credits"]
                     if original_semester:
                         original_semester["courses"].remove(replacement)
                         original_semester["credits"] -= dependencies[replacement]["credits"]
-                elif ((semester["name"] == "Summer1" and (semester["credits"] + dependencies[replacement]["credits"]) <= 9) and replacement != 'EGN4450'):
-                    semester["courses"].append(replacement)
-                    taken_courses.append(replacement)
-                    semester["credits"] += dependencies[replacement]["credits"]
-                    if original_semester:
-                        original_semester["courses"].remove(replacement)
-                        original_semester["credits"] -= dependencies[replacement]["credits"]
-                elif ((semester["name"] == "Summer1" and (semester["credits"] + dependencies[replacement]["credits"]) <= 9) and replacement == 'EGN4450'):
-                    continue
+                else:
+                    skipped_courses.append(replacement)
             else:
-                break  # Exit the loop if no valid replacement is found         
+                break       
+
+        #check if the credits for summer semester is exactly 9
+        if semester["name"] == "Summer1" and semester["credits"] != 9:
+            restore_summer_courses_to_goal(semester, taken_courses, goal_schedule, goal_schedule_pure, dependencies)
 
         # Update the courses in the semester
         #update the updated_schedule after the while
-        semester["courses"] = new_courses
+        # semester["courses"] = new_courses
         semester["credits"] = sum(dependencies[course]["credits"] for course in semester["courses"])
+
         #update total credits of the schedule
         total_credits += semester["credits"]
         
@@ -382,25 +455,29 @@ def adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retak
   
     # After updating all semesters, remove the unnecessary courses and re-adjust for consistency.
     #updated_schedule = prune_and_adjust_schedule(updated_schedule, dependencies, failed_to_retake)
-    manage_credit_limit(updated_schedule, goal_schedule, dependencies)
+    #remove the empty semesters at the end of updated schedule
+    Final_schedule =  remove_trailing_empty_semesters(updated_schedule)
+    manage_credit_limit(Final_schedule, goal_schedule, dependencies)
+    Final_schedule =  remove_trailing_empty_semesters(Final_schedule)
     
 
     # Calculate the similarity score after adjusting the schedule
-    similarity_score = calculate_similarity_score(goal_schedule, updated_schedule)
+    similarity_score = calculate_similarity_score(goal_schedule_pure, Final_schedule)
     print("Similarity Score is :", similarity_score)
+    
 
 
-    return updated_schedule, total_credits, similarity_score
+    return Final_schedule, total_credits, similarity_score
 
 
-def calculate(next_semester,taken_courses,dependencies,goal_schedule):
+def calculate(taken_courses,dependencies,goal_schedule):
     # Generate high-priority courses
-    high_priority_courses = create_high_priority_courses(dependencies)
+    # high_priority_courses = create_high_priority_courses(dependencies)
     
-    # Generate failed courses
-    failed_to_retake = create_failed_courses(goal_schedule, next_semester, taken_courses, high_priority_courses)
+    # # Generate failed courses
+    # failed_to_retake = create_failed_courses(goal_schedule, taken_courses, high_priority_courses)
     
-    new_schedule, total_credits, similarity_score = adjust_schedule(goal_schedule, next_semester, taken_courses, failed_to_retake, dependencies)
+    new_schedule, total_credits, similarity_score = adjust_schedule(goal_schedule, taken_courses, dependencies)
     res = ""
     # for semester in new_schedule["semesters"]:
     #     if semester["id"] >= next_semester:  # Print semesters starting from the next semester
@@ -408,48 +485,17 @@ def calculate(next_semester,taken_courses,dependencies,goal_schedule):
     #         course_credit = [dependencies[course]["credits"] for course in semester["courses"]]
     #         res += (f'Semester: {semester["name"]}, Courses: {course_labels}, Credits: {semester["credits"]}<br/>')
     for semester in new_schedule["semesters"]:
-        if semester["id"] >= next_semester:  # Print semesters starting from the next semester
+        # if semester["id"] >= next_semester:  # Print semesters starting from the next semester
             # Include label and credit as separate elements for each course
-            course_details = [
-                {
-                    "label": dependencies[course]["label"],
-                    "credit": dependencies[course]["credits"]
-                } if course in dependencies else {"label": course, "credit": 0} 
-                for course in semester["courses"]
-            ]
-            res += (f'Semester: {semester["name"]}, Courses: {course_details}, Credits: {semester["credits"]}<br/>')
+        course_details = [
+            {
+                "label": dependencies[course]["label"],
+                "credit": dependencies[course]["credits"]
+            } if course in dependencies else {"label": course, "credit": 0} 
+            for course in semester["courses"]
+        ]
+        res += (f'Semester: {semester["name"]}, Courses: {course_details}, Credits: {semester["credits"]}<br/>')
     
     return res
 
-# dependencies = load_json('api/engine/course_dep.json')
-# goal_schedule = load_json('api/engine/goal.json')
-# calculate("2",["ENC1101","EGN3000/3000L","NatSciElec1"],["MAC2281"],dependencies,goal_schedule)
-# # Main function
-# def main():                                                                                                                                                                                       
-#     # Load input JSON files
-#     dependencies = load_json('dependencies.json')
-#     goal_schedule = load_json('goal.json')
 
-#     # Get inputs from the user
-#     next_semester = input("Enter the next semester: ")
-#     taken_courses = input("Enter taken courses separated by commas: ").split(',')
-#     failed_courses = input("Enter failed courses separated by commas: ").split(',')
-
-#     # Remove any extra spaces from the inputs
-#     taken_courses = [course.strip() for course in taken_courses]
-#     failed_courses = [course.strip() for course in failed_courses]
-
-#     # Adjust the schedule based on user input
-#     new_schedule, total_credits, similarity_score = adjust_schedule(goal_schedule, next_semester, taken_courses, failed_courses, dependencies)
-    
-
-#     # Print the adjusted schedule from the next semester onward
-#     print("\nAdjusted Schedule:")
-#     for semester in new_schedule["semesters"]:
-#         if semester["name"] >= next_semester:  # Print semesters starting from the next semester
-#             print(f'Semester: {semester["name"]}, Courses: {semester["courses"]}, Credits: {semester["credits"]}')
-#     print("\nTotal credit:", {total_credits})
-#     print(f"Similarity score: {similarity_score:.2f}%")
-
-# if __name__ == "__main__":
-#     main()

@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+STATIC_URL = '/static/'
+
+
+
+# Optional if using a custom static folder outside the app
+# STATICFILES_DIRS = [ BASE_DIR / 'static', ]
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +33,7 @@ SECRET_KEY = "django-insecure-#&5b11xq$+avi@fmn^h()wq*ngvkc3&&m)561phzy)kh4t$d_3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","100.29.16.102"]
+ALLOWED_HOSTS = ["localhost","100.29.16.102", "127.0.0.1"]
 
 
 # Application definition

@@ -1,0 +1,242 @@
+{
+    "CIS1930": {
+        "dependents": [],
+        "credits": 0,
+        "label": "Freshman Seminar for Computing",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "MAC1147": {
+        "dependents": ["COP3515","CIS4219"],
+        "credits": 4,
+        "label": "Precalculus Algebra and Trigonometry",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "STA2023": {
+        "dependents": ["COP3515","CIS4219"],
+        "credits": 3,
+        "label": "Introductory Statistics I",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "MAD2104": {
+        "dependents": ["COP3515","CIS4219"],
+        "credits": 3,
+        "label": "Discrete Math",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "NatSciElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Natural Science",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "PHY2020": {
+        "dependents": ["COP3515","CIS4219"],
+        "credits": 3,
+        "label": "Conceptual Physics",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "PSY2012": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Intro to Psychological Science",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "ECO2013": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Economic Principles (Macroeconomics)",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "COP2510": {
+        "dependents": ["COP2513","CIS3213"],
+        "credits": 3,
+        "label": "Programming Concepts",
+        "availability": ["Fall", "Spring"]
+    },
+    "ENC1101": {
+        "dependents": ["ENC1102"],
+        "credits": 3,
+        "label": "Composition I",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "ENC1102": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Composition II",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "CGS1540": {
+        "dependents": ["CIS3213"],
+        "credits": 3,
+        "label": "Intro to Databases",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP2513": {
+        "dependents": ["COP3515", "CIS4219","CIS4622"],
+        "credits": 3,
+        "label": "Object Oriented Programming",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS3213": {
+        "dependents": ["CIS4219"],
+        "credits": 3,
+        "label": "Foundations of Cybersecurity",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP3515": {
+        "dependents": ["CNT4104/L","COP4538","CIS4200", "CyberElec1", "CyberElec2", "CyberElec3", "CyberElec4", "CyberElec5", "CyberElec6", "CyberElec7"],
+        "credits": 3,
+        "label": "Advanced Program Design",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS4219": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Human Aspects of Cybersecurity",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS4622": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Hands-on Cybersecurity",
+        "availability": ["Fall", "Spring"]
+    },
+    "CNT4104/L": {
+        "dependents": ["CNT4403"],
+        "credits": 4,
+        "label": "Comp Info Networks/ Lab",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP4538": {
+        "dependents": ["COP4703"],
+        "credits": 3,
+        "label": "Data Structures and Algorithms",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS4200": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Penetration Testing",
+        "availability": ["Fall", "Spring"]
+    },
+    "CNT4403": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Network Security and Firewalls",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP4703": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Advanced Database Systems",
+        "availability": ["Fall", "Spring"]
+    },
+    "ISM4323": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Information Sec and IT Risk Management",
+        "availability": ["Fall", "Spring"]
+    },
+    "LIS4414": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Information Policy and Ethics",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec4": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec5": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec6": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "CyberElec7": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cybersecurity Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "GeneralElec1": {
+        "dependents": [],
+        "credits": 4,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec4": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec5": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdSocialScience": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Open Choice Gen Ed Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdHumanities1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Humanities",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdHumanities2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Humanities",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdAmerica": {
+        "dependents": [],
+        "credits": 3,
+        "label": "POS2041/AMH2010/AMH2020",
+        "availability": ["Fall", "Spring", "Summer"]
+    }
+}

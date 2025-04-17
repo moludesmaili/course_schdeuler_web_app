@@ -9,7 +9,7 @@ class Course(models.Model):
     
 # Create your models here.
 class recommendation_request(models.Model):
-    semester = models.IntegerField()
+    program = models.IntegerField()
     taken_courses = models.JSONField()
     #failed_courses = models.JSONField() 
     

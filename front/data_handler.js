@@ -1,26 +1,26 @@
 var takenCoursesInput;
 var url = "http://100.29.16.102"
-//var url = "http://localhost:8000"
+// var url = "http://localhost:9000"
 
 function showContent() {
   document.getElementById("protected-content").style.display = "block";
-}        
+}
 function checkPassword() {
   const correctPassword = "usf_course_scheduler"; // Change this to your desired password
   const savedPassword = localStorage.getItem("auth");
 
   if (savedPassword === correctPassword) {
-      showContent();
-      return;
+    showContent();
+    return;
   }
 
   const userInput = prompt("Enter the password:");
   if (userInput === correctPassword) {
-      localStorage.setItem("auth", correctPassword); // Save password in localStorage
-      showContent();
+    localStorage.setItem("auth", correctPassword); // Save password in localStorage
+    showContent();
   } else {
-      alert("Incorrect password. Access denied.");
-      checkPassword(); // Keep prompting until the correct password is entered
+    alert("Incorrect password. Access denied.");
+    checkPassword(); // Keep prompting until the correct password is entered
   }
 }
 function updateTakenCourses() {
@@ -75,10 +75,10 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-  // Check if semester is selected on form submission
+  // Check if program is selected on form submission
   $("#formSubmitButton").on("click", function () {
-    const semester = $("#semester").val();
-    if (!semester) {
+    const program = $("#program").val();
+    if (!program) {
       const toastElement = new bootstrap.Toast(
         document.getElementById("errorToast")
       );
@@ -90,13 +90,13 @@ $(document).ready(function () {
 
 function send_data() {
   console.log("Sending Data:", takenCoursesInput);
-  const semester = $("#semester").val(); // Get the selected semester
+  const program = $("#program").val(); // Get the selected program
 
-  if (semester !== "") {
-    fetch(url+"/api/recommend/create", {
+  if (program !== "") {
+    fetch(url + "/api/recommend/create", {
       method: "POST",
       body: JSON.stringify({
-        semester: semester,
+        program: program,
         taken_courses: takenCoursesInput,
       }),
       headers: {
@@ -115,12 +115,13 @@ function send_data() {
         console.log("Response Data:", json); // Debugging the response
         parseAndRenderTable(json); // Call to render the table with response data
         updateResultsMessage(
-          "This plan must be reviewed and approved by a CSE advisor!"
+          "This plan must be reviewed and approved by a Bellini CAICC advisor!"
         );
         let printDropdown = document.getElementById('printDropdown');
         if (printDropdown) {
-            printDropdown.style.display = 'inline-block'; // Make it visible
-        }      })
+          printDropdown.style.display = 'inline-block'; // Make it visible
+        }
+      })
       .catch((error) => {
         console.error("Error:", error);
         // Show error in toast
@@ -128,7 +129,7 @@ function send_data() {
         $(".toast").toast("show"); // Show the toast
       });
   } else {
-    $(".toast-body").text("Semester is required!"); // Set the message for missing semester
+    $(".toast-body").text("Program is required!"); // Set the message for missing program
     $(".toast").toast("show"); // Show the toast
   }
 }
@@ -148,11 +149,11 @@ function parseAndRenderTable(responseText) {
       // Parse the courses and include the credit for each course
       const courses = coursesMatch
         ? JSON.parse(coursesMatch[1].replace(/'/g, '"')).map((course) => {
-            return {
-              label: course.label,
-              credit: course.credit
-            };
-          })
+          return {
+            label: course.label,
+            credit: course.credit
+          };
+        })
         : [];
 
       return {
@@ -213,7 +214,7 @@ function printTable2(mode) {
   let customTable = `
     <table style="width: 98%; border-collapse: collapse; background-color: white;">
       <tbody>`;
-  
+
   parsedData.forEach((semester) => {
     customTable += `
       <tr>
@@ -282,6 +283,8 @@ function printTable2(mode) {
         font-size: 10pt;
         font-family: Arial, sans-serif;
         background-color: white;
+        margin: 0;
+        padding: 0;
         margin-bottom: 10px;
         margin-bottom: 10px;
       }
@@ -317,38 +320,857 @@ function printTable2(mode) {
       </head>
       <body>
         <div class="WordSection1">
-          <h3 style="text-align: center;">Generated Schedule</h3>
+          <h3 style="text-align: left; font-size: 0.9em">Student Name: </h3>
+          <h3 style="text-align: left; font-size: 0.9em">U Number: </h3>
+          <h3 style="text-align: left; font-size: 0.9em">Program: </h3>
+          <br>
           ${customTable}
         </div>
       </body>
     </html>`;
-  
 
-  if (mode === "pdf") {
-    const opt = {
-      margin: [5, 5, 5, 5],
-      filename: "usf_scheduler.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 , 
-        backgroundColor: null, y: 0 , useCORS: true},
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    };
-    // const printWindow = window.open("", "_blank", "width=800,height=600"); // to show the opt to debug
-    // printWindow.document.write(opt);
-    // printWindow.document.close();  // Close the document stream to render the content
-    
-    html2pdf().from(html).set(opt).save();
-  } else if (mode === "word") {
-    const blob = new Blob(["\ufeff", html], {
-      type: "application/msword",
+
+    if (mode === "pdf") {
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: "usf_scheduler.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 , 
+          backgroundColor: null, y: 0 , useCORS: true},
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      };
+      // const printWindow = window.open("", "_blank", "width=800,height=600"); // to show the opt to debug
+      // printWindow.document.write(opt);
+      // printWindow.document.close();  // Close the document stream to render the content
+      
+      html2pdf().from(html).set(opt).save();
+    } else if (mode === "word") {
+      const blob = new Blob(["\ufeff", html], {
+        type: "application/msword",
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("A");
+      link.href = url;
+      link.download = "usf_scheduler.doc";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
+
+// for the comment form:
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadComments();
+});
+
+function submitComment() {
+  let username = document.getElementById("username").value;
+  let comment = document.getElementById("comment").value;
+
+  if (!username || !comment) {
+    alert("Both fields are required!");
+    return;
+  }
+
+  fetch("http://127.0.0.1:5000/add_comment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: username, comment: comment }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message);
+      loadComments(); // Refresh comments list
     });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("A");
-    link.href = url;
-    link.download = "usf_scheduler.doc";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+}
+
+function loadComments() {
+  fetch("http://127.0.0.1:5000/get_comments")
+    .then(response => response.json())
+    .then(comments => {
+      let commentSection = document.getElementById("comment-section");
+      commentSection.innerHTML = ""; // Clear existing comments
+      comments.forEach(c => {
+        let div = document.createElement("div");
+        div.innerHTML = `<strong>${c.username}:</strong> ${c.comment}`;
+        commentSection.appendChild(div);
+      });
+    });
+}
+
+const courseLabels = {
+"CAI4002": "Intro to Artificial Intelligence",
+"CAI4100": "Intro to Machine Learning",
+"CDA3103": "Computer Organization",
+"CDA3201/3201L": "Computer Logic and Design/ Lab",
+"CDA4021": "Computing Circuits",
+"CDA4203/L": "Computer System Design/ Lab",
+"CDA4205/4205L": "Computer Architecture/ Lab",
+"CDA4213/L": "CMOS VLSI Desig/ Lab",
+"CEN4020": "Software Engineering",
+"CGS1540": "Intro to Databases",
+"CGS3853": "Web Systems for IT",
+"CHM2045/2045L": "General Chemistry/ Lab",
+"CIS1930": "Freshman Seminar for Computing",
+"CIS3213": "Foundations of Cybersecurity",
+"CIS3433": "System Integration and Architecture for IT",
+"CIS4083": "Cloud Computing for IT",
+"CIS4200": "Penetration Testing",
+"CIS4219": "Human Aspects of Cybersecurity",
+"CIS4250": "Ethical Issues and Prof Conduct",
+"CIS4622": "Hands-on Cybersecurity",
+"CIS4910": "Comp Science and Engineering Project",
+"CNT4104/L": "Comp Info Networks/ Lab",
+"CNT4403": "Network Security and Firewalls",
+"CNT4419": "Secure Coding",
+"CNT4603": "System Admin and Maintenance for IT",
+"COP2510": "Programming Concepts",
+"COP2513": "Object Oriented Programming",
+"COP3514": "Program Design",
+"COP3515": "Advanced Program Design",
+"COP4530": "Data Structures",
+"COP4538": "Data Structures and Algorithms",
+"COP4600": "Operating Systems",
+"COP4703": "Advanced Database Systems",
+"COT3100": "Introduction to Discrete Structures",
+"COT4400": "Analysis of Algorithms",
+"AIElec1": "AI Elective",
+"AIElec2": "AI Elective",
+"AIElec3": "AI Elective",
+"AIElec4": "AI Elective",
+"HardwareElec1": "Hardware Elective",
+"HardwareElec2": "Hardware Elective",
+"SoftwareElelc1": "Software Elective",
+"SoftwareElelc2": "Software Elective",
+"SoftwareElelc3": "Software Elective",
+"TheoryElelc": "Theory Elective",
+"Techelec1": "Technical Elective",
+"Techelec2": "Technical Elective",
+"Techelec3": "Technical Elective",
+"CyberElec1": "Cybersecurity Elective",
+"CyberElec2": "Cybersecurity Elective",
+"CyberElec3": "Cybersecurity Elective",
+"CyberElec4": "Cybersecurity Elective",
+"CyberElec5": "Cybersecurity Elective",
+"CyberElec6": "Cybersecurity Elective",
+"CyberElec7": "Cybersecurity Elective",
+"ECO2013": "Economic Principles (Macroeconomics)",
+"EGN2440": "Probability and Statistics with calculus",
+"EGN2615": "Economics with SG Implications",
+"EGN3433": "EGN3433 or MAP2302",
+"EGN4450": "Introduction to Linear Systems",
+"ENC1101": "Composition I",
+"ENC1102": "Composition II",
+"GenEdAmerica": "POS2041/AMH2010/AMH2020",
+"GenEdHumanities1": "Gen Ed Humanities",
+"GenEdHumanities2": "Gen Ed Humanities",
+"GenEdSocialScience": "Open Choice Gen Ed Elective",
+"GeneralElec1": "General Elective",
+"GeneralElec2": "General Elective",
+"GeneralElec3": "General Elective",
+"GeneralElec4": "General Elective",
+"GeneralElec5": "General Elective",
+"GeneralElec6": "General Elective",
+"ISM4323": "Information Sec and IT Risk Management",
+"ITElec1": "IT Elective",
+"ITElec2": "IT Elective",
+"ITElec3": "IT Elective",
+"ITElec4": "IT Elective",
+"ITElec5": "IT Elective",
+"ITElec6": "IT Elective",
+"ITElec7": "IT Elective",
+"LDR2010": "Leadership Fundamentals",
+"LIS4414": "Information Policy and Ethics",
+"MAC1147": "Precalculus Algebra and Trigonometry",
+"MAC2311": "Engineering Calculus I",
+"MAC2312": "Engineering Calculus II",
+"MAC2313": "Calculus III",
+"MAD2104": "Discrete Math",
+"NatSciElec1": "Gen Ed Natural Science",
+"NatSciElec2": "Gen Ed Natural Science",
+"PHY2020": "Conceptual Physics",
+"PHY2048/2048L": "General Physics I/ Lab",
+"PHY2049/2049L": "General Physics II/ Lab",
+"PSY2012": "Intro to Psychological Science",
+"STA2023": "Introductory Statistics I"
+}
+
+
+// updating the list of taken courses based on each program
+// Dynamically build taken courses checkboxes from goal JSON based on selected program
+function buildTakenCoursesCheckboxes(programId, goalJsonData) {
+  const container = document.getElementById("accordionExample");
+  container.innerHTML = ""; // Clear previous content
+
+  const goalData = goalJsonData[programId];
+  if (goalData) {
+    goalData.semesters.forEach((semester, index) => {
+      const semesterName = semester.name;
+      const courses = semester.courses;
+
+      const accordionItem = document.createElement("div");
+      accordionItem.className = "accordion-item";
+
+      const headerId = `heading${index}`;
+      const collapseId = `collapse${index}`;
+
+      // Build the checkbox list for each course
+      const courseCheckboxes = courses.map((courseId) => {
+        const label = courseLabels[courseId] || courseId; // Use label if found, fallback to ID
+        return `
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="${courseId}" value="${courseId}" name="taken_courses">
+            <label class="form-check-label" for="${courseId}">${label}</label>
+          </div>`;
+      }).join("");
+
+      accordionItem.innerHTML = `
+        <h2 class="accordion-header" id="${headerId}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+            Semester ${semesterName}
+          </button>
+        </h2>
+        <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="${headerId}" data-bs-parent="#accordionExample">
+          <div class="accordion-body checkbox-list">
+            ${courseCheckboxes}
+          </div>
+        </div>`;
+
+      container.appendChild(accordionItem);
+    });
+  } else {
+    console.error("Failed to load program goal data");
+  }
+}
+
+
+// Bind to program selection change
+$(document).ready(function () {
+  $("#program").on("change", function () {
+    const selectedProgram = $(this).val();
+    if (selectedProgram) {
+      buildTakenCoursesCheckboxes(selectedProgram,course_json);
+    }
+  });
+});
+
+var course_json = {
+  "1": {
+    "semesters": [
+      {
+        "name": "1",
+        "id": "1",
+        "term": "Fall",
+        "courses": [
+          "CIS1930",
+          "COP2510",
+          "MAC2311",
+          "ENC1101",
+          "NatSciElec1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "2",
+        "id": "2",
+        "term": "Spring",
+        "courses": [
+          "COP3514",
+          "MAC2312",
+          "PHY2048/2048L",
+          "ENC1102"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "3",
+        "id": "3",
+        "term": "Fall",
+        "courses": [
+          "CDA3103",
+          "COT3100",
+          "PHY2049/2049L",
+          "GenEdHumanities1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "4",
+        "id": "4",
+        "term": "Spring",
+        "courses": [
+          "COP4530",
+          "CDA3201/3201L",
+          "GeneralElec1",
+          "GeneralElec2"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "Summer1",
+        "id": "4.5",
+        "term": "Summer",
+        "courses": [
+          "EGN2440",
+          "GenEdAmerica",
+          "NatSciElec2"
+        ],
+        "credits": 9
+      },
+      {
+        "name": "5",
+        "id": "5",
+        "term": "Fall",
+        "courses": [
+          "CDA4205/4205L",
+          "EGN4450",
+          "GenEdHumanities2",
+          "SoftwareElelc1",
+          "GeneralElec3"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "6",
+        "id": "6",
+        "term": "Spring",
+        "courses": [
+          "COT4400",
+          "GenEdSocialScience",
+          "SoftwareElelc2",
+          "SoftwareElelc3",
+          "Techelec1"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "7",
+        "id": "7",
+        "term": "Fall",
+        "courses": [
+          "COP4600",
+          "CNT4419",
+          "TheoryElelc",
+          "Techelec2",
+          "GeneralElec4"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "8",
+        "id": "8",
+        "term": "Spring",
+        "courses": [
+          "CEN4020",
+          "CIS4250",
+          "Techelec3",
+          "GeneralElec5"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "9",
+        "id": "9",
+        "term": "Fall",
+        "courses": [],
+        "credits": 0
+      }
+    ]
+  },
+  "2": {
+    "semesters": [
+      {
+        "name": "1",
+        "id": "1",
+        "term": "Fall",
+        "courses": [
+          "CIS1930",
+          "MAC2311",
+          "CHM2045/2045L",
+          "ENC1101",
+          "GeneralElec1"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "2",
+        "id": "2",
+        "term": "Spring",
+        "courses": [
+          "MAC2312",
+          "COT3100",
+          "COP2510",
+          "PHY2048/2048L"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "3",
+        "id": "3",
+        "term": "Fall",
+        "courses": [
+          "MAC2313",
+          "COP3514",
+          "CDA3103",
+          "COT3100",
+          "PHY2049/2049L"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "4",
+        "id": "4",
+        "term": "Spring",
+        "courses": [
+          "EGN3433",
+          "COP4530",
+          "CDA3201/3201L",
+          "ENC1102",
+          "GenEdHumanities1"
+        ],
+        "credits": 16
+      },
+      {
+        "name": "Summer1",
+        "id": "4.5",
+        "term": "Summer",
+        "courses": [
+          "EGN2440",
+          "GenEdAmerica",
+          "NatSciElec1"
+        ],
+        "credits": 9
+      },
+      {
+        "name": "5",
+        "id": "5",
+        "term": "Fall",
+        "courses": [
+          "CDA4205/4205L",
+          "CDA4021",
+          "EGN4450",
+          "EGN2615",
+          "GeneralElec2"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "6",
+        "id": "6",
+        "term": "Spring",
+        "courses": [
+          "COT4400",
+          "CDA4203/L",
+          "HardwareElec1",
+          "GeneralElec3"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "7",
+        "id": "7",
+        "term": "Fall",
+        "courses": [
+          "COP4600",
+          "CDA4213/L",
+          "GenEdHumanities2",
+          "Techelec1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "8",
+        "id": "8",
+        "term": "Spring",
+        "courses": [
+          "CIS4910",
+          "CIS4250",
+          "HardwareElec2",
+          "Techelec2"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "9",
+        "id": "9",
+        "term": "Fall",
+        "courses": [],
+        "credits": 0
+      }
+    ]
+  }, 
+  "3":{
+    "semesters": [
+      {
+        "name": "1",
+        "id": "1",
+        "term": "Fall",
+        "courses": [
+          "CIS1930",
+          "COP2510",
+          "MAC2311",
+          "ENC1101",
+          "NatSciElec1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "2",
+        "id": "2",
+        "term": "Spring",
+        "courses": [
+          "COP3514",
+          "MAC2312",
+          "PHY2048/2048L",
+          "ENC1102"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "3",
+        "id": "3",
+        "term": "Fall",
+        "courses": [
+          "CDA3103",
+          "COT3100",
+          "PHY2049/2049L",
+          "GenEdHumanities1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "4",
+        "id": "4",
+        "term": "Spring",
+        "courses": [
+          "COP4530",
+          "CAI4002",
+          "GeneralElec1",
+          "GeneralElec2"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "Summer1",
+        "id": "4.5",
+        "term": "Summer",
+        "courses": [
+          "EGN2440",
+          "GenEdAmerica",
+          "NatSciElec2"
+        ],
+        "credits": 9
+      },
+      {
+        "name": "5",
+        "id": "5",
+        "term": "Fall",
+        "courses": [
+          "CAI4100",
+          "EGN4450",
+          "GenEdHumanities2",
+          "Techelec1",
+          "GeneralElec3"
+        ],
+        "credits": 14
+      },
+      {
+        "name": "6",
+        "id": "6",
+        "term": "Spring",
+        "courses": [
+          "COT4400",
+          "GenEdSocialScience",
+          "AIElec1",
+          "AIElec2",
+          "Techelec2"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "7",
+        "id": "7",
+        "term": "Fall",
+        "courses": [
+          "COP4600",
+          "CNT4419",
+          "AIElec3",
+          "TheoryElelc",
+          "GeneralElec4"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "8",
+        "id": "8",
+        "term": "Spring",
+        "courses": [
+          "CIS4910",
+          "CIS4250",
+          "CEN4020",
+          "AIElec4",
+          "Techelec3"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "9",
+        "id": "9",
+        "term": "Fall",
+        "courses": [],
+        "credits": 0
+      }
+    ]
+  }, 
+  "4": {
+    "semesters": [
+      {
+        "name": "1",
+        "id": "1",
+        "term": "Fall",
+        "courses": [
+          "CIS1930",
+          "COP2510",
+          "CGS1540",
+          "MAC1147",
+          "ENC1101"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "2",
+        "id": "2",
+        "term": "Spring",
+        "courses": [
+          "COP2513",
+          "MAD2104",
+          "ENC1102",
+          "PHY2020",
+          "GenEdHumanities1"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "3",
+        "id": "3",
+        "term": "Fall",
+        "courses": [
+          "CIS3213",
+          "STA2023",
+          "ECO2013",
+          "GeneralElec2"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "4",
+        "id": "4",
+        "term": "Spring",
+        "courses": [
+          "COP3515",
+          "PSY2012",
+          "NatSciElec1",
+          "GeneralElec1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "Summer1",
+        "id": "4.5",
+        "term": "Summer",
+        "courses": [
+          "GenEdHumanities2",
+          "GenEdAmerica",
+          "GeneralElec3"
+        ],
+        "credits": 9
+      },
+      {
+        "name": "5",
+        "id": "5",
+        "term": "Fall",
+        "courses": [
+          "COP4538",
+          "CIS4622",
+          "ISM4323",
+          "GenEdSocialScience",
+          "CyberElec1"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "6",
+        "id": "6",
+        "term": "Spring",
+        "courses": [
+          "CNT4104/L",
+          "CIS4219",
+          "CyberElec2",
+          "CyberElec3",
+          "GeneralElec4"
+        ],
+        "credits": 16
+      },
+      {
+        "name": "7",
+        "id": "7",
+        "term": "Fall",
+        "courses": [
+          "CIS4200",
+          "CNT4403",
+          "CyberElec4",
+          "CyberElec5",
+          "GeneralElec5"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "8",
+        "id": "8",
+        "term": "Spring",
+        "courses": [
+          "LIS4414",
+          "COP4703",
+          "CyberElec6",
+          "CyberElec7"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "9",
+        "id": "9",
+        "term": "Fall",
+        "courses": [],
+        "credits": 0
+      }
+    ]
+  },
+  "5": {
+    "semesters": [
+      {
+        "name": "1",
+        "id": "1",
+        "term": "Fall",
+        "courses": [
+          "CIS1930",
+          "COP2510",
+          "CGS1540",
+          "MAC1147",
+          "ENC1101"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "2",
+        "id": "2",
+        "term": "Spring",
+        "courses": [
+          "COP2513",
+          "MAD2104",
+          "ENC1102",
+          "PHY2020",
+          "GenEdHumanities1"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "3",
+        "id": "3",
+        "term": "Fall",
+        "courses": [
+          "CIS3213",
+          "STA2023",
+          "ECO2013",
+          "GeneralElec1"
+        ],
+        "credits": 13
+      },
+      {
+        "name": "4",
+        "id": "4",
+        "term": "Spring",
+        "courses": [
+          "COP3515",
+          "CIS3433",
+          "PSY2012",
+          "LDR2010"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "Summer1",
+        "id": "4.5",
+        "term": "Summer",
+        "courses": [
+          "GenEdAmerica",
+          "GeneralElec2",
+          "GeneralElec3"
+        ],
+        "credits": 9
+      },
+      {
+        "name": "5",
+        "id": "5",
+        "term": "Fall",
+        "courses": [
+          "COP4538",
+          "CGS3853",
+          "NatSciElec1",
+          "GenEdHumanities2",
+          "GeneralElec4"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "6",
+        "id": "6",
+        "term": "Spring",
+        "courses": [
+          "CNT4104/L",
+          "ITElec1",
+          "ITElec2",
+          "ITElec3",
+          "GeneralElec5"
+        ],
+        "credits": 16
+      },
+      {
+        "name": "7",
+        "id": "7",
+        "term": "Fall",
+        "courses": [
+          "CIS4083",
+          "CNT4603",
+          "ITElec4",
+          "ITElec5",
+          "GeneralElec6"
+        ],
+        "credits": 15
+      },
+      {
+        "name": "8",
+        "id": "8",
+        "term": "Spring",
+        "courses": [
+          "LIS4414",
+          "COP4703",
+          "ITElec6",
+          "ITElec7"
+        ],
+        "credits": 12
+      },
+      {
+        "name": "9",
+        "id": "9",
+        "term": "Fall",
+        "courses": [],
+        "credits": 0
+      }
+    ]
   }
 }
 

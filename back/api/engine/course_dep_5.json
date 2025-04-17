@@ -1,66 +1,60 @@
 {
-    "MAC2281": {
-        "dependents": ["MAC2282", "COT3100", "PHY2048/2048L", "COP2510"],
-        "credits": 4,
-        "label": "Engineering Calculus I",
-        "availability": ["Fall", "Spring", "Summer"]
-    },
-    "MAC2282": {
-        "dependents": ["EGN4450", "EGN3443"],
-        "credits": 4,
-        "label": "Engineering Calculus II",
-        "availability": ["Fall", "Spring", "Summer"]
-    },
-    "COT3100": {
-        "dependents": ["COP4530"],
-        "credits": 3,
-        "label": "Introduction to Discrete Structures",
-        "availability": ["Fall", "Spring", "Summer"]
-    },
-    "EGN4450": {
+    "CIS1930": {
         "dependents": [],
-        "credits": 2,
-        "label": "Introduction to Linear Systems",
+        "credits": 0,
+        "label": "Freshman Seminar for Computing",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "EGN3443": {
+    "MAC1147": {
+        "dependents": ["COP3515"],
+        "credits": 4,
+        "label": "Precalculus Algebra and Trigonometry",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "STA2023": {
+        "dependents": ["COP3515"],
+        "credits": 3,
+        "label": "Introductory Statistics I",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "LDR2010": {
         "dependents": [],
         "credits": 3,
-        "label": "Probability and Statistics for Engineers",
+        "label": "Leadership Fundamentals",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "MAD2104": {
+        "dependents": ["COP3515"],
+        "credits": 3,
+        "label": "Discrete Math",
         "availability": ["Fall", "Spring", "Summer"]
     },
     "NatSciElec1": {
         "dependents": [],
         "credits": 3,
-        "label": "Natural Science Elective",
+        "label": "Gen Ed Natural Science",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "NatSciElec2": {
+    "PHY2020": {
+        "dependents": ["COP3515"],
+        "credits": 3,
+        "label": "Conceptual Physics",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "PSY2012": {
         "dependents": [],
         "credits": 3,
-        "label": "Natural Science Elective",
+        "label": "Intro to Psychological Science",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "PHY2048/2048L": {
-        "dependents": ["PHY2049/2049L"],
-        "credits": 4,
-        "label": "General Physics I/ Lab",
-        "availability": ["Fall", "Spring", "Summer"]
-    },
-    "PHY2049/2049L": {
-        "dependents": [],
-        "credits": 4,
-        "label": "General Physics II/ Lab",
-        "availability": ["Fall", "Spring", "Summer"]
-    },
-    "EGN3000/3000L": {
+    "ECO2013": {
         "dependents": [],
         "credits": 3,
-        "label": "Foundations of Engineering/ Lab",
+        "label": "Economic Principles (Macroeconomics)",
         "availability": ["Fall", "Spring", "Summer"]
     },
     "COP2510": {
-        "dependents": ["CDA3103", "COP3514"],
+        "dependents": ["COP2513","CIS3433","CIS3213"],
         "credits": 3,
         "label": "Programming Concepts",
         "availability": ["Fall", "Spring"]
@@ -77,100 +71,118 @@
         "label": "Composition II",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "CDA3103": {
-        "dependents": ["CDA3201/3201L", "COP4530"],
+    "CGS1540": {
+        "dependents": ["CIS3213"],
         "credits": 3,
-        "label": "Computer Organization",
+        "label": "Intro to Databases",
         "availability": ["Fall", "Spring"]
     },
-    "COP3514": {
-        "dependents": ["CDA3201/3201L", "COP4530"],
+    "CGS3853": {
+        "dependents": [],
         "credits": 3,
-        "label": "Program Design",
+        "label": "Web Systems for IT",
         "availability": ["Fall", "Spring"]
     },
-    "CDA3201/3201L": {
-        "dependents": ["CDA4205/4205L", "CSEelec1", "CSEelec2", "CSEelec3"],
+    "COP2513": {
+        "dependents": ["COP3515"],
+        "credits": 3,
+        "label": "Object Oriented Programming",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS3213": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Foundations of Cybersecurity",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP3515": {
+        "dependents": ["CNT4104/L","COP4538", "CGS3853","CIS4083", "ITElec1", "ITElec2", "ITElec3", "ITElec4", "ITElec5", "ITElec6", "ITElec7"],
+        "credits": 3,
+        "label": "Advanced Program Design",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS3433": {
+        "dependents": [],
+        "credits": 3,
+        "label": "System Integration and Architecture for IT",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS4083": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Cloud Computing for IT",
+        "availability": ["Fall", "Spring"]
+    },
+    "CNT4104/L": {
+        "dependents": ["CNT4603"],
         "credits": 4,
-        "label": "Computer Logic and Design/ Lab",
+        "label": "Comp Info Networks/ Lab",
         "availability": ["Fall", "Spring"]
     },
-    "COP4530": {
-        "dependents": ["COP4600", "CNT4419", "CEN4020", "COT4400", "CSETheoryElelc", "CSESoftwareElelc1", "CSESoftwareElelc2"],
-        "credits": 3,
-        "label": "Data Structures",
-        "availability": ["Fall", "Spring"]
-    },
-    "CDA4205/4205L": {
-        "dependents": [],
-        "credits": 4,
-        "label": "Computer Architecture/ Lab",
-        "availability": ["Fall", "Spring"]
-    },
-    "COP4600": {
+    "CNT4603": {
         "dependents": [],
         "credits": 3,
-        "label": "Operating Systems",
+        "label": "System Admin and Maintenance for IT",
         "availability": ["Fall", "Spring"]
     },
-    "CNT4419": {
-        "dependents": [],
+    "COP4538": {
+        "dependents": ["COP4703"],
         "credits": 3,
-        "label": "Secure Coding",
+        "label": "Data Structures and Algorithms",
         "availability": ["Fall", "Spring"]
     },
-    "CEN4020": {
+    "COP4703": {
         "dependents": [],
         "credits": 3,
-        "label": "Software Engineering",
+        "label": "Advanced Database Systems",
         "availability": ["Fall", "Spring"]
     },
-    "COT4400": {
+    "LIS4414": {
         "dependents": [],
         "credits": 3,
-        "label": "Analysis of Algorithms",
+        "label": "Information Policy and Ethics",
         "availability": ["Fall", "Spring"]
     },
-    "CIS4250": {
+    "ITElec1": {
         "dependents": [],
         "credits": 3,
-        "label": "Ethical Issues and Prof Conduct",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
-    "CSEelec1": {
+    "ITElec2": {
         "dependents": [],
         "credits": 3,
-        "label": "CSE Elective",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
-    "CSEelec2": {
+    "ITElec3": {
         "dependents": [],
         "credits": 3,
-        "label": "CSE Elective",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
-    "CSEelec3": {
+    "ITElec4": {
         "dependents": [],
         "credits": 3,
-        "label": "CSE Elective",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
-    "CSETheoryElelc": {
+    "ITElec5": {
         "dependents": [],
         "credits": 3,
-        "label": "CSE Theory Elective",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
-    "CSESoftwareElelc1": {
+    "ITElec6": {
         "dependents": [],
         "credits": 3,
-        "label": "CSE Software Elective",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
-    "CSESoftwareElelc2": {
+    "ITElec7": {
         "dependents": [],
         "credits": 3,
-        "label": "CSE Software Elective",
+        "label": "IT Elective",
         "availability": ["Fall", "Spring"]
     },
     "GeneralElec1": {
@@ -203,28 +215,28 @@
         "label": "General Elective",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "GenEdSocialScience": {
+    "GeneralElec6": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Core Social Science",
+        "label": "General Elective",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "GenEdHumanities": {
+    "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
         "label": "Gen Ed Humanities",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "GenEdHumanAndCulturalDiv": {
+    "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Human and Cultural Diversity",
+        "label": "Gen Ed Humanities",
         "availability": ["Fall", "Spring", "Summer"]
     },
-    "ENC3246": {
+    "GenEdAmerica": {
         "dependents": [],
         "credits": 3,
-        "label": "Communication for Engineers",
+        "label": "POS2041/AMH2010/AMH2020",
         "availability": ["Fall", "Spring", "Summer"]
     }
 }

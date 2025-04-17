@@ -1,0 +1,242 @@
+{
+    "CIS1930": {
+        "dependents": [],
+        "credits": 0,
+        "label": "Freshman Seminar for Computing",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "MAC2311": {
+        "dependents": ["MAC2312", "COT3100", "PHY2048/2048L", "COP3514"],
+        "credits": 4,
+        "label": "Engineering Calculus I",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "MAC2312": {
+        "dependents": ["EGN4450", "EGN2440"],
+        "credits": 4,
+        "label": "Engineering Calculus II",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "COT3100": {
+        "dependents": ["COP4530"],
+        "credits": 3,
+        "label": "Introduction to Discrete Structures",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "EGN4450": {
+        "dependents": [],
+        "credits": 2,
+        "label": "Introduction to Linear Systems",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "EGN2440": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Probability and Statistics with Calculus ",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "NatSciElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Natural Science",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "NatSciElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Natural Science",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "PHY2048/2048L": {
+        "dependents": ["PHY2049/2049L"],
+        "credits": 4,
+        "label": "General Physics I/ Lab",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "PHY2049/2049L": {
+        "dependents": [],
+        "credits": 4,
+        "label": "General Physics II/ Lab",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "COP2510": {
+        "dependents": ["CDA3103", "COP3514"],
+        "credits": 3,
+        "label": "Programming Concepts",
+        "availability": ["Fall", "Spring"]
+    },
+    "ENC1101": {
+        "dependents": ["ENC1102"],
+        "credits": 3,
+        "label": "Composition I",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "ENC1102": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Composition II",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "CDA3103": {
+        "dependents": ["CAI4002", "COP4530"],
+        "credits": 3,
+        "label": "Computer Organization",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP3514": {
+        "dependents": ["CAI4002", "COP4530"],
+        "credits": 3,
+        "label": "Program Design",
+        "availability": ["Fall", "Spring"]
+    },
+    "CAI4002": {
+        "dependents": ["CAI4100","AIElec1","AIElec2","AIElec3", "AIElec4"],
+        "credits": 3,
+        "label": "Intro to Artificial Intelligence",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP4530": {
+        "dependents": ["CAI4100","COP4600", "CNT4419", "CEN4020", "COT4400", "TheoryElelc","AIElec1","AIElec2","AIElec3", "AIElec4"],
+        "credits": 3,
+        "label": "Data Structures",
+        "availability": ["Fall", "Spring"]
+    },
+    "CAI4100": {
+        "dependents": ["AIElec1","AIElec2","AIElec3", "AIElec4"],
+        "credits": 3,
+        "label": "Intro to Machine Learning",
+        "availability": ["Fall", "Spring"]
+    },
+    "COP4600": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Operating Systems",
+        "availability": ["Fall", "Spring"]
+    },
+    "CNT4419": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Secure Coding",
+        "availability": ["Fall", "Spring"]
+    },
+    "CEN4020": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Software Engineering",
+        "availability": ["Fall", "Spring"]
+    },
+    "COT4400": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Analysis of Algorithms",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS4250": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Ethical Issues and Prof Conduct",
+        "availability": ["Fall", "Spring"]
+    },
+    "CIS4910": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Comp Science and Engineering Project",
+        "availability": ["Fall", "Spring"]
+    },
+    "Techelec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Technical Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "Techelec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Technical Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "Techelec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Technical Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "TheoryElelc": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Theory Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "AIElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "AI Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "AIElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "AI Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "AIElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "AI Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "AIElec4": {
+        "dependents": [],
+        "credits": 3,
+        "label": "AI Elective",
+        "availability": ["Fall", "Spring"]
+    },
+    "GeneralElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GeneralElec4": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdSocialScience": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Core Social Science",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdHumanities1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Humanities",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdHumanities2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Gen Ed Humanities",
+        "availability": ["Fall", "Spring", "Summer"]
+    },
+    "GenEdAmerica": {
+        "dependents": [],
+        "credits": 3,
+        "label": "POS2041/AMH2010/AMH2020",
+        "availability": ["Fall", "Spring", "Summer"]
+    }
+}

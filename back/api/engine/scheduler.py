@@ -334,9 +334,33 @@ def calculate_similarity_score(goal_schedule_pure, updated_schedule):
     similarity_score = total_similarity / total_courses if total_courses > 0 else 0
     return similarity_score
 
+#calculate the difficulty scores for all the semester and then the average of them
+def calculate_difficulty_score(schedule, dependencies):
+    """
+    Given a schedule dict (with schedule["semesters"] a list of { "courses": [...] }),
+    and the same dependencies map you already pass around (where
+    dependencies[code]["difficulty"] is defined),
+    returns the average of each semester's total difficulty.
+    """
+    # 1) Compute total difficulty per semester
+    semester_totals = []
+    for sem in schedule["semesters"]:
+        total = 0
+        for course in sem["courses"]:
+            # fallback to 0 if somehow missing
+            total += dependencies.get(course, {}).get("difficulty", 0)
+        semester_totals.append(total)
+
+    # 2) Guard empty
+    if not semester_totals:
+        return 0.0
+
+    # 3) Return average
+    return sum(semester_totals) / len(semester_totals)
+
 
 # Function to adjust the course schedule based on taken and failed courses
-def adjust_schedule(goal_schedule, taken_courses, dependencies):
+def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
     # Generate high-priority courses
     high_priority_courses = create_high_priority_courses(dependencies)
     # remain a snapshot of the original state and never be mutated.
@@ -348,6 +372,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies):
     intentionally_not_taken = []  
     prereq_courses = [course for course in dependencies if is_prereq(course, dependencies)]
     # current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]) if s["name"] == next_semester)
+    current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]) if s["id"] == next_semester)
     total_credits = 0
     # Add credits of taken courses
     total_credits += sum(dependencies[course]["credits"] for course in taken_courses if course in dependencies)
@@ -358,7 +383,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies):
     # for semester in updated_schedule["semesters"]:
     #     if semester["name"] == next_semester:
     
-    for semester_idx in range(0, len(updated_schedule["semesters"])):
+    for semester_idx in range(current_semester_index, len(updated_schedule["semesters"])):
         semester = updated_schedule["semesters"][semester_idx]
         new_courses = []
         current_credits = 0  # Initialize current credits for the semester
@@ -463,21 +488,18 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies):
 
     # Calculate the similarity score after adjusting the schedule
     similarity_score = calculate_similarity_score(goal_schedule_pure, Final_schedule)
+    average_difficulty_score = calculate_difficulty_score(Final_schedule, dependencies)
     print("Similarity Score is :", similarity_score)
     
-
-
-    return Final_schedule, total_credits, similarity_score
-
-
-def calculate(taken_courses,dependencies,goal_schedule):
-    # Generate high-priority courses
-    # high_priority_courses = create_high_priority_courses(dependencies)
     
-    # # Generate failed courses
-    # failed_to_retake = create_failed_courses(goal_schedule, taken_courses, high_priority_courses)
+
+
+    return Final_schedule, total_credits, similarity_score, average_difficulty_score
+
+
+def calculate(taken_courses,dependencies,goal_schedule, next_semester):
     
-    new_schedule, total_credits, similarity_score = adjust_schedule(goal_schedule, taken_courses, dependencies)
+    new_schedule, total_credits, similarity_score, average_difficulty_score = adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester)
     res = ""
     # for semester in new_schedule["semesters"]:
     #     if semester["id"] >= next_semester:  # Print semesters starting from the next semester
@@ -485,17 +507,26 @@ def calculate(taken_courses,dependencies,goal_schedule):
     #         course_credit = [dependencies[course]["credits"] for course in semester["courses"]]
     #         res += (f'Semester: {semester["name"]}, Courses: {course_labels}, Credits: {semester["credits"]}<br/>')
     for semester in new_schedule["semesters"]:
-        # if semester["id"] >= next_semester:  # Print semesters starting from the next semester
+        if semester["id"] >= next_semester:  # Print semesters starting from the next semester
             # Include label and credit as separate elements for each course
-        course_details = [
-            {
-                "label": dependencies[course]["label"],
-                "credit": dependencies[course]["credits"]
-            } if course in dependencies else {"label": course, "credit": 0} 
-            for course in semester["courses"]
-        ]
-        res += (f'Semester: {semester["name"]}, Courses: {course_details}, Credits: {semester["credits"]}<br/>')
+        # course_details = [
+        #     {
+        #         "label": dependencies[course]["label"],
+        #         "credit": dependencies[course]["credits"]
+        #     } if course in dependencies else {"label": course, "credit": 0} 
+        #     for course in semester["courses"]
+        # ]
+            course_details = [
+                {
+                    "label":      dependencies[course]["label"],
+                    "credit":     dependencies[course]["credits"],
+                    "difficulty": dependencies[course]["difficulty"]
+                }
+                for course in semester["courses"]
+            ]
+            res += (f'Semester: {semester["name"]}, Courses: {course_details}, Credits: {semester["credits"]}<br/>')
     
-    return res
+    # return res
+    return res, similarity_score, total_credits, average_difficulty_score
 
 

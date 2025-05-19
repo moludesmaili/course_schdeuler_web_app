@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import recommendation_request
+from .models import RecommendationLog
 from .serializer import recommendationRequestSerializer
 from .engine.scheduler import calculate
 import json
@@ -27,7 +28,7 @@ def create_recommendation(request):
         #taken_courses = serializer.data["taken_courses"]["value"]
         # program = serializer.validated_data.get("program")
         program = serializer.data["program"]
-        
+        next_semester = serializer.data["next_semester"]
         taken_courses = serializer.data["taken_courses"]
         # Parse taken_courses if it's a string or nested JSON
         #failed_courses = serializer.data["failed_courses"]["values"]
@@ -51,8 +52,19 @@ def create_recommendation(request):
             )
 
         # goal_schedule = load_json('api/engine/goal.json')
-        new_schedule = calculate(taken_courses,dependencies,goal_schedule)
+        res_string, sim_score, total_cred, diff_score  = calculate(taken_courses,dependencies,goal_schedule, str(next_semester))
+
+        # 2. Log it
+        RecommendationLog.objects.create(
+            program       = program,
+            next_semester = next_semester,
+            taken_courses = taken_courses,
+            result        = res_string,
+            similarity_score = sim_score,
+            total_credits = total_cred,
+            average_difficulty_score = diff_score
+        )
         # serializer.save()
         # return Response({"courses": goal_schedule, "dependencies": dependencies}, status=status.HTTP_200_OK)
-        return Response(new_schedule, status = status.HTTP_201_CREATED)
+        return Response(res_string, status = status.HTTP_201_CREATED)
     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)

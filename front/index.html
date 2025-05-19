@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bellini CAICC Fast Graduation Planner</title>
+    <title>Bellini College Fast Graduation Planner</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
 </head>
 
 <body onload="checkPassword()">
-    <div id="protected-content">
+    <div id="protected-content" style="display: none;">
         <!-- Modern Navigation -->
         <nav class="modern-nav">
             <div class="nav-container">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="nav-links">
                     <a href="https://www.usf.edu" class="nav-link">USF Home</a>
-                    <a href="https://www.usf.edu/engineering/cse/index.aspx" class="nav-link">Bellini CAICC College</a>
+                    <a href="https://www.usf.edu/engineering/cse/index.aspx" class="nav-link">Bellini College</a>
                     <a href="https://usf.app.box.com/s/g030daao5cqk5kny1q8szc1he9qxpp7o" class="nav-link">Flowcharts</a>
                     <a href="https://usf.app.box.com/s/epc9rvberld5r58stxb08n6b1y5dug9c" class="nav-link">4-year Plans</a>
                     <a href="https://usf.app.box.com/s/fkumee81tklestgeawrsu2fxd61j8111" class="nav-link">Elective List</a>
@@ -42,10 +42,10 @@
 
         <!-- Toast Notifications -->
         <div class="toast-container">
-            <div class="toast" id="errorToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast" id="programSelectToast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-content">
                     <div class="toast-body">
-                        Semester is required.
+                        Inputs are required.
                     </div>
                     <button type="button" class="toast-close" data-bs-dismiss="toast" aria-label="Close">×</button>
                 </div>
@@ -59,13 +59,22 @@
                     <button type="button" class="toast-close" data-bs-dismiss="toast" aria-label="Close">×</button>
                 </div>
             </div>
+            <div class="toast" id="programSelectToastfirst" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-content">
+                  <div class="toast-body">
+                    Please select your program first.
+                  </div>
+                  <button type="button" class="toast-close" data-bs-dismiss="toast" aria-label="Close">×</button>
+                </div>
+            </div>
         </div>
 
         <!-- Main Content -->
         <main class="main-content">
             <div class="container">
                 <div class="planner-header">
-                    <h1>Bellini CAICC Fast Graduation Planne (Prototype)</h1>
+                    <h1>Bellini College of Artificial Intelligence, Cybersecurity and Computing</h1>
+                    <h1>Fast Graduation Planner (Prototype)</h1>
                     <p class="subtitle">Plan your academic journey with confidence</p>
                 </div>
 
@@ -74,18 +83,29 @@
                         <div class="form-group">
                             <label for="program">Select Your Program</label>
                             <select class="form-select modern-select" id="program" required>
-                                <option value="">Choose your program</option>
-                                <option value="1">Computer Science</option>
-                                <option value="2">Computer Engineering</option>
-                                <option value="3">Artificial Intelligence</option>
-                                <option value="4">Cybersecurity</option>
-                                <option value="5">Information Technology</option>
+                                <option value=""></option>
+                                <option value="1">Computer Science 2025</option>
+                                <option value="2">Computer Engineering 2025</option>
+                                <option value="3">Artificial Intelligence 2025</option>
+                                <option value="4">Cybersecurity 2025</option>
+                                <option value="5">Information Technology 2025</option>
                             </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="semester">Select Your Next Semester</label>
+                            <select class="form-select modern-select" id="semester" required>
+                                <option value=""></option>
+                                <option value="1">Fall 2025</option>
+                                <option value="2">Spring 2026</option>
+                                <!-- <option value="2">Summer 2026</option> -->
+                                <!-- <option value="1">Fall 2026</option> -->
+                            </select>
+                        </div> 
 
                         <div class="form-group">
                             <label>Select Your Taken Courses</label>
-                            <button type="button" class="btn-modern" data-bs-toggle="modal" data-bs-target="#takenCoursesModal">
+                            <button type="button" id="selectCoursesBtn" class="btn-modern" data-bs-target="#takenCoursesModal">
                                 <span>Select Courses</span>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -184,7 +204,7 @@
         function startNewSchedule() {
             // Clear the program selection
             document.getElementById('program').value = '';
-            
+            document.getElementById('semester').value = '';
             // Clear the taken courses input and reset the accordion
             document.getElementById('taken_courses_input').value = '{}';
             document.getElementById('accordionExample').innerHTML = '';

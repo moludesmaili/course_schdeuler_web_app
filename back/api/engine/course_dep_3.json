@@ -2,241 +2,467 @@
     "CIS1930": {
         "dependents": [],
         "credits": 0,
-        "label": "Freshman Seminar for Computing",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "CIS 1930 Freshman Seminar for Computing",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 1
     },
     "MAC2311": {
-        "dependents": ["MAC2312", "COT3100", "PHY2048/2048L", "COP3514"],
+        "dependents": [
+            "MAC2312",
+            "COT3100",
+            "PHY2048/2048L",
+            "COP3514"
+        ],
         "credits": 4,
-        "label": "Engineering Calculus I",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "MAC 2311 Calculus I",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 4
     },
     "MAC2312": {
-        "dependents": ["EGN4450", "EGN2440"],
+        "dependents": [
+            "EGN4450",
+            "EGN2440"
+        ],
         "credits": 4,
-        "label": "Engineering Calculus II",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "MAC 2312 Calculus II",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 4
     },
     "COT3100": {
-        "dependents": ["COP4530"],
+        "dependents": [
+            "COP4530"
+        ],
         "credits": 3,
-        "label": "Introduction to Discrete Structures",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "COT 3100 Introduction to Discrete Structures",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 4
     },
     "EGN4450": {
         "dependents": [],
         "credits": 2,
-        "label": "Introduction to Linear Systems",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "EGN 4450 Introduction to Linear Systems",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
     },
     "EGN2440": {
         "dependents": [],
         "credits": 3,
-        "label": "Probability and Statistics with Calculus ",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "EGN 2440 Probability and Statistics with Calculus",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
     },
     "NatSciElec1": {
         "dependents": [],
         "credits": 3,
         "label": "Gen Ed Natural Science",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
     },
     "NatSciElec2": {
         "dependents": [],
         "credits": 3,
         "label": "Gen Ed Natural Science",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
     },
     "PHY2048/2048L": {
-        "dependents": ["PHY2049/2049L"],
+        "dependents": [
+            "PHY2049/2049L",
+            "CDA3103"
+        ],
         "credits": 4,
-        "label": "General Physics I/ Lab",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "PHY 2048/2048L General Physics I/ Lab",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
     },
     "PHY2049/2049L": {
         "dependents": [],
         "credits": 4,
-        "label": "General Physics II/ Lab",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "PHY 2049/2049L General Physics II/ Lab",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
     },
     "COP2510": {
-        "dependents": ["CDA3103", "COP3514"],
+        "dependents": [
+            "CDA3103",
+            "COP3514"
+        ],
         "credits": 3,
-        "label": "Programming Concepts",
-        "availability": ["Fall", "Spring"]
+        "label": "COP 2510 Programming Concepts",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 2
     },
     "ENC1101": {
-        "dependents": ["ENC1102"],
+        "dependents": [
+            "ENC1102"
+        ],
         "credits": 3,
-        "label": "Composition I",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "ENC 1101 Composition I",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "ENC1102": {
         "dependents": [],
         "credits": 3,
-        "label": "Composition II",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "ENC 1102 Composition II",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "CDA3103": {
-        "dependents": ["CAI4002", "COP4530"],
+        "dependents": [
+            "CAI4002",
+            "COP4530"
+        ],
         "credits": 3,
-        "label": "Computer Organization",
-        "availability": ["Fall", "Spring"]
+        "label": "CDA 3103 Computer Organization",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "COP3514": {
-        "dependents": ["CAI4002", "COP4530"],
+        "dependents": [
+            "CAI4002",
+            "COP4530"
+        ],
         "credits": 3,
-        "label": "Program Design",
-        "availability": ["Fall", "Spring"]
+        "label": "COP 3514 Program Design",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "CAI4002": {
-        "dependents": ["CAI4100","AIElec1","AIElec2","AIElec3", "AIElec4"],
+        "dependents": [
+            "CAI4100",
+            "AIElec1",
+            "AIElec2",
+            "AIElec3",
+            "AIElec4"
+        ],
         "credits": 3,
-        "label": "Intro to Artificial Intelligence",
-        "availability": ["Fall", "Spring"]
+        "label": "CAI 4002 Introduction to Artificial Intelligence",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "COP4530": {
-        "dependents": ["CAI4100","COP4600", "CNT4419", "CEN4020", "COT4400", "TheoryElelc","AIElec1","AIElec2","AIElec3", "AIElec4"],
+        "dependents": [
+            "CAI4100",
+            "COP4600",
+            "CNT4419",
+            "CEN4020",
+            "COT4400",
+            "TheoryElelc",
+            "AIElec1",
+            "AIElec2",
+            "AIElec3",
+            "AIElec4"
+        ],
         "credits": 3,
-        "label": "Data Structures",
-        "availability": ["Fall", "Spring"]
+        "label": "COP 4530 Data Structures",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 5
     },
     "CAI4100": {
-        "dependents": ["AIElec1","AIElec2","AIElec3", "AIElec4"],
+        "dependents": [
+            "AIElec1",
+            "AIElec2",
+            "AIElec3",
+            "AIElec4"
+        ],
         "credits": 3,
-        "label": "Intro to Machine Learning",
-        "availability": ["Fall", "Spring"]
+        "label": "CAI 4100 Introduction to Machine Learning",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 5
     },
     "COP4600": {
         "dependents": [],
         "credits": 3,
-        "label": "Operating Systems",
-        "availability": ["Fall", "Spring"]
+        "label": "COP 4600 Operating Systems",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 5
     },
     "CNT4419": {
         "dependents": [],
         "credits": 3,
-        "label": "Secure Coding",
-        "availability": ["Fall", "Spring"]
+        "label": "CNT 4419 Secure Coding",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "CEN4020": {
         "dependents": [],
         "credits": 3,
-        "label": "Software Engineering",
-        "availability": ["Fall", "Spring"]
+        "label": "CEN 4020 Software Engineering",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "COT4400": {
         "dependents": [],
         "credits": 3,
-        "label": "Analysis of Algorithms",
-        "availability": ["Fall", "Spring"]
+        "label": "COT 4400 Analysis of Algorithms",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 5
     },
     "CIS4250": {
         "dependents": [],
         "credits": 3,
-        "label": "Ethical Issues and Prof Conduct",
-        "availability": ["Fall", "Spring"]
+        "label": "CIS 4250 Ethical Issues and Prof Conduct",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "CIS4910": {
         "dependents": [],
         "credits": 3,
-        "label": "Comp Science and Engineering Project",
-        "availability": ["Fall", "Spring"]
+        "label": "CIS 4910 Comp Science and Engineering Project",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "Techelec1": {
         "dependents": [],
         "credits": 3,
         "label": "Technical Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "Techelec2": {
         "dependents": [],
         "credits": 3,
         "label": "Technical Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "Techelec3": {
         "dependents": [],
         "credits": 3,
         "label": "Technical Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "TheoryElelc": {
         "dependents": [],
         "credits": 3,
         "label": "Theory Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
     },
     "AIElec1": {
         "dependents": [],
         "credits": 3,
         "label": "AI Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "AIElec2": {
         "dependents": [],
         "credits": 3,
         "label": "AI Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "AIElec3": {
         "dependents": [],
         "credits": 3,
         "label": "AI Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "AIElec4": {
         "dependents": [],
         "credits": 3,
         "label": "AI Elective",
-        "availability": ["Fall", "Spring"]
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
     },
     "GeneralElec1": {
         "dependents": [],
         "credits": 3,
         "label": "General Elective",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GeneralElec2": {
         "dependents": [],
         "credits": 3,
         "label": "General Elective",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GeneralElec3": {
         "dependents": [],
         "credits": 3,
         "label": "General Elective",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GeneralElec4": {
         "dependents": [],
         "credits": 3,
         "label": "General Elective",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GenEdSocialScience": {
         "dependents": [],
         "credits": 3,
         "label": "Gen Ed Core Social Science",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
         "label": "Gen Ed Humanities",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
         "label": "Gen Ed Humanities",
-        "availability": ["Fall", "Spring", "Summer"]
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     },
     "GenEdAmerica": {
         "dependents": [],
         "credits": 3,
-        "label": "POS2041/AMH2010/AMH2020",
-        "availability": ["Fall", "Spring", "Summer"]
+        "label": "POS2041 or AMH2010 or AMH2020",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
     }
 }

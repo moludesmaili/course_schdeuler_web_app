@@ -1,6 +1,6 @@
 var takenCoursesInput;
-var url = "http://100.29.16.102"
-// var url = "http://localhost:9000"
+// var url = "http://100.29.16.102"
+var url = "http://localhost:9000"
 
 function showContent() {
   document.getElementById("protected-content").style.display = "block";
@@ -76,13 +76,29 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   // Check if program is selected on form submission
-  $("#formSubmitButton").on("click", function () {
-    const program = $("#program").val();
+  // $("#formSubmitButton").on("click", function () {
+  //   const program = $("#program").val();
+  //   if (!program) {
+  //     const toastElement = new bootstrap.Toast(
+  //       document.getElementById("errorToast")
+  //     );
+  //     toastElement.show();
+  //   }
+  // });
+  $("#selectCoursesBtn").on("click", function(e) {
+    e.preventDefault();                  // stop any default behavior
+    const program = $("#program").val(); // read selected program
+  
     if (!program) {
-      const toastElement = new bootstrap.Toast(
-        document.getElementById("errorToast")
+      // show “select program first” toast
+      const toastEl = document.getElementById("programSelectToastfirst");
+      new bootstrap.Toast(toastEl).show();
+    } else {
+      // open the modal by script
+      const takenModal = new bootstrap.Modal(
+        document.getElementById("takenCoursesModal")
       );
-      toastElement.show();
+      takenModal.show();
     }
   });
 });
@@ -91,13 +107,15 @@ $(document).ready(function () {
 function send_data() {
   console.log("Sending Data:", takenCoursesInput);
   const program = $("#program").val(); // Get the selected program
+  const nextSemester = $("#semester").val(); // Get the selected semester
 
   if (program !== "") {
     fetch(url + "/api/recommend/create", {
       method: "POST",
       body: JSON.stringify({
         program: program,
-        taken_courses: takenCoursesInput,
+        next_semester: nextSemester,
+        taken_courses: takenCoursesInput
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -106,7 +124,7 @@ function send_data() {
       .then((response) => {
         if (!response.ok) {
           return response.json().then((data) => {
-            throw new Error(data.error || "Invalid input");
+            throw new Error(data.error || "Please select taken courses!");
           });
         }
         return response.json();
@@ -126,11 +144,13 @@ function send_data() {
         console.error("Error:", error);
         // Show error in toast
         $(".toast-body").text(error.message); // Set the error message
-        $(".toast").toast("show"); // Show the toast
+        //$(".toast").toast("show"); // Show the toast
+        $("#programSelectToast").toast("show");
       });
   } else {
-    $(".toast-body").text("Program is required!"); // Set the message for missing program
-    $(".toast").toast("show"); // Show the toast
+    $(".toast-body").text("Inputs are required!"); // Set the message for missing program
+    //$(".toast").toast("show"); // Show the toast
+    $("#programSelectToast").toast("show");
   }
 }
 
@@ -151,7 +171,8 @@ function parseAndRenderTable(responseText) {
         ? JSON.parse(coursesMatch[1].replace(/'/g, '"')).map((course) => {
           return {
             label: course.label,
-            credit: course.credit
+            credit: course.credit,
+            difficulty: course.difficulty
           };
         })
         : [];
@@ -200,6 +221,26 @@ function parseAndRenderTable(responseText) {
     creditsRow.appendChild(cell);
   });
   courseBody.appendChild(creditsRow);
+
+  // Add row for difficulty category (smaller, non-bold)
+  const diffRow = document.createElement("tr");
+  parsedData.forEach((semester) => {
+    // 1) compute the numeric score
+    const score = semester.courses
+      .reduce((sum, c) => sum + (c.difficulty || 0), 0);
+
+    // 2) bucket into a category
+    let category;
+    if (score <= 9)         category = 'Easy';
+    else if (10 <= score <= 14)   category = 'Moderate';
+    else                     category = 'Hard';
+
+    // 3) render
+    const cell = document.createElement("td");
+    cell.innerHTML = `<span style="font-size:0.8em;">Difficulty: ${category}</span>`;
+    diffRow.appendChild(cell);
+  });
+  courseBody.appendChild(diffRow);
 
   // Make the parsedData available for other functions
   window.courseData = parsedData;
@@ -359,48 +400,48 @@ function printTable2(mode) {
   }
 
 
-// for the comment form:
+// // for the comment form:
 
-document.addEventListener("DOMContentLoaded", function () {
-  loadComments();
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   loadComments();
+// });
 
-function submitComment() {
-  let username = document.getElementById("username").value;
-  let comment = document.getElementById("comment").value;
+// function submitComment() {
+//   let username = document.getElementById("username").value;
+//   let comment = document.getElementById("comment").value;
 
-  if (!username || !comment) {
-    alert("Both fields are required!");
-    return;
-  }
+//   if (!username || !comment) {
+//     alert("Both fields are required!");
+//     return;
+//   }
 
-  fetch("http://127.0.0.1:5000/add_comment", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username: username, comment: comment }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      alert(data.message);
-      loadComments(); // Refresh comments list
-    });
-}
+//   fetch("http://127.0.0.1:5000/add_comment", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ username: username, comment: comment }),
+//   })
+//     .then(response => response.json())
+//     .then(data => {
+//       alert(data.message);
+//       loadComments(); // Refresh comments list
+//     });
+// }
 
-function loadComments() {
-  fetch("http://127.0.0.1:5000/get_comments")
-    .then(response => response.json())
-    .then(comments => {
-      let commentSection = document.getElementById("comment-section");
-      commentSection.innerHTML = ""; // Clear existing comments
-      comments.forEach(c => {
-        let div = document.createElement("div");
-        div.innerHTML = `<strong>${c.username}:</strong> ${c.comment}`;
-        commentSection.appendChild(div);
-      });
-    });
-}
+// function loadComments() {
+//   fetch("http://127.0.0.1:5000/get_comments")
+//     .then(response => response.json())
+//     .then(comments => {
+//       let commentSection = document.getElementById("comment-section");
+//       commentSection.innerHTML = ""; // Clear existing comments
+//       comments.forEach(c => {
+//         let div = document.createElement("div");
+//         div.innerHTML = `<strong>${c.username}:</strong> ${c.comment}`;
+//         commentSection.appendChild(div);
+//       });
+//     });
+// }
 
 const courseLabels = {
 "CAI4002": "Intro to Artificial Intelligence",

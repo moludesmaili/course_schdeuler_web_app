@@ -261,10 +261,6 @@ body {
     white-space: nowrap;
 }
 
-.schedule-table td:first-child {
-    text-align: left;
-    min-width: 150px;
-}
 
 .schedule-table th:not(:first-child) {
     min-width: 80px;

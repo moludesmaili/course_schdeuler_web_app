@@ -1,5 +1,5 @@
 var takenCoursesInput;
-var url = "http://100.29.16.102"
+var url = "http://184.73.142.80"
 // var url = "http://localhost:9000"
 
 function showContent() {

@@ -78,7 +78,7 @@
     "NatSciElec1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Natural Science",
+        "label": "Gen Ed Natural Science Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -89,7 +89,7 @@
     "NatSciElec2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Natural Science",
+        "label": "Natural Science Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -103,7 +103,7 @@
             "CDA3103"
         ],
         "credits": 4,
-        "label": "PHY 2048/2048L General Physics I/ Lab",
+        "label": "PHY2048/2048L General Physics I - Calculus Based/ Lab",
         "availability": [
             "Fall",
             "Spring",
@@ -114,7 +114,7 @@
     "PHY2049/2049L": {
         "dependents": [],
         "credits": 4,
-        "label": "PHY 2049/2049L General Physics II/ Lab",
+        "label": "PHY2049/2049L General Physics II - Calculus Based/ Lab",
         "availability": [
             "Fall",
             "Spring",
@@ -421,10 +421,10 @@
         ],
         "difficulty": 2
     },
-    "GenEdSocialScience": {
+    "GenEdSocialScience2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Core Social Science",
+        "label": "Gen Ed Social Science",
         "availability": [
             "Fall",
             "Spring",
@@ -435,7 +435,7 @@
     "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities",
+        "label": "Gen Ed Humanities Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -446,7 +446,7 @@
     "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities",
+        "label": "Gen Ed Humanities Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -454,7 +454,7 @@
         ],
         "difficulty": 2
     },
-    "GenEdAmerica": {
+    "GenEdSocialScience1": {
         "dependents": [],
         "credits": 3,
         "label": "POS2041 or AMH2010 or AMH2020",

@@ -33,7 +33,6 @@
         "MAC2313",
         "COP3514",
         "CDA3103",
-        "COT3100",
         "PHY2049/2049L"
       ],
       "credits": 14
@@ -57,8 +56,8 @@
       "term": "Summer",
       "courses": [
         "EGN2440",
-        "GenEdAmerica",
-        "NatSciElec1"
+        "GenEdSocialScience1",
+        "NatSciElec2"
       ],
       "credits": 9
     },

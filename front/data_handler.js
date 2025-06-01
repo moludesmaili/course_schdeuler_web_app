@@ -506,10 +506,10 @@ const courseLabels = {
 "EGN4450": "EGN 4450 Introduction to Linear Systems",
 "ENC1101": "ENC 1101 Composition I",
 "ENC1102": "ENC 1102 Composition II",
-"GenEdAmerica": "POS2041/AMH2010/AMH2020",
-"GenEdHumanities1": "Gen Ed Humanities",
-"GenEdHumanities2": "Gen Ed Humanities",
-"GenEdSocialScience": "Gen Ed Social Science Elective",
+"GenEdHumanities1": "Gen Ed Humanities Elective",
+"GenEdHumanities2": "Gen Ed Humanities Elective",
+"GenEdSocialScience1": "POS2041/AMH2010/AMH2020",
+"GenEdSocialScience2": "Gen Ed Social Science Elective",
 "GeneralElec1": "General Elective",
 "GeneralElec2": "General Elective",
 "GeneralElec3": "General Elective",
@@ -527,15 +527,15 @@ const courseLabels = {
 "LDR2010": "LDR 2010 Leadership Fundamentals",
 "LIS4414": "LIS 4414 Information Policy and Ethics",
 "MAC1147": "MAC 1147 Precalculus Algebra and Trigonometry",
-"MAC2311": "MAC 2311 Engineering Calculus 1",
-"MAC2312": "MAC 2312 Engineering Calculus 2",
+"MAC2311": "MAC 2311 Calculus 1",
+"MAC2312": "MAC 2312 Calculus 2",
 "MAC2313": "MAC 2283 or MAC 2313 Calculus 3",
 "MAD2104": "MAD 2104 Discrete Math",
-"NatSciElec1": "Gen Ed Natural Science",
-"NatSciElec2": "Gen Ed Natural Science",
+"NatSciElec1": "Gen Ed Natural Science Elective",
+"NatSciElec2": "Natural Science Elective",
 "PHY2020": "PHY 2020 Conceptual Physics",
-"PHY2048/2048L": "PHY2048/2048L General Physics I/ Lab",
-"PHY2049/2049L": "PHY2049/2049L General Physics II/ Lab",
+"PHY2048/2048L": "PHY2048/2048L General Physics I - Calculus Based/ Lab",
+"PHY2049/2049L": "PHY2049/2049L General Physics II - Calculus Based/ Lab",
 "PSY2012": "PSY 2012 Intro to Psychological Science",
 "STA2023": "STA 2023 Introductory Statistics I"
 }
@@ -657,7 +657,7 @@ var course_json = {
         "term": "Summer",
         "courses": [
           "EGN2440",
-          "GenEdAmerica",
+          "GenEdSocialScience1",
           "NatSciElec2"
         ],
         "credits": 9
@@ -681,7 +681,7 @@ var course_json = {
         "term": "Spring",
         "courses": [
           "COT4400",
-          "GenEdSocialScience",
+          "GenEdSocialScience2",
           "SoftwareElelc2",
           "SoftwareElelc3",
           "Techelec1"
@@ -781,8 +781,8 @@ var course_json = {
         "term": "Summer",
         "courses": [
           "EGN2440",
-          "GenEdAmerica",
-          "NatSciElec1"
+          "GenEdSocialScience1",
+          "NatSciElec2"
         ],
         "credits": 9
       },
@@ -901,7 +901,7 @@ var course_json = {
         "term": "Summer",
         "courses": [
           "EGN2440",
-          "GenEdAmerica",
+          "GenEdSocialScience1",
           "NatSciElec2"
         ],
         "credits": 9
@@ -925,7 +925,7 @@ var course_json = {
         "term": "Spring",
         "courses": [
           "COT4400",
-          "GenEdSocialScience",
+          "GenEdSocialScience2",
           "AIElec1",
           "AIElec2",
           "Techelec2"
@@ -1025,7 +1025,7 @@ var course_json = {
         "term": "Summer",
         "courses": [
           "GenEdHumanities2",
-          "GenEdAmerica",
+          "GenEdSocialScience1",
           "GeneralElec3"
         ],
         "credits": 9
@@ -1038,7 +1038,7 @@ var course_json = {
           "COP4538",
           "CIS4622",
           "ISM4323",
-          "GenEdSocialScience",
+          "GenEdSocialScience2",
           "CyberElec1"
         ],
         "credits": 15
@@ -1147,7 +1147,7 @@ var course_json = {
         "id": "4.5",
         "term": "Summer",
         "courses": [
-          "GenEdAmerica",
+          "GenEdSocialScience1",
           "GeneralElec2",
           "GeneralElec3"
         ],

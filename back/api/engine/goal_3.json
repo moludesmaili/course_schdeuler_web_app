@@ -55,7 +55,7 @@
       "term": "Summer",
       "courses": [
         "EGN2440",
-        "GenEdAmerica",
+        "GenEdSocialScience1",
         "NatSciElec2"
       ],
       "credits": 9
@@ -79,7 +79,7 @@
       "term": "Spring",
       "courses": [
         "COT4400",
-        "GenEdSocialScience",
+        "GenEdSocialScience2",
         "AIElec1",
         "AIElec2",
         "Techelec2"

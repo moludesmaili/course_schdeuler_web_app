@@ -414,10 +414,10 @@
         ],
         "difficulty": 2
     },
-    "GenEdSocialScience": {
+    "GenEdSocialScience2": {
         "dependents": [],
         "credits": 3,
-        "label": "Open Choice Gen Ed Elective",
+        "label": "Gen Ed Social Science Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -428,7 +428,7 @@
     "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities",
+        "label": "Gen Ed Humanities Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -439,7 +439,7 @@
     "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities",
+        "label": "Gen Ed Humanities Elective",
         "availability": [
             "Fall",
             "Spring",
@@ -447,7 +447,7 @@
         ],
         "difficulty": 2
     },
-    "GenEdAmerica": {
+    "GenEdSocialScience1": {
         "dependents": [],
         "credits": 3,
         "label": "POS2041 or AMH2010 or AMH2020",

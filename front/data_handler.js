@@ -502,7 +502,7 @@ const courseLabels = {
 "ECO2013": "ECO 2013 Economic Principles (Macroeconomics)",
 "EGN2440": "EGN 2440 Probability and Statistics with calculus",
 "EGN2615": "EGN 2615 Economics with SG Implications",
-"EGN3433": "EGN 3433 EGN3433 or MAP2302",
+"EGN3433": "EGN 3433 or MAP 2302 Differential Equations",
 "EGN4450": "EGN 4450 Introduction to Linear Systems",
 "ENC1101": "ENC 1101 Composition I",
 "ENC1102": "ENC 1102 Composition II",
@@ -757,7 +757,6 @@ var course_json = {
           "MAC2313",
           "COP3514",
           "CDA3103",
-          "COT3100",
           "PHY2049/2049L"
         ],
         "credits": 14

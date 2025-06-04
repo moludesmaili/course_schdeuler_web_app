@@ -231,8 +231,8 @@ function parseAndRenderTable(responseText) {
 
     // 2) bucket into a category
     let category;
-    if (score <= 9)         category = 'Easy';
-    else if (10 <= score <= 14)   category = 'Moderate';
+    if (score <= 9)         category = 'Moderate';
+    else if (10 <= score <= 14)   category = 'Challenging';
     else                     category = 'Hard';
 
     // 3) render
@@ -1480,7 +1480,7 @@ var course_json = {
           "MAC2311",
           "ENC1102",
           "GeneralElec1",
-          "GenEdSocialScience1",
+          "GenEdSocialScience2",
           "GenEdHumanities1"
         ],
         "credits": 16

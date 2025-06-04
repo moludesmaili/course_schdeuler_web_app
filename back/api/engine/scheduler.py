@@ -490,6 +490,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
     similarity_score = calculate_similarity_score(goal_schedule_pure, Final_schedule)
     average_difficulty_score = calculate_difficulty_score(Final_schedule, dependencies)
     print("Similarity Score is :", similarity_score)
+    print(total_credits)
     
     
 

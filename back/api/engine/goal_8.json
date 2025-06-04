@@ -7,7 +7,7 @@
       "courses": [
         "CIS1930",
         "COP2510",
-        "MAC2311",
+        "MAC1147",
         "ENC1101",
         "NatSciElec1"
       ],
@@ -18,45 +18,46 @@
       "id": "2",
       "term": "Spring",
       "courses": [
-        "COP3514",
-        "MAC2312",
-        "PHY2048/2048L",
-        "ENC1102"
+        "MAC2311",
+        "ENC1102",
+        "GeneralElec1",
+        "GenEdSocialScience1",
+        "GenEdHumanities1"
       ],
-      "credits": 14
+      "credits": 16
     },
     {
       "name": "3",
       "id": "3",
       "term": "Fall",
       "courses": [
-        "CDA3103",
+        "MAC2312",
+        "COP3514",
         "COT3100",
-        "PHY2049/2049L",
-        "GenEdHumanities1"
+        "PHY2048/2048L"
       ],
-      "credits": 13
+      "credits": 14
     },
     {
       "name": "4",
       "id": "4",
       "term": "Spring",
       "courses": [
-        "COP4530",
-        "CAI4002",
-        "GeneralElec1",
+        "PHY2049/2049L",
+        "CDA3103",
+        "EGN2440",
         "GeneralElec2"
       ],
-      "credits": 12
+      "credits": 13
     },
     {
       "name": "Summer1",
       "id": "4.5",
       "term": "Summer",
       "courses": [
-        "EGN2440",
+        "NatSciElec2",
         "GenEdSocialScience1",
-        "NatSciElec2"
+        "GenEdHumanities2"
       ],
       "credits": 9
     },
@@ -65,9 +66,9 @@
       "id": "5",
       "term": "Fall",
       "courses": [
-        "CAI4100",
+        "COP4530",
+        "CAI4002",
         "EGN4450",
-        "GenEdHumanities2",
         "Techelec1",
         "GeneralElec3"
       ],
@@ -78,8 +79,8 @@
       "id": "6",
       "term": "Spring",
       "courses": [
+        "CAI4100",
         "COT4400",
-        "GenEdSocialScience2",
         "AIElec1",
         "AIElec2",
         "Techelec2"

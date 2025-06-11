@@ -78,7 +78,7 @@
     "NatSciElec1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Natural Science Elective",
+        "label": "USF GE Natural Science(UGEN) OR St. GE Natural Science(SGEN)",
         "availability": [
             "Fall",
             "Spring",
@@ -89,7 +89,7 @@
     "NatSciElec2": {
         "dependents": [],
         "credits": 3,
-        "label": "Natural Science Elective",
+        "label": "USF GE Natural Science(UGEN) OR St. GE Natural Science(SGEN)",
         "availability": [
             "Fall",
             "Spring",
@@ -424,7 +424,7 @@
     "GenEdSocialScience2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Social Science",
+        "label": "USF GE Social Science (UGES)",
         "availability": [
             "Fall",
             "Spring",
@@ -435,7 +435,7 @@
     "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities Elective",
+        "label": "State GE Humanities (SGEH)",
         "availability": [
             "Fall",
             "Spring",
@@ -446,7 +446,7 @@
     "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities Elective",
+        "label": "USF GE Humanities (UGEH)",
         "availability": [
             "Fall",
             "Spring",

@@ -52,10 +52,10 @@
         ],
         "difficulty": 4
     },
-    "NatSciElec1": {
+    "NatSciElec3": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Natural Science",
+        "label": "USF GE Natural Science(UGEN)",
         "availability": [
             "Fall",
             "Spring",
@@ -417,7 +417,7 @@
     "GenEdSocialScience2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Social Science Elective",
+        "label": "USF GE Social Science (UGES)",
         "availability": [
             "Fall",
             "Spring",
@@ -428,7 +428,7 @@
     "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities Elective",
+        "label": "State GE Humanities (SGEH)",
         "availability": [
             "Fall",
             "Spring",
@@ -439,7 +439,7 @@
     "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities Elective",
+        "label": "USF GE Humanities (UGEH)",
         "availability": [
             "Fall",
             "Spring",

@@ -116,7 +116,7 @@
     "NatSciElec2": {
         "dependents": [],
         "credits": 3,
-        "label": "Natural Science Elective",
+        "label": "USF GE Natural Science(UGEN) OR St. GE Natural Science(SGEN)",
         "availability": [
             "Fall",
             "Spring",
@@ -422,7 +422,7 @@
     "GenEdHumanities1": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities Elective",
+        "label": "State GE Humanities (SGEH)",
         "availability": [
             "Fall",
             "Spring",
@@ -433,7 +433,7 @@
     "GenEdHumanities2": {
         "dependents": [],
         "credits": 3,
-        "label": "Gen Ed Humanities Elective",
+        "label": "USF GE Humanities (UGEH)",
         "availability": [
             "Fall",
             "Spring",

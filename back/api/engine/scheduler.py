@@ -322,6 +322,7 @@ def calculate_similarity_score(goal_schedule_pure, updated_schedule):
 
         # Find the corresponding semester in the updated schedule
         updated_semester = next((sem for sem in updated_schedule["semesters"] if sem["name"] == goal_semester_name), None)
+
         if updated_semester:
             updated_courses = set(updated_semester["courses"])  # Convert new bin nodes to set
             # Calculate the intersection size (similarity for this bin)

@@ -506,10 +506,10 @@ const courseLabels = {
 "EGN4450": "EGN 4450 Introduction to Linear Systems",
 "ENC1101": "ENC 1101 Composition I",
 "ENC1102": "ENC 1102 Composition II",
-"GenEdHumanities1": "Gen Ed Humanities Elective",
-"GenEdHumanities2": "Gen Ed Humanities Elective",
+"GenEdHumanities1": "State GE Humanities (SGEH)",
+"GenEdHumanities2": "USF GE Humanities (UGEH)",
 "GenEdSocialScience1": "POS2041/AMH2010/AMH2020",
-"GenEdSocialScience2": "Gen Ed Social Science Elective",
+"GenEdSocialScience2": "USF GE Social Science (UGES)",
 "GeneralElec1": "General Elective",
 "GeneralElec2": "General Elective",
 "GeneralElec3": "General Elective",
@@ -531,8 +531,9 @@ const courseLabels = {
 "MAC2312": "MAC 2312 Calculus 2",
 "MAC2313": "MAC 2283 or MAC 2313 Calculus 3",
 "MAD2104": "MAD 2104 Discrete Math",
-"NatSciElec1": "Gen Ed Natural Science Elective",
-"NatSciElec2": "Natural Science Elective",
+"NatSciElec1": "USF GE Natural Science(UGEN) OR St. GE Natural Science(SGEN)",
+"NatSciElec2": "USF GE Natural Science(UGEN) OR St. GE Natural Science(SGEN)",
+"NatSciElec3":"USF GE Natural Science(UGEN)",
 "PHY2020": "PHY 2020 Conceptual Physics",
 "PHY2048/2048L": "PHY2048/2048L General Physics I - Calculus Based/ Lab",
 "PHY2049/2049L": "PHY2049/2049L General Physics II - Calculus Based/ Lab",
@@ -1013,7 +1014,7 @@ var course_json = {
         "courses": [
           "COP3515",
           "PSY2012",
-          "NatSciElec1",
+          "NatSciElec3",
           "GeneralElec1"
         ],
         "credits": 13
@@ -1159,7 +1160,7 @@ var course_json = {
         "courses": [
           "COP4538",
           "CGS3853",
-          "NatSciElec1",
+          "NatSciElec3",
           "GenEdHumanities2",
           "GeneralElec4"
         ],

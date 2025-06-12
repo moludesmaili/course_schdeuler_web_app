@@ -232,7 +232,8 @@
     "COP4530": {
         "dependents": [
             "COP4600",
-            "COT4400"
+            "COT4400",
+            "CIS4910"
         ],
         "credits": 3,
         "label": "COP 4530 Data Structures",

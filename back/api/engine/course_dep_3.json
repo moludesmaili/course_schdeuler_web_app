@@ -212,7 +212,8 @@
             "AIElec1",
             "AIElec2",
             "AIElec3",
-            "AIElec4"
+            "AIElec4",
+            "CIS4910"
         ],
         "credits": 3,
         "label": "COP 4530 Data Structures",

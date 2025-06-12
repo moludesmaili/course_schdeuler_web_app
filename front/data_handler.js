@@ -1,6 +1,6 @@
 var takenCoursesInput;
-// var url = "http://184.73.142.80"
-var url = "http://localhost:9000"
+var url = "http://184.73.142.80"
+// var url = "http://localhost:9000"
 
 function showContent() {
   document.getElementById("protected-content").style.display = "block";
@@ -1444,7 +1444,7 @@ var course_json = {
           "CIS4910",
           "CIS4250",
           "CDA4213/L",
-          "GenEdHumanities1",
+          "GenEdHumanities2",
           "Techelec2"
         ],
         "credits": 16

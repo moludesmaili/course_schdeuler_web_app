@@ -361,6 +361,7 @@ def calculate_difficulty_score(schedule, dependencies):
 
 # Function to adjust the course schedule based on taken and failed courses
 def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
+    initial_taken_courses = copy.deepcopy(taken_courses)
     # Generate high-priority courses
     high_priority_courses = create_high_priority_courses(dependencies)
     # remain a snapshot of the original state and never be mutated.
@@ -445,8 +446,8 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
         semester["credits"] = sum(dependencies[course]["credits"] for course in semester["courses"])
 
         #check if there is place for adding more courses
-        #if semester["courses"]:
-        while (semester["name"] != "Summer1" and semester["credits"] <= 12) or (semester["name"] == "Summer1" and semester["credits"] <= 6):
+        #add more courses if there is room (except this is a no taken courses schedule)
+        while initial_taken_courses and ((semester["name"] != "Summer1" and semester["credits"] <= 12) or (semester["name"] == "Summer1" and semester["credits"] <= 6)):
             replacement, original_semester = find_nearest_available_course(taken_courses, failed_to_retake, dependencies, new_courses, updated_schedule, term, skipped_courses, semester_idx)
             if semester["name"] == "Summer1" and replacement == "EGN4450":
                 skipped_courses.append(replacement)  # Add EGN4450 to skipped_courses
@@ -492,9 +493,6 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
     print("Similarity Score is :", similarity_score)
     print(total_credits)
     
-    
-
-
     return Final_schedule, total_credits, similarity_score, average_difficulty_score
 
 

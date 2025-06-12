@@ -1541,8 +1541,8 @@ var course_json = {
         "courses": [
           "CAI4100",
           "COT4400",
-          "AIElec1",
-          "AIElec2",
+          "GeneralElec4",
+          "TheoryElelc",
           "Techelec2"
         ],
         "credits": 15
@@ -1554,9 +1554,9 @@ var course_json = {
         "courses": [
           "COP4600",
           "CNT4419",
-          "AIElec3",
-          "TheoryElelc",
-          "GeneralElec4"
+          "AIElec1",
+          "AIElec2",
+          "Techelec3"
         ],
         "credits": 15
       },
@@ -1568,8 +1568,8 @@ var course_json = {
           "CIS4910",
           "CIS4250",
           "CEN4020",
-          "AIElec4",
-          "Techelec3"
+          "AIElec3",
+          "AIElec4"
         ],
         "credits": 15
       },

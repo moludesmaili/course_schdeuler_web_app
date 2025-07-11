@@ -59,8 +59,8 @@ def find_nearest_available_course(taken_courses, failed_to_retake, dependencies,
             # Skip any course that is in the skipped_courses list (for the replacement while and not adding the two credit course to the summer)
             if course in skipped_courses:
                 continue  # Skip this course and check the next one
-            # Skip CIS4250 but keep searching
-            if course == "CIS4250":
+            # Skip CIS4250 and LIS4414 but keep searching
+            if course in {"CIS4250","LIS4414"}:
                 continue  # Don't return yet, keep looking for another course
             if course not in taken_courses and course not in failed_to_retake:
                 if can_take_course(course, taken_courses, dependencies, new_courses, term):
@@ -163,7 +163,7 @@ def remove_trailing_empty_semesters(schedule):
 def ensure_senior_course_in_last_semester(updated_schedule, dependencies):
     # ETHICAL_COURSE = "CIS4250"
     # Identify all senior courses present in the program
-    senior_courses = ["CIS4250"]
+    senior_courses = ["CIS4250","LIS4414"]
     present_senior_courses = [course for course in senior_courses if course in dependencies]
     
     if not present_senior_courses:
@@ -388,7 +388,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
         semester = updated_schedule["semesters"][semester_idx]
         new_courses = []
         current_credits = 0  # Initialize current credits for the semester
-        ethical_course = "CIS4250"
+        #ethical_course = "CIS4250"
         term = semester["term"]
         
         # Adjust the courses

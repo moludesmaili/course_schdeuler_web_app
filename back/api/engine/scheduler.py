@@ -410,11 +410,12 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
             if can_take_course(course, taken_courses, dependencies, new_courses, term) and course not in taken_courses:
                 if (
                     (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 15) 
-                    or (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 9)
+                    or (semester["name"] == "Summer1" and (current_credits + dependencies[course]["credits"]) <= 9)
                 ):
                     new_courses.append(course)
                     taken_courses.append(course)
-                    to_remove.append(course)  # Mark for removal
+                    # to_remove.append(course)  # Mark for removal
+                    failed_to_retake.remove(course)
                     current_credits += dependencies[course]["credits"]
         # Remove processed courses after the loop
         for course in to_remove:
@@ -435,7 +436,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
             if can_take_course(course, taken_courses, dependencies, new_courses, term):
                 if (
                     (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 15) 
-                    or (semester["name"] != "Summer1" and (current_credits + dependencies[course]["credits"]) <= 9)
+                    or (semester["name"] == "Summer1" and (current_credits + dependencies[course]["credits"]) <= 9)
                 ):
                     new_courses.append(course)
                     taken_courses.append(course)

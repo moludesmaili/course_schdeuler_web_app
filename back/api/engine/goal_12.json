@@ -1,0 +1,115 @@
+{
+  "semesters": [
+    {
+      "name": "1",
+      "id": "1",
+      "term": "Fall",
+      "courses": [
+        "CGS1540",
+        "MAC1147",
+        "ENC1101",
+        "EGN3000/EGN3000L"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "2",
+      "id": "2",
+      "term": "Spring",
+      "courses": [
+        "COP2512",
+        "MAD2104",
+        "ENC1102",
+        "PHY2020",
+        "GenEdHumanities1"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "3",
+      "id": "3",
+      "term": "Fall",
+      "courses": [
+        "COP2513",
+        "CIS3213",
+        "STA2023",
+        "ECO2013"
+      ],
+      "credits": 12
+    },
+    {
+      "name": "4",
+      "id": "4",
+      "term": "Spring",
+      "courses": [
+        "COP3515",
+        "CIS3433",
+        "PSY2012",
+        "LDR2010"
+      ],
+      "credits": 12
+    },
+    {
+      "name": "Summer1",
+      "id": "4.5",
+      "term": "Summer",
+      "courses": [
+        "GenEdSocialScience1",
+        "GeneralElec1",
+        "GeneralElec2"
+      ],
+      "credits": 9
+    },
+    {
+      "name": "5",
+      "id": "5",
+      "term": "Fall",
+      "courses": [
+        "COP4538",
+        "CGS3853",
+        "ENC3246",
+        "NatSciElec3",
+        "GeneralElec3"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "6",
+      "id": "6",
+      "term": "Spring",
+      "courses": [
+        "CNT4104/L",
+        "ITElec1",
+        "ITElec2",
+        "ITElec3",
+        "GeneralElec4"
+      ],
+      "credits": 16
+    },
+    {
+      "name": "7",
+      "id": "7",
+      "term": "Fall",
+      "courses": [
+        "CIS4083",
+        "CNT4603",
+        "ITElec4",
+        "ITElec5",
+        "GeneralElec5"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "8",
+      "id": "8",
+      "term": "Spring",
+      "courses": [
+        "LIS4414",
+        "COP4703",
+        "ITElec6",
+        "GeneralElec6"
+      ],
+      "credits": 12
+    }
+  ]
+}

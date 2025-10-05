@@ -1,0 +1,478 @@
+{
+    "CIS1930": {
+        "dependents": [],
+        "credits": 0,
+        "label": "CIS 1930 Freshman Seminar for Computing",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 1
+    },
+    "EGN3000/EGN3000L": {
+        "dependents": [],
+        "credits": 3,
+        "label": "EGN 3000 Foundations of Engineering/ Lab",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 1
+    },
+    "ENC3246": {
+        "dependents": [],
+        "credits": 3,
+        "label": "ENC 3246 Communication for Engineers",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "MAC1147": {
+        "dependents": [
+            "COP3515"
+        ],
+        "credits": 4,
+        "label": "MAC 1147 Precalculus Algebra and Trigonometry",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
+    },
+    "STA2023": {
+        "dependents": [
+            "COP3515"
+        ],
+        "credits": 3,
+        "label": "STA 2023 Introductory Statistics I",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
+    },
+    "LDR2010": {
+        "dependents": [],
+        "credits": 3,
+        "label": "LDR 2010 Leadership Fundamentals",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 1
+    },
+    "MAD2104": {
+        "dependents": [
+            "COP3515"
+        ],
+        "credits": 3,
+        "label": "MAD 2104 Discrete Math",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 4
+    },
+    "NatSciElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "Natural Science Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 3
+    },
+    "PHY2020": {
+        "dependents": [
+            "COP3515"
+        ],
+        "credits": 3,
+        "label": "PHY 2020 Conceptual Physics",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "PSY2012": {
+        "dependents": [],
+        "credits": 3,
+        "label": "PSY 2012 Intro to Psychological Science",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "ECO2013": {
+        "dependents": [],
+        "credits": 3,
+        "label": "ECO 2013 Economic Principles (Macroeconomics)",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "COP2512": {
+        "dependents": [
+            "COP2513",
+            "CIS3433",
+            "CIS3213"
+        ],
+        "credits": 3,
+        "label": "COP 2512 Programming Fundamentals for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 2
+    },
+    "ENC1101": {
+        "dependents": [
+            "ENC1102"
+        ],
+        "credits": 3,
+        "label": "ENC 1101 Composition I",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "ENC1102": {
+        "dependents": [],
+        "credits": 3,
+        "label": "ENC 1102 Composition II",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "CGS1540": {
+        "dependents": [
+            "CIS3213"
+        ],
+        "credits": 3,
+        "label": "CGS 1540 Intro to Databases",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "CGS3853": {
+        "dependents": [],
+        "credits": 3,
+        "label": "CGS 3853 Web Systems for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "COP2513": {
+        "dependents": [
+            "COP3515"
+        ],
+        "credits": 3,
+        "label": "COP 2513 Object Oriented Programming for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "CIS3213": {
+        "dependents": [],
+        "credits": 3,
+        "label": "CIS 3213 Foundations of Cybersecurity",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "COP3515": {
+        "dependents": [
+            "CNT4104/L",
+            "COP4538",
+            "CGS3853",
+            "CIS4083",
+            "ITElec1",
+            "ITElec2",
+            "ITElec3",
+            "ITElec4",
+            "ITElec5",
+            "ITElec6",
+            "ITElec7"
+        ],
+        "credits": 3,
+        "label": "COP 3515 Advanced Program Design",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "CIS3433": {
+        "dependents": [],
+        "credits": 3,
+        "label": "CIS 3433 System Integration and Architecture for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "CIS4083": {
+        "dependents": [],
+        "credits": 3,
+        "label": "CIS 4083 Cloud Computing for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "CNT4104/L": {
+        "dependents": [
+            "CNT4603"
+        ],
+        "credits": 4,
+        "label": "CNT 4104/4104L Comp Info Networks",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "CNT4603": {
+        "dependents": [],
+        "credits": 3,
+        "label": "CNT 4603 System Admin and Maintenance for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 3
+    },
+    "COP4538": {
+        "dependents": [
+            "COP4703"
+        ],
+        "credits": 3,
+        "label": "COP 4538 Data Structures and Algorithms",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 5
+    },
+    "COP4703": {
+        "dependents": [],
+        "credits": 3,
+        "label": "COP 4703 Advanced Database Systems for IT",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "LIS4414": {
+        "dependents": [],
+        "credits": 3,
+        "label": "LIS 4414 or CIS 4253",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 2
+    },
+    "ITElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "ITElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "ITElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "ITElec4": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "ITElec5": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "ITElec6": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "ITElec7": {
+        "dependents": [],
+        "credits": 3,
+        "label": "IT Elective",
+        "availability": [
+            "Fall",
+            "Spring"
+        ],
+        "difficulty": 4
+    },
+    "GeneralElec1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GeneralElec2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GeneralElec3": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GeneralElec4": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GeneralElec5": {
+        "dependents": [],
+        "credits": 3,
+        "label": "General Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GeneralElec6": {
+        "dependents": [],
+        "credits": 4,
+        "label": "General Elective",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GenEdHumanities1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "SGEH Gen Ed Core Humanities",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GenEdHumanities2": {
+        "dependents": [],
+        "credits": 3,
+        "label": "USF GE Humanities (UGEH)",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    },
+    "GenEdSocialScience1": {
+        "dependents": [],
+        "credits": 3,
+        "label": "TGEI Gen Ed Information and Data Literacy",
+        "availability": [
+            "Fall",
+            "Spring",
+            "Summer"
+        ],
+        "difficulty": 2
+    }
+}

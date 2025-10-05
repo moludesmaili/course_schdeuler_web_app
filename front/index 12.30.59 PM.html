@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bellini College Fast Graduation Planner</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="data_handler.js"></script>
+</head>
+
+<body onload="checkPassword()">
+    <div id="protected-content" style="display: none;">
+        <!-- Modern Navigation -->
+        <nav class="modern-nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <img src="./USF.png" alt="USF Logo" class="nav-logo">
+                    <a href="https://www.usf.edu" class="nav-link">
+                        University of South Florida
+                    </a>
+                    <span></span>
+                </div>
+                <div class="nav-links">
+                    <a href="https://www.usf.edu/engineering/cse/index.aspx" class="nav-link">Bellini CAICC College</a>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link">Flowcharts</a>
+                        <div class="dropdown-content">
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/flowcharts/cs-flowchart-2025.pdf" target="_blank">Computer Science</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/flowcharts/cpe-flowchart-2025.pdf" target="_blank">Computer Engineering</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/flowcharts/ai-flowchart-2025.pdf" target="_blank">Artificial Intelligence</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/flowcharts/cys-flowchart-2025.pdf" target="_blank">Cybersecurity</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/flowcharts/it-flowchart-2025.pdf" target="_blank">Information Technology</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link">4-year Plans</a>
+                        <div class="dropdown-content">
+                            <a href="https://catalog.usf.edu/preview_program.php?catoid=23&poid=11796&returnto=3958" target="_blank">Computer Science</a>
+                            <a href="https://catalog.usf.edu/preview_program.php?catoid=23&poid=11794&returnto=3958" target="_blank">Computer Engineering</a>
+                            <a href="https://catalog.usf.edu/preview_program.php?catoid=23&poid=13995&returnto=3958" target="_blank">Artificial Intelligence</a>
+                            <a href="https://catalog.usf.edu/preview_program.php?catoid=23&poid=11802&returnto=3958" target="_blank">Cybersecurity</a>
+                            <a href="https://catalog.usf.edu/preview_program.php?catoid=23&poid=12095&returnto=3958" target="_blank">Information Technology</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link">Elective List</a>
+                        <div class="dropdown-content">
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/cscpe-elective-list-2025-26.pdf" target="_blank">Computer Science and Engineering</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/ai-elective-list-2025-26.pdf" target="_blank">Artificial Intelligence</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/cys-elective-list-2025-26.pdf" target="_blank">Cybersecurity</a>
+                            <a href="https://www.usf.edu/ai-cybersecurity-computing/documents/undergraduate/it-elective-list-2025-26.pdf" target="_blank">Information Technology</a>
+                        </div>
+                    </div>
+                    <a href="https://catalog.usf.edu/content.php?catoid=23&navoid=3963" class="nav-link">Gen Ed Courses</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container">
+            <div class="toast" id="programSelectToast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-content">
+                    <div class="toast-body">
+                        Inputs are required.
+                    </div>
+                    <button type="button" class="toast-close" data-bs-dismiss="toast" aria-label="Close">×</button>
+                </div>
+            </div>
+
+            <div class="toast" id="toast-invalid-courses" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-content">
+                    <div class="toast-body">
+                        Selected courses are not valid. Ensure prerequisites are selected.
+                    </div>
+                    <button type="button" class="toast-close" data-bs-dismiss="toast" aria-label="Close">×</button>
+                </div>
+            </div>
+            <div class="toast" id="programSelectToastfirst" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-content">
+                  <div class="toast-body">
+                    Please select your program first.
+                  </div>
+                  <button type="button" class="toast-close" data-bs-dismiss="toast" aria-label="Close">×</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="planner-header">
+                    <h1>Bellini College of Artificial Intelligence, Cybersecurity and Computing</h1>
+                    <h1>Fast Graduation Planner (Prototype)</h1>
+                    <p class="subtitle">Plan your academic journey with confidence</p>
+                </div>
+
+                <form id="plannerForm" class="planner-form">
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="program">Select Your Program</label>
+                            <select class="form-select modern-select" id="program" required>
+                                <option value=""></option>
+                                <option value="1">Computer Science 2025</option>
+                                <option value="2">Computer Engineering 2025</option>
+                                <option value="3">Artificial Intelligence 2025</option>
+                                <option value="4">Cybersecurity 2025</option>
+                                <option value="5">Information Technology 2025</option>
+                                <option value="6">Computer Science 2025 (with Precalculus)</option>
+                                <option value="7">Computer Engineering 2025 (with Precalculus)</option>
+                                <option value="8">Artificial Intelligence 2025 (with Precalculus)</option>
+                                <option value="9">Computer Science 2024</option>
+                                <option value="10">Computer Engineering 2024</option>
+                                <option value="11">Cybersecurity 2024</option>
+                                <option value="12">Information Technology 2024</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="semester">Select Your Next Semester</label>
+                            <select class="form-select modern-select" id="semester" required>
+                                <option value=""></option>
+                                <option value="1">Spring 2026</option>
+                                <option value="2">Fall 2026</option>
+                                <!-- <option value="2">Summer 2026</option> -->
+                                <!-- <option value="1">Fall 2026</option> -->
+                            </select>
+                        </div> 
+
+                        <div class="form-group">
+                            <label>Select Your Taken Courses</label>
+                            <button type="button" id="selectCoursesBtn" class="btn-modern" data-bs-target="#takenCoursesModal">
+                                <span>Select Courses</span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button onclick="send_data()" class="btn-primary" type="submit">
+                        Generate Schedule
+                    </button>
+                </form>
+
+                <div class="results-container">
+                    <div id="resultsSection" class="results-section hidden">
+                        <div class="table-container">
+                            <table class="schedule-table">
+                                <thead>
+                                    <tr id="semester-headers"></tr>
+                                </thead>
+                                <tbody id="course-body"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="print-options" id="printDropdown">
+                            <div class="dropdown">
+                                <button class="btn-secondary" type="button" data-bs-toggle="dropdown">
+                                    Export Schedule
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <!-- <li><a class="dropdown-item" href="#" id="printPdf">Export as PDF</a></li> -->
+                                    <li><a class="dropdown-item" href="#" id="printWord">Export as Word</a></li>
+                                </ul>
+                            </div>
+                            <button class="btn-secondary" id="newScheduleBtn" onclick="startNewSchedule()">
+                                Start New Schedule
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 4V20H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div id="results-message" class="results-message"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal for Course Selection -->
+        <div class="modal fade" id="takenCoursesModal" tabindex="-1" aria-labelledby="takenCoursesModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Select Your Taken Courses</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="taken_courses_input" name="taken_courses[value]" value="{}">
+                        <div class="accordion" id="accordionExample"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn-primary" onclick="updateTakenCourses()" data-bs-dismiss="modal">Save Selection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2({
+                width: '100%',
+                theme: 'modern'
+            });
+        });
+
+        // Function to show/hide export button based on schedule generation
+        function toggleExportButton(show) {
+            const printOptions = document.getElementById('printDropdown');
+            if (show) {
+                printOptions.classList.add('visible');
+            } else {
+                printOptions.classList.remove('visible');
+            }
+        }
+
+        // Function to start a new schedule
+        function startNewSchedule() {
+            // Clear the program selection
+            document.getElementById('program').value = '';
+            document.getElementById('semester').value = '';
+            // Clear the taken courses input and reset the accordion
+            document.getElementById('taken_courses_input').value = '{}';
+            document.getElementById('accordionExample').innerHTML = '';
+            
+            // Clear the table
+            document.getElementById('course-body').innerHTML = '';
+            document.getElementById('semester-headers').innerHTML = '';
+            
+            // Clear any messages
+            document.getElementById('results-message').innerHTML = '';
+            
+            // Hide the results section
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.classList.add('hidden');
+            
+            // Hide the export and new schedule buttons
+            const printOptions = document.getElementById('printDropdown');
+            printOptions.style.display = 'none';
+            
+            // Reset the modal state
+            const modal = document.getElementById('takenCoursesModal');
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle form submission
+        document.getElementById('plannerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            // Get form values
+            const program = document.getElementById('program').value;
+            const takenCourses = document.getElementById('taken_courses_input').value;
+            
+            // Validate form
+            if (!program) {
+                alert('Please select a program');
+                return;
+            }
+            
+            // Call the original send_data function
+            //window.send_data();
+            
+            // Show results section and scroll to it
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.classList.remove('hidden');
+            
+            // Show export button after a short delay to ensure table is rendered
+            setTimeout(() => {
+                const tableBody = document.getElementById('course-body');
+                if (tableBody && tableBody.children.length > 0) {
+                    const printOptions = document.getElementById('printDropdown');
+                    printOptions.style.display = 'flex';
+                    
+                    // Scroll to results section
+                    resultsSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center',
+                        inline: 'center'
+                    });
+                }
+            }, 500);
+        });
+
+        // Hide results section when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.classList.add('hidden');
+            const printOptions = document.getElementById('printDropdown');
+            printOptions.style.display = 'none';
+        });
+    </script>
+</body>
+</html> 

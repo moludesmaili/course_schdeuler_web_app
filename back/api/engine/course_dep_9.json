@@ -459,7 +459,7 @@
         ],
         "difficulty": 2
     },
-    "GenEdHumanities2": {
+    "GenEdHumanities3": {
         "dependents": [],
         "credits": 3,
         "label": "TGED Gen Ed Human and Cultural Diversity in GC",
@@ -470,7 +470,7 @@
         ],
         "difficulty": 2
     },
-    "GenEdSocialScience1": {
+    "GenEdSocialScience3": {
         "dependents": [],
         "credits": 3,
         "label": "SGES Gen Ed Core Social Science",

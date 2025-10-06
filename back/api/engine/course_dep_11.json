@@ -437,7 +437,7 @@
         ],
         "difficulty": 2
     },
-    "GenEdSocialScience2": {
+    "GenEdSocialScience4": {
         "dependents": [],
         "credits": 3,
         "label": "TGEI_GenEd_Information_and_Data_Literacy",
@@ -459,7 +459,7 @@
         ],
         "difficulty": 2
     },
-    "GenEdHumanities2": {
+    "GenEdHumanities3": {
         "dependents": [],
         "credits": 3,
         "label": "TGED_GenEd_Human_and_Cultural_Diversity",

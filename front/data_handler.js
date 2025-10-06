@@ -515,8 +515,11 @@ const courseLabels = {
 "ENC1102": "ENC 1102 Composition II",
 "GenEdHumanities1": "State GE Humanities (SGEH)",
 "GenEdHumanities2": "USF GE Humanities (UGEH)",
+"GenEdHumanities3": "TGED Gen Ed Human and Cultural Diversity",
 "GenEdSocialScience1": "POS2041/AMH2010/AMH2020",
+"GenEdSocialScience3":"SGES Gen Ed Core Social Science",
 "GenEdSocialScience2": "USF GE Social Science (UGES)",
+"GenEdSocialScience4": "TGEI Gen Ed Information and Data Literacy",
 "GeneralElec1": "General Elective",
 "GeneralElec2": "General Elective",
 "GeneralElec3": "General Elective",
@@ -1645,7 +1648,7 @@ var course_json = {
         "term": "Summer",
         "courses": [
           "EGN3443",
-          "GenEdSocialScience1",
+          "GenEdSocialScience3",
           "NatSciElec2"
         ],
         "credits": 9
@@ -1768,7 +1771,7 @@ var course_json = {
         "courses": [
           "EGN3443",
           "NatSciElec2",
-          "GenEdSocialScience1"
+          "GenEdSocialScience3"
         ],
         "credits": 9
       },
@@ -1886,8 +1889,8 @@ var course_json = {
         "id": "4.5",
         "term": "Summer",
         "courses": [
-          "GenEdHumanities2",
-          "GenEdSocialScience2",
+          "GenEdHumanities3",
+          "GenEdSocialScience4",
           "GeneralElec2"
         ],
         "credits": 9
@@ -2001,7 +2004,7 @@ var course_json = {
         "id": "4.5",
         "term": "Summer",
         "courses": [
-          "GenEdSocialScience1",
+          "GenEdSocialScience4",
           "GeneralElec1",
           "GeneralElec2"
         ],

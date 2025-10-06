@@ -1645,7 +1645,7 @@ var course_json = {
         "term": "Summer",
         "courses": [
           "EGN3443",
-          "SGES_GenEd_Core_Social_Science",
+          "GenEdSocialScience1",
           "NatSciElec2"
         ],
         "credits": 9
@@ -1753,11 +1753,11 @@ var course_json = {
         "id": "4",
         "term": "Spring",
         "courses": [
-          "MAP2302",
+          "EGN3433",
           "COP4530",
           "CDA3201/3201L",
           "ENC1102",
-          "SGEH_GenEd_Humanities"
+          "GenEdHumanities1"
         ],
         "credits": 16
       },

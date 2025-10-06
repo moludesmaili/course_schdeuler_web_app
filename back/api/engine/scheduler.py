@@ -100,28 +100,55 @@ def find_nearest_available_course(taken_courses, failed_to_retake, dependencies,
 #     return updated_schedule
 
 # Handle the single course or two single courses in the last semester
-def handle_single_course_last_semester(updated_schedule, dependencies):
-    # Identify the last and second-to-last semesters
-    last_semester = updated_schedule["semesters"][-1]
-    if (updated_schedule["semesters"][-2]["name"]== 'Summer1'):
-        second_to_last_semester = updated_schedule["semesters"][-3]
-    else:
-        second_to_last_semester = updated_schedule["semesters"][-2]
+# def handle_single_course_last_semester(updated_schedule, dependencies):
+#     # Identify the last and second-to-last semesters
+#     last_semester = updated_schedule["semesters"][-1]
+#     if (updated_schedule["semesters"][-2]["name"]== 'Summer1'):
+#         second_to_last_semester = updated_schedule["semesters"][-3]
+#     else:
+#         second_to_last_semester = updated_schedule["semesters"][-2]
     
-    # second_to_last_semester = updated_schedule["semesters"][-2]
+#     # second_to_last_semester = updated_schedule["semesters"][-2]
 
-    # Check if the last semester has only one course
+#     # Check if the last semester has only one course
+#     if len(last_semester["courses"]) == 1:
+#         single_course = last_semester["courses"][0]
+#         course_credits = dependencies[single_course]["credits"]
+
+#         # Check if the second-to-last semester can accommodate the course
+#         if second_to_last_semester["credits"] + course_credits <= 18:
+#             # Move the course
+#             second_to_last_semester["courses"].append(single_course)
+#             second_to_last_semester["credits"] += course_credits
+#             last_semester["courses"].remove(single_course)
+#             last_semester["credits"] -= course_credits
+def handle_single_course_last_semester(updated_schedule, dependencies):
+    semesters = updated_schedule.get("semesters", [])
+
+    # Need at least 2 semesters to move a course
+    if len(semesters) < 2:
+        return  # nothing to do, not enough semesters
+
+    last_semester = semesters[-1]
+
+    # Determine second-to-last safely
+    if len(semesters) >= 3 and semesters[-2]["name"] == "Summer1":
+        second_to_last_semester = semesters[-3]
+    else:
+        second_to_last_semester = semesters[-2]
+
+    # Only proceed if last semester has a single course
     if len(last_semester["courses"]) == 1:
         single_course = last_semester["courses"][0]
         course_credits = dependencies[single_course]["credits"]
 
-        # Check if the second-to-last semester can accommodate the course
+        # Check if the second-to-last semester can take it
         if second_to_last_semester["credits"] + course_credits <= 18:
-            # Move the course
             second_to_last_semester["courses"].append(single_course)
             second_to_last_semester["credits"] += course_credits
             last_semester["courses"].remove(single_course)
             last_semester["credits"] -= course_credits
+
 
 # Handle the single course or two single courses in the last semester
 # def handle_single_course_last_semester(updated_schedule, dependencies):

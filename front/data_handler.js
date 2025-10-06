@@ -1660,7 +1660,7 @@ var course_json = {
         "courses": [
           "CDA4205/4205L",
           "EGN4450",
-          "GenEdHumanities2",
+          "GenEdHumanities3",
           "SoftwareElelc1",
           "GeneralElec2"
         ],

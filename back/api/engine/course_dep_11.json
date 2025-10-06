@@ -186,7 +186,9 @@
     },
     "CIS3213": {
         "dependents": [
-            "CIS4219"
+            "CIS4219",
+            "CIS4622",
+            "COP3515"
         ],
         "credits": 3,
         "label": "CIS 3213 Foundations of Cybersecurity",

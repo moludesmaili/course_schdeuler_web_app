@@ -42,7 +42,8 @@
     "MAC2312": {
         "dependents": [
             "EGN4450",
-            "EGN2440"
+            "EGN2440",
+            "PHY2049/2049L"
         ],
         "credits": 4,
         "label": "MAC 2312 Calculus II",

@@ -52,7 +52,8 @@
         "dependents": [
             "MAC2313",
             "EGN4450",
-            "EGN3443"
+            "EGN3443",
+            "PHY2049/2049L"
         ],
         "credits": 4,
         "label": "MAC 2282 or MAC 2312",
@@ -324,7 +325,6 @@
         "credits": 4,
         "label": "CDA 4203/4203L Computer System Design",
         "availability": [
-            "Fall",
             "Spring"
         ],
         "difficulty": 3
@@ -334,8 +334,7 @@
         "credits": 4,
         "label": "CDA 4213/4213L CMOS-VLSI Design",
         "availability": [
-            "Fall",
-            "Spring"
+            "Fall"
         ],
         "difficulty": 3
     },

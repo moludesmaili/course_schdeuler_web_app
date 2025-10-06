@@ -51,7 +51,8 @@
     "MAC2312": {
         "dependents": [
             "EGN4450",
-            "EGN3443"
+            "EGN3443",
+            "PHY2049/2049L"
         ],
         "credits": 4,
         "label": "MAC 2282 or MAC 2312",

@@ -237,7 +237,6 @@
         "credits": 3,
         "label": "CIS 3433 System Integration and Architecture for IT",
         "availability": [
-            "Fall",
             "Spring"
         ],
         "difficulty": 3
@@ -247,8 +246,7 @@
         "credits": 3,
         "label": "CIS 4083 Cloud Computing for IT",
         "availability": [
-            "Fall",
-            "Spring"
+            "Fall"
         ],
         "difficulty": 3
     },
@@ -269,8 +267,7 @@
         "credits": 3,
         "label": "CNT 4603 System Admin and Maintenance for IT",
         "availability": [
-            "Fall",
-            "Spring"
+            "Fall"
         ],
         "difficulty": 3
     },

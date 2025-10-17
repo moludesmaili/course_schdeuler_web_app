@@ -1,6 +1,6 @@
 var takenCoursesInput;
-//var url = "http://184.73.142.80"
-var url = "http://localhost:8000"
+var url = "http://184.73.142.80"
+//var url = "http://localhost:8000"
 
 function showContent() {
   document.getElementById("protected-content").style.display = "block";

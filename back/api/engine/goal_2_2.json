@@ -80,9 +80,9 @@
       "term": "Fall",
       "courses": [
         "COT4400",
-        "CDA4203/L",
         "HardwareElec1",
-        "GeneralElec3"
+        "GeneralElec3",
+        "GenEdHumanities2"
       ],
       "credits": 13
     },
@@ -92,8 +92,8 @@
       "term": "Spring",
       "courses": [
         "COP4600",
-        "CDA4213/L",
-        "GenEdHumanities2",
+        "CDA4203/L",
+        "Techelec2",
         "Techelec1"
       ],
       "credits": 13
@@ -104,9 +104,9 @@
       "term": "Fall",
       "courses": [
         "CIS4910",
+        "CDA4213/L",
         "CIS4250",
-        "HardwareElec2",
-        "Techelec2"
+        "HardwareElec2"
       ],
       "credits": 12
     },

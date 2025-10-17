@@ -447,6 +447,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
         # Remove processed courses after the loop
         for course in to_remove:
             failed_to_retake.remove(course)
+            
     
         # Skip the empty semester to avoid infinite loops
         # if not semester["courses"] and semester["credits"] == 0:
@@ -520,6 +521,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
     average_difficulty_score = calculate_difficulty_score(Final_schedule, dependencies)
     print("Similarity Score is :", similarity_score)
     print(total_credits)
+    
     
     return Final_schedule, total_credits, similarity_score, average_difficulty_score
 

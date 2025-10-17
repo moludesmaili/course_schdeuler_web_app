@@ -1,6 +1,6 @@
 var takenCoursesInput;
-var url = "http://184.73.142.80"
-//var url = "http://localhost:8000"
+//var url = "http://184.73.142.80"
+var url = "http://localhost:8000"
 
 function showContent() {
   document.getElementById("protected-content").style.display = "block";
@@ -157,6 +157,7 @@ function send_data() {
 // Function to parse and render the table
 function parseAndRenderTable(responseText) {
   // Parse the response into structured data
+  const nextSemester = $("#semester").val(); // Get the selected semester
   const parsedData = responseText
     .trim()
     .split("<br/>")
@@ -191,11 +192,28 @@ function parseAndRenderTable(responseText) {
   courseBody.innerHTML = "";
 
   // Add semester headers
-  parsedData.forEach((semester) => {
+  // parsedData.forEach((semester) => {
+  //   const headerCell = document.createElement("th");
+  //   headerCell.className = "semester-column";
+  //   headerCell.style.color = "white";
+  //   headerCell.innerText = `Semester ${semester.semester}`;
+  //   semesterHeaders.appendChild(headerCell);
+  // });
+  parsedData.forEach((semester, i) => {
     const headerCell = document.createElement("th");
     headerCell.className = "semester-column";
     headerCell.style.color = "white";
-    headerCell.innerText = `Semester ${semester.semester}`;
+  
+    const next = parsedData[i + 1]?.semester;
+  
+    if (String(semester.semester).toLowerCase() === "summer1" || Number(nextSemester) === 1) {
+      headerCell.innerText = `Semester ${semester.semester}`;
+    } else if (Number(nextSemester) === 2) {
+      headerCell.innerText = `Semester ${semester.semester - 1}`;
+    } else {
+      headerCell.innerText = `Semester ${semester.semester}`;
+    }
+  
     semesterHeaders.appendChild(headerCell);
   });
 

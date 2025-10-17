@@ -400,7 +400,7 @@ def adjust_schedule(goal_schedule, taken_courses, dependencies, next_semester):
     intentionally_not_taken = []  
     prereq_courses = [course for course in dependencies if is_prereq(course, dependencies)]
     # current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]) if s["name"] == next_semester)
-    current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]) if s["id"] == next_semester)
+    current_semester_index = next(i for i, s in enumerate(updated_schedule["semesters"]))
     total_credits = 0
     # Add credits of taken courses
     total_credits += sum(dependencies[course]["credits"] for course in taken_courses if course in dependencies)
@@ -534,7 +534,7 @@ def calculate(taken_courses,dependencies,goal_schedule, next_semester):
     #         course_credit = [dependencies[course]["credits"] for course in semester["courses"]]
     #         res += (f'Semester: {semester["name"]}, Courses: {course_labels}, Credits: {semester["credits"]}<br/>')
     for semester in new_schedule["semesters"]:
-        if semester["id"] >= next_semester:  # Print semesters starting from the next semester
+        if semester["id"]:  # Print semesters starting from the next semester
             # Include label and credit as separate elements for each course
         # course_details = [
         #     {

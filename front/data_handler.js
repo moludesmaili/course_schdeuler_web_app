@@ -192,30 +192,30 @@ function parseAndRenderTable(responseText) {
   courseBody.innerHTML = "";
 
   // Add semester headers
-  // parsedData.forEach((semester) => {
-  //   const headerCell = document.createElement("th");
-  //   headerCell.className = "semester-column";
-  //   headerCell.style.color = "white";
-  //   headerCell.innerText = `Semester ${semester.semester}`;
-  //   semesterHeaders.appendChild(headerCell);
-  // });
-  parsedData.forEach((semester, i) => {
+  parsedData.forEach((semester) => {
     const headerCell = document.createElement("th");
     headerCell.className = "semester-column";
     headerCell.style.color = "white";
-  
-    const next = parsedData[i + 1]?.semester;
-  
-    if (String(semester.semester).toLowerCase() === "summer1" || Number(nextSemester) === 1) {
-      headerCell.innerText = `Semester ${semester.semester}`;
-    } else if (Number(nextSemester) === 2) {
-      headerCell.innerText = `Semester ${semester.semester - 1}`;
-    } else {
-      headerCell.innerText = `Semester ${semester.semester}`;
-    }
-  
+    headerCell.innerText = `Semester ${semester.semester}`;
     semesterHeaders.appendChild(headerCell);
   });
+  // parsedData.forEach((semester, i) => {
+  //   const headerCell = document.createElement("th");
+  //   headerCell.className = "semester-column";
+  //   headerCell.style.color = "white";
+  
+  //   const next = parsedData[i + 1]?.semester;
+  
+  //   if (String(semester.semester).toLowerCase() === "summer1" || Number(nextSemester) === 1) {
+  //     headerCell.innerText = `Semester ${semester.semester}`;
+  //   } else if (Number(nextSemester) === 2) {
+  //     headerCell.innerText = `Semester ${(semester.semester)}`;
+  //   } else {
+  //     headerCell.innerText = `Semester ${semester.semester}`;
+  //   }
+  
+  //   semesterHeaders.appendChild(headerCell);
+  // });
 
   // Maximum number of courses for any semester
   const maxCourses = Math.max(...parsedData.map((s) => s.courses.length));

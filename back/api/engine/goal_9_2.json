@@ -1,0 +1,121 @@
+{
+  "semesters": [
+    {
+      "name": "1",
+      "id": "1",
+      "term": "Spring",
+      "courses": [
+        "MAC2311",
+        "ENC1101",
+        "EGN3000/EGN3000L",
+        "NatSciElec1"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "2",
+      "id": "2",
+      "term": "Fall",
+      "courses": [
+        "MAC2312",
+        "COP2510",
+        "ENC1102",
+        "PHY2048/2048L"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "3",
+      "id": "3",
+      "term": "Spring",
+      "courses": [
+        "COT3100",
+        "COP3514",
+        "CDA3103",
+        "PHY2049/2049L"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "Summer1",
+      "id": "3.5",
+      "term": "Summer",
+      "courses": [
+        "EGN3443",
+        "GenEdSocialScience3",
+        "NatSciElec2"
+      ],
+      "credits": 9
+    },
+    {
+      "name": "4",
+      "id": "4",
+      "term": "Fall",
+      "courses": [
+        "COP4530",
+        "CDA3201/3201L",
+        "GenEdHumanities1",
+        "GeneralElec1"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "5",
+      "id": "5",
+      "term": "Spring",
+      "courses": [
+        "CDA4205/4205L",
+        "EGN4450",
+        "GenEdHumanities3",
+        "SoftwareElelc1",
+        "GeneralElec2"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "6",
+      "id": "6",
+      "term": "Fall",
+      "courses": [
+        "COT4400",
+        "ENC3246",
+        "SoftwareElelc2",
+        "Techelec1",
+        "GeneralElec3"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "7",
+      "id": "7",
+      "term": "Spring",
+      "courses": [
+        "COP4600",
+        "CNT4419",
+        "TheoryElelc",
+        "Techelec2",
+        "GeneralElec4"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "8",
+      "id": "8",
+      "term": "Fall",
+      "courses": [
+        "CEN4020",
+        "CIS4250",
+        "Techelec3",
+        "GeneralElec5"
+      ],
+      "credits": 12
+    },
+    {
+      "name": "9",
+      "id": "9",
+      "term": "Spring",
+      "courses": [],
+      "credits": 0
+    }
+  ]
+}

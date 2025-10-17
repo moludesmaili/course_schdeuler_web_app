@@ -1,0 +1,124 @@
+{
+  "semesters": [
+    {
+      "name": "1",
+      "id": "1",
+      "term": "Spring",
+      "courses": [
+        "CIS1930",
+        "COP2510",
+        "MAC1147",
+        "ENC1101",
+        "NatSciElec1"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "2",
+      "id": "2",
+      "term": "Fall",
+      "courses": [
+        "MAC2311",
+        "ENC1102",
+        "GeneralElec1",
+        "GenEdSocialScience2",
+        "GenEdHumanities1"
+      ],
+      "credits": 16
+    },
+    {
+      "name": "3",
+      "id": "3",
+      "term": "Spring",
+      "courses": [
+        "MAC2312",
+        "COP3514",
+        "COT3100",
+        "PHY2048/2048L"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "Summer1",
+      "id": "3.5",
+      "term": "Summer",
+      "courses": [
+        "NatSciElec2",
+        "GenEdSocialScience1",
+        "GenEdHumanities2"
+      ],
+      "credits": 9
+    },
+    {
+      "name": "4",
+      "id": "4",
+      "term": "Fall",
+      "courses": [
+        "PHY2049/2049L",
+        "CDA3103",
+        "EGN2440",
+        "GeneralElec2"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "5",
+      "id": "5",
+      "term": "Spring",
+      "courses": [
+        "COP4530",
+        "CAI4002",
+        "EGN4450",
+        "Techelec1",
+        "GeneralElec3"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "6",
+      "id": "6",
+      "term": "Fall",
+      "courses": [
+        "CAI4100",
+        "COT4400",
+        "GeneralElec4",
+        "TheoryElelc",
+        "Techelec2"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "7",
+      "id": "7",
+      "term": "Spring",
+      "courses": [
+        "COP4600",
+        "CNT4419",
+        "AIElec1",
+        "AIElec2",
+        "Techelec3"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "8",
+      "id": "8",
+      "term": "Fall",
+      "courses": [
+        "CIS4910",
+        "CIS4250",
+        "CEN4020",
+        "AIElec3",
+        "AIElec4"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "9",
+      "id": "9",
+      "term": "Spring",
+      "courses": [],
+      "credits": 0
+    }
+  ]
+}

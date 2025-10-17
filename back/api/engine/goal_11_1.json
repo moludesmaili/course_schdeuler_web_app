@@ -1,0 +1,122 @@
+{
+  "semesters": [
+    {
+      "name": "1",
+      "id": "1",
+      "term": "Fall",
+      "courses": [
+        "CGS1540",
+        "MAC1147",
+        "ENC1101",
+        "EGN3000/EGN3000L"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "2",
+      "id": "2",
+      "term": "Spring",
+      "courses": [
+        "COP2512",
+        "MAD2104",
+        "ENC1102",
+        "PHY2020",
+        "GenEdHumanities1"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "3",
+      "id": "3",
+      "term": "Fall",
+      "courses": [
+        "COP2513",
+        "CIS3213",
+        "STA2023",
+        "ECO2013"
+      ],
+      "credits": 12
+    },
+    {
+      "name": "4",
+      "id": "4",
+      "term": "Spring",
+      "courses": [
+        "COP3515",
+        "PSY2012",
+        "NatSciElec3",
+        "GeneralElec1"
+      ],
+      "credits": 12
+    },
+    {
+      "name": "Summer1",
+      "id": "4.5",
+      "term": "Summer",
+      "courses": [
+        "GenEdHumanities3",
+        "GenEdSocialScience4",
+        "GeneralElec2"
+      ],
+      "credits": 9
+    },
+    {
+      "name": "5",
+      "id": "5",
+      "term": "Fall",
+      "courses": [
+        "COP4538",
+        "CIS4622",
+        "ISM4323",
+        "ENC3246",
+        "CyberElec1"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "6",
+      "id": "6",
+      "term": "Spring",
+      "courses": [
+        "CNT4104/L",
+        "CIS4219",
+        "CyberElec2",
+        "CyberElec3",
+        "GeneralElec3"
+      ],
+      "credits": 16
+    },
+    {
+      "name": "7",
+      "id": "7",
+      "term": "Fall",
+      "courses": [
+        "CIS4200",
+        "CNT4403",
+        "CyberElec4",
+        "CyberElec5",
+        "GeneralElec4"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "8",
+      "id": "8",
+      "term": "Spring",
+      "courses": [
+        "LIS4414",
+        "COP4703",
+        "CyberElec6",
+        "GeneralElec5"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "9",
+      "id": "9",
+      "term": "Fall",
+      "courses": [],
+      "credits": 0
+    }
+  ]
+}

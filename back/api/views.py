@@ -33,7 +33,7 @@ def create_recommendation(request):
         # Parse taken_courses if it's a string or nested JSON
         #failed_courses = serializer.data["failed_courses"]["values"]
         dependencies_path = f'api/engine/course_dep_{program}.json'
-        goal_path = f'api/engine/goal_{program}.json'
+        goal_path = f'api/engine/goal_{program}_{next_semester}.json'
         # dependencies = load_json('api/engine/course_dep.json')
         dependencies = load_json(dependencies_path)
         goal_schedule = load_json(goal_path)

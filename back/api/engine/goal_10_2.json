@@ -1,0 +1,120 @@
+{
+  "semesters": [
+    {
+      "name": "1",
+      "id": "1",
+      "term": "Spring",
+      "courses": [
+        "MAC2311",
+        "CHM2045/2045L",
+        "ENC1101",
+        "EGN3000/EGN3000L"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "2",
+      "id": "2",
+      "term": "Fall",
+      "courses": [
+        "MAC2312",
+        "COT3100",
+        "COP2510",
+        "PHY2048/2048L"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "3",
+      "id": "3",
+      "term": "Spring",
+      "courses": [
+        "MAC2313",
+        "COP3514",
+        "CDA3103",
+        "PHY2049/2049L"
+      ],
+      "credits": 14
+    },
+    {
+      "name": "Summer1",
+      "id": "3.5",
+      "term": "Summer",
+      "courses": [
+        "EGN3443",
+        "NatSciElec2",
+        "GenEdSocialScience3"
+      ],
+      "credits": 9
+    },
+    {
+      "name": "4",
+      "id": "4",
+      "term": "Fall",
+      "courses": [
+        "EGN3433",
+        "COP4530",
+        "CDA3201/3201L",
+        "ENC1102",
+        "GenEdHumanities1"
+      ],
+      "credits": 16
+    },
+    {
+      "name": "5",
+      "id": "5",
+      "term": "Spring",
+      "courses": [
+        "CDA4205/4205L",
+        "EGN3373",
+        "EEE3394",
+        "EGN3615",
+        "EGN4450"
+      ],
+      "credits": 15
+    },
+    {
+      "name": "6",
+      "id": "6",
+      "term": "Fall",
+      "courses": [
+        "COT4400",
+        "CDA4203/L",
+        "HardwareElec1",
+        "GeneralElec1"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "7",
+      "id": "7",
+      "term": "Spring",
+      "courses": [
+        "COP4600",
+        "CDA4213/L",
+        "ENC3246",
+        "Techelec1"
+      ],
+      "credits": 13
+    },
+    {
+      "name": "8",
+      "id": "8",
+      "term": "Fall",
+      "courses": [
+        "CIS4910",
+        "CIS4250",
+        "HardwareElec2",
+        "Techelec2"
+      ],
+      "credits": 12
+    },
+    {
+      "name": "9",
+      "id": "9",
+      "term": "Spring",
+      "courses": [],
+      "credits": 0
+    }
+  ]
+}

@@ -54,9 +54,9 @@
       "term": "Fall",
       "courses": [
         "COP3515",
-        "GeneralElec3",
         "PSY2012",
-        "LDR2010"
+        "LDR2010",
+        "CIS3433"
       ],
       "credits": 12
     },
@@ -67,7 +67,7 @@
       "courses": [
         "COP4538",
         "CGS3853",
-        "CIS3433",
+        "GeneralElec3",
         "ENC3246",
         "NatSciElec3"
       ],
@@ -91,11 +91,12 @@
       "id": "7",
       "term": "Spring",
       "courses": [
-        "GeneralElec6",
+        
         "COP4703",
         "ITElec4",
         "ITElec5",
-        "GeneralElec5"
+        "CIS4083",
+        "CNT4603"
       ],
       "credits": 15
     },
@@ -105,9 +106,9 @@
       "term": "Fall",
       "courses": [
         "LIS4414",
-        "CIS4083",
-        "CNT4603",
-        "ITElec6"
+        "GeneralElec5",
+        "ITElec6",
+        "GeneralElec6"
       ],
       "credits": 12
     },
